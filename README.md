@@ -92,8 +92,8 @@ Note: To stop the server enter ctrl + c in your Terminal
 <!-- CONTACT -->
 ## Contact
 
-Kelsie Murphy - [GitHub](https://github.com/kelsiesmurphy)
-Kyle Fenlon - [GitHub](https://github.com/kylefenlon)
-Josh Montgomery - [GitHub](https://github.com/jomonty)
+* Kelsie Murphy - [GitHub](https://github.com/kelsiesmurphy)
+* Kyle Fenlon - [GitHub](https://github.com/kylefenlon)
+* Josh Montgomery - [GitHub](https://github.com/jomonty)
 
 Project Link: [https://github.com/kelsiesmurphy/pickup](https://github.com/kelsiesmurphy/pickup)
