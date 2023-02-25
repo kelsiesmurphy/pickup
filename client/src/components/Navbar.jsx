@@ -4,9 +4,6 @@ import { Edit } from "react-feather";
 import AddEventButton from "./AddEventButton";
 
 const Navbar = ({ community }) => {
-
-  
-
   return (
     <div className="flex basis-full justify-center">
       <div className="flex flex-1 items-center justify-between py-4 px-4 transition-all lg:px-28">
