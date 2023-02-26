@@ -7,7 +7,9 @@ const Navbar = ({ community }) => {
   return (
     <div className="flex basis-full justify-center">
       <div className="flex flex-1 items-center justify-between py-4 px-4 transition-all lg:px-28">
-        <img src={wordmark} className="aspect-[156/48] h-12" />
+        <Link to="/">
+          <img src={wordmark} className="aspect-[156/48] h-12" />
+        </Link>
         <div className="flex items-center gap-4">
           <Link
             to={`/communities/${community.id}/edit`}

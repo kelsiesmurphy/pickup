@@ -21,7 +21,7 @@ const MainContainer = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col basis-full min-h-screen">
       <Navbar community={community} />
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -30,7 +30,7 @@ const MainContainer = () => {
         <Route path="/events/:id" element={<EventPage />} />
         <Route path="*" element={<Error />} />
       </Routes>
-    </>
+    </div>
   );
 };
 
