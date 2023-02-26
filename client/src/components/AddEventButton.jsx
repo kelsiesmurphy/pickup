@@ -1,6 +1,5 @@
 import { Plus } from "react-feather";
 
-
 const AddEventButton = () => {
   const handleNewEventModal = () => {
     // TODO, perhaps using https://github.com/davidtheclark/react-aria-modal??
