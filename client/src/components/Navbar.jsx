@@ -5,7 +5,7 @@ import AddEventButton from "./AddEventButton";
 
 const Navbar = ({ community }) => {
   return (
-    <div className="flex basis-full justify-center">
+    <nav className="flex basis-full justify-center">
       <div className="flex flex-1 items-center justify-between py-4 px-4 transition-all lg:px-28">
         <Link to="/">
           <img src={wordmark} className="aspect-[156/48] h-12" />
@@ -25,7 +25,7 @@ const Navbar = ({ community }) => {
           />
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

@@ -10,7 +10,7 @@ const Error = () => {
         <div className="mt-16 mb-24 flex max-w-7xl flex-1 flex-wrap items-center justify-between gap-8">
           <div className="flex flex-1 flex-col gap-4 md:max-w-md">
             <h2 className="font-semibold text-green-800">404 error</h2>
-            <h1 className="text-4xl font-semibold md:text-6xl">
+            <h1 className="text-4xl font-semibold md:text-6xl text-slate-900">
               Page not found
             </h1>
             <p className="text-slate-500">
