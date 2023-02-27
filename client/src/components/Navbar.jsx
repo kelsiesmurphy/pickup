@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { wordmark } from "../assets/AssetFiles";
 import { Edit } from "react-feather";
 import AddEventButton from "./AddEventButton";
+import LoginButton from "./LoginButton";
 
 const Navbar = ({ community }) => {
   return (
@@ -19,6 +20,7 @@ const Navbar = ({ community }) => {
             Edit
           </Link>
           <AddEventButton />
+          <LoginButton buttonText={"Login"} />
           <img
             src={community.logo_img_link}
             className="aspect-square h-10 rounded"
