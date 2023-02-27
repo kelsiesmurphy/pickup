@@ -28,7 +28,7 @@ const MainContainer = () => {
         <Route path="/communities/:id" element={<CommunityPage />} />
         <Route path="/communities/:id/edit" element={<CommunityEditPage />} />
         <Route path="/events/:id" element={<EventPage />} />
-        <Route path="*" element={<Error />} />
+        {/* <Route path="*" element={<Error />} /> */}
       </Routes>
     </div>
   );

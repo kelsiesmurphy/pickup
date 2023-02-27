@@ -14,8 +14,8 @@ const Features = () => {
         and recruit new volunteers from your dashboard!
       </p>
       <picture className="mt-12 max-w-6xl">
-        <source srcset={communityExampleMobile} media="(max-width: 768px)" />
-        <source srcset={communityExampleDesktop} />
+        <source srcSet={communityExampleMobile} media="(max-width: 768px)" />
+        <source srcSet={communityExampleDesktop} />
         <img
           src={communityExampleDesktop}
           alt="Screenshot of the desktop view of the Pickup dashboard, showing stats and a cover picture for a beach community group"
