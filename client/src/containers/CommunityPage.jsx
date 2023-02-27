@@ -1,5 +1,13 @@
+import CommunityStats from "../components/dashboard/CommunityStats";
+import SocialHeader from "../components/dashboard/SocialHeader";
+
 const CommunityPage = () => {
-  return <div>CommunityPage</div>;
+  return (
+    <>
+      <SocialHeader />
+      <CommunityStats />
+    </>
+  )
 };
 
 export default CommunityPage;
