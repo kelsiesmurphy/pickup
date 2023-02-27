@@ -1,5 +1,5 @@
 import { HeroConstant } from "../../constants/constants";
-import LoginButton from "../LoginButton";
+import SignupButton from "../SignupButton";
 
 const Hero = () => {
   return (
@@ -14,7 +14,7 @@ const Hero = () => {
               {HeroConstant.sub_heading}
             </p>
           </div>
-          <LoginButton buttonText={"Get started"} />
+          <SignupButton buttonText={"Get started"} />
         </div>
         <img
           src={HeroConstant.hero_image}
