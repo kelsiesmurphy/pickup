@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { wordmark } from "../assets/AssetFiles";
-import { Edit } from "react-feather";
 import AddEventButton from "./AddEventButton";
 import LoginButton from "./LoginButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import SignupButton from "./SignupButton";
+import { Heart } from "react-feather";
 
 const Navbar = ({ community }) => {
   const { user, isAuthenticated, logout } = useAuth0();
@@ -31,11 +31,11 @@ const Navbar = ({ community }) => {
         {isAuthenticated && (
           <div className="flex items-center gap-4">
             <Link
-              to={`/communities/${community.id}/edit`}
+              to={`/communities/${community.id}`}
               className=" flex items-center gap-2 rounded-lg border border-slate-300 bg-white py-2.5 px-4 text-slate-700 shadow-sm outline-slate-900 transition-colors hover:bg-slate-50"
             >
-              <Edit color="#334155" size={20} />
-              Edit
+              <Heart color="#334155" size={20} />
+              Community
             </Link>
             <AddEventButton />
             <img
