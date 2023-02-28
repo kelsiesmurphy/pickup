@@ -1,5 +1,10 @@
 package org.pickup.backend.server.models;
 
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import org.pickup.backend.server.views.EmailSignupView;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,19 +14,21 @@ public class EmailSignup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @JsonView(EmailSignupView.PostReturn.class)
     private long id;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable=false)
+    @JsonView(EmailSignupView.PostReturn.class)
     private String email;
-    @Column(name = "signup_date_time")
+    @Column(name = "signup_date_time", nullable=false)
+    @JsonView(EmailSignupView.PostReturn.class)
     private String signupDateTime;
-    @Column(name = "is_active")
-    private boolean isActive;
+    @Column(name = "is_active", nullable=false)
+    private boolean is_active = true;
 
     public EmailSignup(String email, String signupDateTime) {
         this.email = email;
         this.signupDateTime = signupDateTime;
-        this.isActive = true;
     }
     public EmailSignup() {}
 
@@ -43,19 +50,23 @@ public class EmailSignup {
         this.email = email;
     }
 
+    @JsonProperty("signup_date_time")
     public String getSignupDateTime() {
         return signupDateTime;
     }
 
+    @JsonProperty("signup_date_time")
     public void setSignupDateTime(String signupDateTime) {
         this.signupDateTime = signupDateTime;
     }
 
+    @JsonProperty("is_active")
     public boolean isActive() {
-        return isActive;
+        return is_active;
     }
 
+    @JsonProperty("is_active")
     public void setActive(boolean active) {
-        isActive = active;
+        is_active = active;
     }
 }
