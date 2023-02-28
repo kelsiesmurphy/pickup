@@ -15,6 +15,19 @@ import java.util.Optional;
 
 @Entity
 @Table(name = "events")
+@JsonPropertyOrder({
+        "id",
+        "community_id",
+        "name",
+        "description",
+        "text_body",
+        "location",
+        "event_date_time",
+        "img_before_link",
+        "img_after_link",
+        "is_active",
+        "comments"
+})
 public class Event {
 
     @Id
@@ -33,11 +46,11 @@ public class Event {
     @JsonProperty("community_id")
     private Long communityId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable=false)
     @JsonView(EventView.Summary.class)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable=false)
     @JsonView(EventView.Summary.class)
     private String description;
 
@@ -52,12 +65,12 @@ public class Event {
     @JsonView(EventView.Summary.class)
     private String location;
 
-    @Column(name = "event_date_time")
+    @Column(name = "event_date_time", nullable=false)
     @JsonView(EventView.Summary.class)
     @JsonProperty("event_date_time")
     private String eventDateTime;
 
-    @Column(name = "img_before_link")
+    @Column(name = "img_before_link", nullable=false)
     @JsonView(EventView.Summary.class)
     @JsonProperty("img_before_link")
     private String imgBeforeLink;
@@ -67,7 +80,7 @@ public class Event {
     @JsonProperty("img_after_link")
     private String imgAfterLink;
 
-    @Column(name = "is_active")
+    @Column(name = "is_active", nullable=false)
     @JsonView(EventView.Detail.class)
     @JsonProperty("is_active")
     private boolean isActive = true;
@@ -112,9 +125,9 @@ public class Event {
         this.id = id;
     }
 
-//    public Community getCommunity() {
-//        return community;
-//    }
+    public Community getCommunity() {
+        return community;
+    }
 //
 //    public void setCommunity(Community community) {
 //        this.community = community;

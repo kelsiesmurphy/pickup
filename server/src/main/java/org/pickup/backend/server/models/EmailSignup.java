@@ -2,6 +2,7 @@ package org.pickup.backend.server.models;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.pickup.backend.server.views.EmailSignupView;
 
@@ -9,6 +10,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "email_signups")
+@JsonPropertyOrder({
+        "id",
+        "email",
+        "signup_date_time"
+})
 public class EmailSignup {
 
     @Id
@@ -25,7 +31,6 @@ public class EmailSignup {
     @JsonProperty("signup_date_time")
     private String signupDateTime;
     @Column(name = "is_active", nullable=false)
-    @JsonView(EmailSignupView.PostReturn.class)
     @JsonProperty("is_active")
     private boolean isActive = true;
 

@@ -65,13 +65,13 @@ public class DataLoader implements ApplicationRunner {
 
 
         User user1 = new User(
-                test1,
+                test1.getId(),
                 "user_name_1",
                 "user1@gg.com",
                 "img_link",
                 false);
         User user2 = new User(
-                test1,
+                test1.getId(),
                 "user_name_2",
                 "user2@gg.com",
                 "img_link",
@@ -125,8 +125,8 @@ public class DataLoader implements ApplicationRunner {
         litterRepository.save(litter2);
 
         EventComment comment1 = new EventComment(
-                event1,
-                user1,
+                event1.getId(),
+                user1.getId(),
                 "2023-02-27 15:34:12",
                 "first"
         );
