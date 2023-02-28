@@ -27,8 +27,8 @@ const AddEventButton = () => {
       <Rodal
         visible={openModal}
         onClose={handleClose}
-        width="688"
-        height="610"
+        width={688}
+        height={610}
         customStyles={{ borderRadius: "12px" }}
       >
         <div>
@@ -44,7 +44,7 @@ const AddEventButton = () => {
             <div className="px-3">
               <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
                 <label
-                  for="title"
+                  htmlFor="title"
                   className="text-sm font-medium text-slate-800"
                 >
                   Event title*
@@ -58,7 +58,7 @@ const AddEventButton = () => {
               </div>
               <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
                 <label
-                  for="location"
+                  htmlFor="location"
                   className="text-sm font-medium text-slate-800"
                 >
                   Event location*
@@ -72,7 +72,7 @@ const AddEventButton = () => {
               </div>
               <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
                 <label
-                  for="time"
+                  htmlFor="time"
                   className="text-sm font-medium text-slate-800"
                 >
                   Event time*
@@ -86,7 +86,7 @@ const AddEventButton = () => {
               </div>
               <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
                 <label
-                  for="image"
+                  htmlFor="image"
                   className="text-sm font-medium text-slate-800"
                 >
                   Cover image*
@@ -100,7 +100,7 @@ const AddEventButton = () => {
               </div>
               <div className="flex flex-wrap justify-between gap-8 py-4">
                 <label
-                  for="Description"
+                  htmlFor="Description"
                   className="text-sm font-medium text-slate-800"
                 >
                   Event title*
