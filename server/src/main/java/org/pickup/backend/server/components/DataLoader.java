@@ -81,7 +81,7 @@ public class DataLoader implements ApplicationRunner {
         userRepository.save(user2);
 
         Event event1 = new Event(
-                test1,
+                test1.getId(),
                 "Beach pickup",
                 "Beach pickup description",
                 "some texty text",
@@ -90,7 +90,7 @@ public class DataLoader implements ApplicationRunner {
                 "some before link");
 
         Event event2 = new Event(
-                test1,
+                test1.getId(),
                 "Forest pickup",
                 "Forest pickup description",
                 "some text text",

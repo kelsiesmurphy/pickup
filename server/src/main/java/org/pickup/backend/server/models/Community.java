@@ -9,12 +9,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "communities")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Community  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @JsonView(CommunityView.Summary.class)
+    @JsonView(CommunityView.Id.class)
     private long id;
 
     @Column(name = "name", nullable=false)
