@@ -22,9 +22,12 @@ public class EmailSignup {
     private String email;
     @Column(name = "signup_date_time", nullable=false)
     @JsonView(EmailSignupView.PostReturn.class)
+    @JsonProperty("signup_date_time")
     private String signupDateTime;
     @Column(name = "is_active", nullable=false)
-    private boolean is_active = true;
+    @JsonView(EmailSignupView.PostReturn.class)
+    @JsonProperty("is_active")
+    private boolean isActive = true;
 
     public EmailSignup(String email, String signupDateTime) {
         this.email = email;
@@ -50,23 +53,19 @@ public class EmailSignup {
         this.email = email;
     }
 
-    @JsonProperty("signup_date_time")
     public String getSignupDateTime() {
         return signupDateTime;
     }
 
-    @JsonProperty("signup_date_time")
     public void setSignupDateTime(String signupDateTime) {
         this.signupDateTime = signupDateTime;
     }
 
-    @JsonProperty("is_active")
     public boolean isActive() {
-        return is_active;
+        return isActive;
     }
 
-    @JsonProperty("is_active")
     public void setActive(boolean active) {
-        is_active = active;
+        isActive = active;
     }
 }

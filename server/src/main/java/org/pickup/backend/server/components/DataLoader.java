@@ -46,6 +46,23 @@ public class DataLoader implements ApplicationRunner {
                 "img_her_link_1",
                 "img_logo_link_1");
         communityRepository.save(test1);
+        Community test2 = new Community(
+                "Not Scouts",
+                "Somewhere else scout group",
+                true,
+                "img_her_link_1",
+                "img_logo_link_1"
+        );
+        communityRepository.save(test2);
+        Community test3 = new Community(
+                "Definitely Not Scouts",
+                "Somewhere else scout group",
+                false,
+                "img_her_link_1",
+                "img_logo_link_1"
+        );
+        communityRepository.save(test3);
+
 
         User user1 = new User(
                 test1,

@@ -1,6 +1,7 @@
 package org.pickup.backend.server.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
+import org.pickup.backend.server.views.CommunityView;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,19 +14,35 @@ public class Community  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @JsonView(CommunityView.Summary.class)
     private long id;
-    @Column(name  = "name")
+
+    @Column(name = "name", nullable=false)
+    @JsonView(CommunityView.Summary.class)
     private String name;
+
     @Column(name = "description")
+    @JsonView(CommunityView.Summary.class)
     private String description;
-    @Column(name = "is_private")
+
+    @Column(name = "is_private", nullable=false)
+    @JsonView(CommunityView.Detail.class)
+    @JsonProperty("is_private")
     private boolean isPrivate;
+
     @Column(name = "img_hero_link")
+    @JsonView(CommunityView.Detail.class)
+    @JsonProperty("img_hero_link")
     private String imgHeroLink;
+
     @Column(name = "img_logo_link")
+    @JsonView(CommunityView.Summary.class)
+    @JsonProperty("img_logo_link")
     private String imgLogoLink;
-    @Column(name = "is_active")
-    private boolean isActive;
+
+    @Column(name = "is_active", nullable=false)
+    @JsonProperty("is_active")
+    private boolean isActive = true;
 
     @OneToMany(mappedBy="community", fetch=FetchType.LAZY)
     @JsonIgnoreProperties({"community"})
@@ -49,7 +66,6 @@ public class Community  {
         this.isPrivate = isPrivate;
         this.imgHeroLink = imgHeroLink;
         this.imgLogoLink = imgLogoLink;
-        this.isActive = true;
         this.users = new ArrayList<>();
         this.events = new ArrayList<>();
         this.litter = new ArrayList<>();
@@ -84,19 +100,15 @@ public class Community  {
     public boolean isPrivate() {
         return isPrivate;
     }
-
     public void setPrivate(boolean aPrivate) {
         isPrivate = aPrivate;
     }
-
     public String getImgHeroLink() {
         return imgHeroLink;
     }
-
     public void setImgHeroLink(String imgHeroLink) {
         this.imgHeroLink = imgHeroLink;
     }
-
     public String getImgLogoLink() {
         return imgLogoLink;
     }
@@ -104,11 +116,9 @@ public class Community  {
     public void setImgLogoLink(String imgLogoLink) {
         this.imgLogoLink = imgLogoLink;
     }
-
     public boolean isActive() {
         return isActive;
     }
-
     public void setActive(boolean active) {
         isActive = active;
     }
