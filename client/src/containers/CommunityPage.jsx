@@ -7,6 +7,7 @@ import PastEvents from "../components/dashboard/PastEvents";
 import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
 
+
 const CommunityPage = () => {
   // const [community, setCommunity] = useState({});
   const [upcomingEvents, setUpcomingEvents] = useState([]);
