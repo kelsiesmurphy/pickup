@@ -1,13 +1,12 @@
 package org.pickup.backend.server.utils.stats;
 
-import org.pickup.backend.server.models.Community;
 import org.pickup.backend.server.models.stats.CommunityStats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CommunityStatBuilder {
+public class CommunityStatsBuilder {
 
     @Autowired
     JdbcTemplate jdbcTemplate;

@@ -3,9 +3,8 @@ package org.pickup.backend.server.controllers;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.pickup.backend.server.models.Event;
 import org.pickup.backend.server.models.EventComment;
-import org.pickup.backend.server.repositories.CommunityRepository;
 import org.pickup.backend.server.repositories.EventRepository;
-import org.pickup.backend.server.utils.stats.EventStatBuilder;
+import org.pickup.backend.server.utils.stats.EventStatsBuilder;
 import org.pickup.backend.server.views.EventView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +22,7 @@ public class EventController {
     @Autowired
     EventRepository eventRepository;
     @Autowired
-    EventStatBuilder eventStatBuilder;
+    EventStatsBuilder eventStatBuilder;
 
     @JsonView(EventView.Summary.class)
     @GetMapping(value = "/events")
@@ -107,7 +106,7 @@ public class EventController {
                 event.setActive((boolean)eventStatus.get("is_active"));
                 eventRepository.save(event);
                 event.setStats(eventStatBuilder.build(event.getId()));
-                return new ResponseEntity(event, HttpStatus.OK);
+                return new ResponseEntity<>(event, HttpStatus.OK);
             }).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.BAD_REQUEST));
         }
         catch (Exception e) {

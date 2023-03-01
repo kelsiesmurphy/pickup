@@ -1,7 +1,7 @@
 package org.pickup.backend.server.controllers;
 
 import org.pickup.backend.server.models.stats.HomePageStats;
-import org.pickup.backend.server.utils.stats.HomePageStatBuilder;
+import org.pickup.backend.server.utils.stats.HomePageStatsBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomePageStatsController {
 
     @Autowired
-    HomePageStatBuilder homePageStatBuilder;
+    HomePageStatsBuilder homePageStatBuilder;
 
     @GetMapping(value = "/home-stats")
     public ResponseEntity getHomeStats() {

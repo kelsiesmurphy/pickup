@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EventStatBuilder {
+public class EventStatsBuilder {
 
     @Autowired
     JdbcTemplate jdbcTemplate;

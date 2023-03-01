@@ -3,7 +3,7 @@ package org.pickup.backend.server.controllers;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.pickup.backend.server.models.Community;
 import org.pickup.backend.server.repositories.CommunityRepository;
-import org.pickup.backend.server.utils.stats.CommunityStatBuilder;
+import org.pickup.backend.server.utils.stats.CommunityStatsBuilder;
 import org.pickup.backend.server.views.CommunityView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class CommunityController {
     @Autowired
     CommunityRepository communityRepository;
     @Autowired
-    CommunityStatBuilder communityStatBuilder;
+    CommunityStatsBuilder communityStatBuilder;
 
     @JsonView(CommunityView.Summary.class)
     @GetMapping(value = "/communities")
