@@ -2,6 +2,7 @@ package org.pickup.backend.server.models;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.pickup.backend.server.models.stats.EventStats;
 import org.pickup.backend.server.utils.RawJsonDeserializer;
 import org.pickup.backend.server.views.EventView;
 
@@ -89,7 +90,7 @@ public class Event {
     @JsonView(EventView.Summary.class)
     @Transient
     @JsonProperty("stats")
-    private Object stats;
+    private EventStats stats;
 
     @OneToMany(mappedBy="event", fetch=FetchType.LAZY)
     @JsonIgnoreProperties({"event"})
@@ -235,7 +236,7 @@ public class Event {
         return stats;
     }
 
-    public void setStats(Object stats) {
+    public void setStats(EventStats stats) {
         this.stats = stats;
     }
 }
