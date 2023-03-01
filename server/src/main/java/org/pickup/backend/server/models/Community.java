@@ -9,12 +9,21 @@ import java.util.List;
 
 @Entity
 @Table(name = "communities")
+@JsonPropertyOrder({
+        "id",
+        "name",
+        "description",
+        "is_private",
+        "img_hero_link",
+        "img_logo_link"
+})
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Community  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @JsonView(CommunityView.Summary.class)
+    @JsonView(CommunityView.Id.class)
     private long id;
 
     @Column(name = "name", nullable=false)

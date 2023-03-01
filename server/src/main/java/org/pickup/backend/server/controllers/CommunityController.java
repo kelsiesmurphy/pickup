@@ -19,7 +19,7 @@ public class CommunityController {
 
     @JsonView(CommunityView.Summary.class)
     @GetMapping(value = "/communities")
-    public ResponseEntity getPublicCommunitySummary() {
+    public ResponseEntity getCommunitiesSummary() {
         return new ResponseEntity<>(
                 communityRepository.findByIsPrivate(false),
                 HttpStatus.OK
@@ -29,7 +29,6 @@ public class CommunityController {
     @JsonView(CommunityView.Detail.class)
     @GetMapping(value = "/communities/{id}")
     public ResponseEntity getCommunityDetail(@PathVariable long id) {
-//        Optional<Community> community = communityRepository.findById(id);
         return new ResponseEntity<>(
                 communityRepository.findById(id),
                 HttpStatus.OK
