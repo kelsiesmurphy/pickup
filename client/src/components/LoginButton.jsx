@@ -6,7 +6,7 @@ const LoginButton = ({ buttonText }) => {
   return (
     <button
       onClick={() => loginWithRedirect({})}
-      className="flex items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-slate-700 outline-slate-900 transition-colors hover:border-slate-100 hover:bg-slate-100 md:max-w-[132px]"
+      className="flex flex-1 md:flex-none items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-slate-700 outline-slate-900 transition-colors hover:border-slate-100 hover:bg-slate-100 md:max-w-[132px]"
     >
       {buttonText}
     </button>

@@ -19,7 +19,7 @@ const AddEventButton = () => {
     <>
       <button
         onClick={handleNewEventModal}
-        className="flex items-center gap-2 rounded-lg border border-green-800 bg-green-800 py-2.5 px-4 text-white shadow-sm outline-slate-900 transition-colors hover:border-green-900 hover:bg-green-900"
+        className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-green-800 bg-green-800 py-2.5 px-4 text-white shadow-sm outline-slate-900 transition-colors hover:border-green-900 hover:bg-green-900 md:flex-none"
       >
         <Plus color="#fff" size={20} />
         New event
@@ -27,8 +27,8 @@ const AddEventButton = () => {
       <Rodal
         visible={openModal}
         onClose={handleClose}
-        width="688"
-        height="610"
+        width={688}
+        height={610}
         customStyles={{ borderRadius: "12px" }}
       >
         <div>
@@ -44,7 +44,7 @@ const AddEventButton = () => {
             <div className="px-3">
               <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
                 <label
-                  for="title"
+                  htmlFor="title"
                   className="text-sm font-medium text-slate-800"
                 >
                   Event title*
@@ -58,7 +58,7 @@ const AddEventButton = () => {
               </div>
               <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
                 <label
-                  for="location"
+                  htmlFor="location"
                   className="text-sm font-medium text-slate-800"
                 >
                   Event location*
@@ -72,7 +72,7 @@ const AddEventButton = () => {
               </div>
               <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
                 <label
-                  for="time"
+                  htmlFor="time"
                   className="text-sm font-medium text-slate-800"
                 >
                   Event time*
@@ -86,7 +86,7 @@ const AddEventButton = () => {
               </div>
               <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
                 <label
-                  for="image"
+                  htmlFor="image"
                   className="text-sm font-medium text-slate-800"
                 >
                   Cover image*
@@ -98,9 +98,23 @@ const AddEventButton = () => {
                   className="min-w-[280px] max-w-[448px] flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
                 />
               </div>
+              {/* <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
+                <label
+                  htmlFor="image"
+                  className="text-sm font-medium text-slate-800"
+                >
+                  Cover image*
+                </label>
+                <input
+                  type="file"
+                  id="image"
+                  placeholder="image link"
+                  className="min-w-[280px] max-w-[448px] flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
+                />
+              </div> */}
               <div className="flex flex-wrap justify-between gap-8 py-4">
                 <label
-                  for="Description"
+                  htmlFor="Description"
                   className="text-sm font-medium text-slate-800"
                 >
                   Event title*
