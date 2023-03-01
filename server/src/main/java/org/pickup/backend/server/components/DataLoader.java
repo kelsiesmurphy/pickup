@@ -10,7 +10,7 @@ import org.springframework.boot.ApplicationRunner;
 
 import java.util.Locale;
 
-@Profile("dev")// Run when flagged in dev mode
+@Profile("initial_setup")// Run when flagged in dev mode
 @Component
 public class DataLoader implements ApplicationRunner {
 
