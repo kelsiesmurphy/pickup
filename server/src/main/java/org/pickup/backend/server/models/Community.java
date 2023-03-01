@@ -1,6 +1,7 @@
 package org.pickup.backend.server.models;
 
 import com.fasterxml.jackson.annotation.*;
+import org.pickup.backend.server.models.stats.CommunityStats;
 import org.pickup.backend.server.views.CommunityView;
 
 import javax.persistence.*;
@@ -15,7 +16,8 @@ import java.util.List;
         "description",
         "is_private",
         "img_hero_link",
-        "img_logo_link"
+        "img_logo_link",
+        "stats"
 })
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Community  {
@@ -64,6 +66,12 @@ public class Community  {
     @OneToMany(mappedBy="community", fetch=FetchType.LAZY)
     @JsonIgnoreProperties({"community"})
     private List<Litter> litter;
+
+//    @JsonInclude()
+    @JsonView(CommunityView.Summary.class)
+    @Transient
+    @JsonProperty("stats")
+    private CommunityStats stats;
 
     public Community(String name,
                      String description,
@@ -154,5 +162,12 @@ public class Community  {
 
     public void setLitter(List<Litter> litter) {
         this.litter = litter;
+    }
+
+    public void setStats(CommunityStats stats) {
+        this.stats = stats;
+    }
+    public CommunityStats getStats(){
+        return this.stats;
     }
 }

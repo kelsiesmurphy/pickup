@@ -1,4 +1,4 @@
-package org.pickup.backend.server.helpers;
+package org.pickup.backend.server.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -70,4 +70,5 @@ public class StatsQueries {
                 "WHERE l.is_active = true AND community_id = ?";
         return jdbcTemplate.queryForObject(sql, Long.class, community_id);
     }
+
 }

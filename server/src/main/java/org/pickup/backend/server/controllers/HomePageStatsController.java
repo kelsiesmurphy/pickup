@@ -1,7 +1,7 @@
 package org.pickup.backend.server.controllers;
 
-import org.pickup.backend.server.helpers.StatsQueries;
 import org.pickup.backend.server.models.stats.HomePageStats;
+import org.pickup.backend.server.utils.stats.HomePageStatBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,19 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomePageStatsController {
 
     @Autowired
-    StatsQueries statsQueries;
+    HomePageStatBuilder homePageStatBuilder;
 
     @GetMapping(value = "/home-stats")
     public ResponseEntity getHomeStats() {
-        HomePageStats stats = new HomePageStats();
-        stats.setTotalCommunities(statsQueries.getTotalCommunitiesCount());
-        stats.setTotalUsers(statsQueries.getTotalUserCount());
-        stats.setTotalEventsCompleted(statsQueries.getTotalEventsCount());
-        stats.setTotalLitterCollected(statsQueries.getTotalLitterCount());
-
-        return new ResponseEntity<>(
-                stats,
-                HttpStatus.OK
-        );
+        try {
+            HomePageStats stats = homePageStatBuilder.build();
+            return new ResponseEntity<>(stats, HttpStatus.OK);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
