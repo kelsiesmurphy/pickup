@@ -4,9 +4,11 @@ package org.pickup.backend.server.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.pickup.backend.server.utils.DateTimeParse;
 import org.pickup.backend.server.views.EmailSignupView;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "email_signups")
@@ -26,17 +28,19 @@ public class EmailSignup {
     @Column(name = "email", nullable=false)
     @JsonView(EmailSignupView.PostReturn.class)
     private String email;
-    @Column(name = "signup_date_time", nullable=false)
+
+    @Column(name = "signup_date_time", nullable=false, columnDefinition="TIMESTAMP")
     @JsonView(EmailSignupView.PostReturn.class)
     @JsonProperty("signup_date_time")
-    private String signupDateTime;
+    private LocalDateTime signupDateTime;
+
     @Column(name = "is_active", nullable=false)
     @JsonProperty("is_active")
     private boolean isActive = true;
 
     public EmailSignup(String email, String signupDateTime) {
         this.email = email;
-        this.signupDateTime = signupDateTime;
+        this.signupDateTime = DateTimeParse.fromString(signupDateTime);
     }
     public EmailSignup() {}
 
@@ -59,11 +63,11 @@ public class EmailSignup {
     }
 
     public String getSignupDateTime() {
-        return signupDateTime;
+        return DateTimeParse.toString(signupDateTime);
     }
 
     public void setSignupDateTime(String signupDateTime) {
-        this.signupDateTime = signupDateTime;
+        this.signupDateTime = DateTimeParse.fromString(signupDateTime);
     }
 
     public boolean isActive() {

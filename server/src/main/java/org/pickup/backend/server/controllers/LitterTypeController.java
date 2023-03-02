@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class LitterTypeController {
 
@@ -21,10 +23,13 @@ public class LitterTypeController {
     @JsonView(LitterTypeView.Summary.class)
     @GetMapping(value = "/litter-types")
     public ResponseEntity getLitterTypes() {
-        return new ResponseEntity<>(
-                litterTypeRepository.findAll(),
-                HttpStatus.OK
-        );
+        try {
+            List<LitterType> result = litterTypeRepository.findAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @JsonView(LitterTypeView.Summary.class)
@@ -34,16 +39,10 @@ public class LitterTypeController {
     ){
         try {
             litterTypeRepository.save(litterType);
-            return new ResponseEntity<>(
-                    litterType,
-                    HttpStatus.OK
-            );
+            return new ResponseEntity<>(litterType, HttpStatus.OK);
         }
         catch (Exception e) {
-            return new ResponseEntity<>(
-                    e,
-                    HttpStatus.BAD_REQUEST
-            );
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
 }
