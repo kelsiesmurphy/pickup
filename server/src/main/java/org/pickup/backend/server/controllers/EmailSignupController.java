@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class EmailSignupController {
 
@@ -21,27 +23,26 @@ public class EmailSignupController {
     @JsonView(EmailSignupView.PostReturn.class)
     @GetMapping(value = "/email-signup")
     public ResponseEntity getEmailSigups() {
-        return new ResponseEntity<>(
-                emailSignupRepository.findAll(),
-                HttpStatus.OK
-        );
+        try {
+            List<EmailSignup> result = emailSignupRepository.findAll();
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping(value = "/email-signup")
     @JsonView(EmailSignupView.PostReturn.class)
-    public ResponseEntity postEmailSignup(@RequestBody EmailSignup emailSignup){
+    public ResponseEntity postEmailSignup(
+            @RequestBody EmailSignup emailSignup
+    ){
         try {
             emailSignupRepository.save(emailSignup);
-            return new ResponseEntity<>(
-                    emailSignup,
-                    HttpStatus.OK
-            );
+            return new ResponseEntity<>(emailSignup, HttpStatus.OK);
         }
         catch(Exception e) {
-            return new ResponseEntity<>(
-                    e,
-                    HttpStatus.BAD_REQUEST
-            );
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
 

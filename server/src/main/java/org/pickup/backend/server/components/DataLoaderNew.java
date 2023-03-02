@@ -2,6 +2,7 @@ package org.pickup.backend.server.components;
 
 import org.pickup.backend.server.models.*;
 import org.pickup.backend.server.repositories.*;
+import org.pickup.backend.server.utils.RawJsonDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.context.annotation.Profile;
@@ -154,7 +155,7 @@ public class DataLoaderNew implements ApplicationRunner {
         List<String> dayOptions = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30");
 
 
-        for (Community community : communities){
+        for (Community community : communities) {
             for (int i = 0; i < community.getId() * 30; i++) {
 
                 HashMap<String, String> apiUserData = getUser();
@@ -168,52 +169,87 @@ public class DataLoaderNew implements ApplicationRunner {
                 userRepository.save(user);
             }
 
-            HashMap<String, Double> apiCoordsData = getCoords();
+            for (int i = 0; i < 12; i++) {
+                int locationIndex1 = (int) (Math.random() * locationValues.size());
+                int cleanTypeIndex1 = (int) (Math.random() * locationValues.size());
 
-            int locationIndex1 = (int)(Math.random() * locationValues.size());
-            int cleanTypeIndex1 = (int)(Math.random() * locationValues.size());
+                String eventName1 = locationValues.get(locationIndex1) + " " + cleanTypeValues.get(cleanTypeIndex1);
 
-            String eventName1 = locationValues.get(locationIndex1) + " " + cleanTypeValues.get(cleanTypeIndex1);
+                int yearIndex1 = (int) (Math.random() * yearOptions.size());
+                int monthIndex1 = (int) (Math.random() * monthOptions.size());
+                int dayIndex1 = (int) (Math.random() * dayOptions.size());
 
-            int yearIndex1 = (int)(Math.random() * yearOptions.size());
-            int monthIndex1 = (int)(Math.random() * monthOptions.size());
-            int dayIndex1 = (int)(Math.random() * dayOptions.size());
+                String date1 = yearOptions.get(yearIndex1) + "-" + monthOptions.get(monthIndex1) + "-" + dayOptions.get(dayIndex1);
 
-            String date1 = yearOptions.get(yearIndex1)+ "-" + monthOptions.get(monthIndex1) + "-" + dayOptions.get(dayIndex1);
+                HashMap<String, Double> apiCoordsData = getCoords();
 
-            Event event = new Event(
-                    community.getId(),
-                    eventName1,
-                    eventName1 + " description",
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                    apiCoordsData.get("lat") + ", " + apiCoordsData.get("long"),
-                    date1 + " 12:00:00",
-                    "some before link"
-            );
-            eventRepository.save(event);
+                String textBodyJson = "{\"1\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, \", \"2\":\"sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\"}";
 
-            int locationIndex2 = (int)(Math.random() * locationValues.size());
-            int cleanTypeIndex2 = (int)(Math.random() * locationValues.size());
-
-            String eventName2 = locationValues.get(locationIndex2) + " " + cleanTypeValues.get(cleanTypeIndex2);
-
-            int yearIndex2 = (int)(Math.random() * yearOptions.size());
-            int monthIndex2 = (int)(Math.random() * monthOptions.size());
-            int dayIndex2 = (int)(Math.random() * dayOptions.size());
-
-            String date2 = yearOptions.get(yearIndex2)+ "-" + monthOptions.get(monthIndex2) + "-" + dayOptions.get(dayIndex2);
-
-
-            Event event2 = new Event(
-                    community.getId(),
-                    eventName2,
-                    eventName2 + " description",
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing ",
-                    apiCoordsData.get("lat") + ", " + apiCoordsData.get("long"),
-                    date2 + "12:00:00",
-                    "https://images.unsplash.com/photo-1588803103006-2822e4b2619d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80");
-            event2.setImgAfterLink("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1746&q=80");
-            eventRepository.save(event2);
+                Event event = new Event(
+                        community.getId(),
+                        eventName1,
+                        eventName1 + " description",
+                        textBodyJson,
+                        apiCoordsData.get("lat") + ", " + apiCoordsData.get("long"),
+                        date1 + " 09:00:00",
+                        date1 + " 15:00:00",
+                        "https://images.unsplash.com/photo-1588803103006-2822e4b2619d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                );
+                if (i % 2 == 0) {
+                    event.setImgAfterLink("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1746&q=80");
+                }
+                eventRepository.save(event);
+            }
         }
+        System.out.println("Data Load Complete");
+
+//            HashMap<String, Double> apiCoordsData = getCoords();
+//
+//            int locationIndex1 = (int)(Math.random() * locationValues.size());
+//            int cleanTypeIndex1 = (int)(Math.random() * locationValues.size());
+//
+//            String eventName1 = locationValues.get(locationIndex1) + " " + cleanTypeValues.get(cleanTypeIndex1);
+//
+//            int yearIndex1 = (int)(Math.random() * yearOptions.size());
+//            int monthIndex1 = (int)(Math.random() * monthOptions.size());
+//            int dayIndex1 = (int)(Math.random() * dayOptions.size());
+//
+//            String date1 = yearOptions.get(yearIndex1)+ "-" + monthOptions.get(monthIndex1) + "-" + dayOptions.get(dayIndex1);
+//
+//            Event event = new Event(
+//                    community.getId(),
+//                    eventName1,
+//                    eventName1 + " description",
+//                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+//                    apiCoordsData.get("lat") + ", " + apiCoordsData.get("long"),
+//                    date1 + " 09:00:00",
+//                    date1 + " 15:00:00",
+//                    "https://images.unsplash.com/photo-1588803103006-2822e4b2619d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+//            );
+//            eventRepository.save(event);
+//
+//            int locationIndex2 = (int)(Math.random() * locationValues.size());
+//            int cleanTypeIndex2 = (int)(Math.random() * locationValues.size());
+//
+//            String eventName2 = locationValues.get(locationIndex2) + " " + cleanTypeValues.get(cleanTypeIndex2);
+//
+//            int yearIndex2 = (int)(Math.random() * yearOptions.size());
+//            int monthIndex2 = (int)(Math.random() * monthOptions.size());
+//            int dayIndex2 = (int)(Math.random() * dayOptions.size());
+//
+//            String date2 = yearOptions.get(yearIndex2)+ "-" + monthOptions.get(monthIndex2) + "-" + dayOptions.get(dayIndex2);
+//
+//
+//            Event event2 = new Event(
+//                    community.getId(),
+//                    eventName2,
+//                    eventName2 + " description",
+//                    "Lorem ipsum dolor sit amet, consectetur adipiscing ",
+//                    apiCoordsData.get("lat") + ", " + apiCoordsData.get("long"),
+//                    date2 + " 12:00:00",
+//                    "https://images.unsplash.com/photo-1588803103006-2822e4b2619d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80");
+//            event2.setImgAfterLink("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1746&q=80");
+//            eventRepository.save(event2);
+//        }
     }
 }
