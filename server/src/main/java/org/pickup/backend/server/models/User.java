@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.pickup.backend.server.models.stats.UserStats;
 import org.pickup.backend.server.views.UserView;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ import java.util.List;
         "user_name",
         "email",
         "img_profile_link",
+        "stats",
         "is_active",
         "is_admin"
 })
@@ -43,21 +45,30 @@ public class User {
     @JsonView(UserView.CommentSummary.class)
     @JsonProperty("user_name")
     private String userName;
+
     @Column(name = "email")
     @JsonView(UserView.Summary.class)
     private String email;
+
     @Column(name = "img_profile_link")
     @JsonView(UserView.CommentSummary.class)
     @JsonProperty("img_profile_link")
     private String imgProfileLink;
+
     @Column(name = "is_active")
     @JsonView(UserView.Detail.class)
     @JsonProperty("is_active")
     private boolean isActive;
+
     @Column(name = "is_admin")
     @JsonView(UserView.Detail.class)
     @JsonProperty("is_admin")
     private boolean isAdmin;
+
+    @JsonView(UserView.Summary.class)
+    @Transient
+    @JsonProperty("stats")
+    private UserStats stats;
 
     @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
     @JsonIgnoreProperties({"user"})
@@ -162,5 +173,13 @@ public class User {
 
     public void setCommunity_id(Long community_id) {
         this.community_id = community_id;
+    }
+
+    public UserStats getStats() {
+        return stats;
+    }
+
+    public void setStats(UserStats stats) {
+        this.stats = stats;
     }
 }

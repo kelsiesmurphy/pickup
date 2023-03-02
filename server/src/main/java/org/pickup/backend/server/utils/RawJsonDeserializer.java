@@ -1,4 +1,4 @@
-package org.pickup.backend.server.helpers;
+package org.pickup.backend.server.utils;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;

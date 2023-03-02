@@ -2,16 +2,13 @@ package org.pickup.backend.server.models;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.pickup.backend.server.helpers.RawJsonDeserializer;
-import org.pickup.backend.server.repositories.CommunityRepository;
-import org.pickup.backend.server.views.CommunityView;
+import org.pickup.backend.server.models.stats.EventStats;
+import org.pickup.backend.server.utils.RawJsonDeserializer;
 import org.pickup.backend.server.views.EventView;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Entity
 @Table(name = "events")
@@ -26,6 +23,7 @@ import java.util.Optional;
         "img_before_link",
         "img_after_link",
         "is_active",
+        "stats",
         "comments"
 })
 public class Event {
@@ -89,6 +87,11 @@ public class Event {
     @JsonIgnoreProperties({"event"})
     private List<Litter> litter;
 
+    @JsonView(EventView.Summary.class)
+    @Transient
+    @JsonProperty("stats")
+    private EventStats stats;
+
     @OneToMany(mappedBy="event", fetch=FetchType.LAZY)
     @JsonIgnoreProperties({"event"})
     @JsonView(EventView.Detail.class)
@@ -137,7 +140,7 @@ public class Event {
         return communityId;
     }
 
-    public void setCommunityId(long communityId) {
+    public void setCommunityId(Long communityId) {
         this.communityId = communityId;
     }
 
@@ -227,5 +230,13 @@ public class Event {
 
     public void setComments(List<EventComment> comments) {
         this.comments = comments;
+    }
+
+    public Object getStats() {
+        return stats;
+    }
+
+    public void setStats(EventStats stats) {
+        this.stats = stats;
     }
 }
