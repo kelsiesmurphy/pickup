@@ -1,15 +1,16 @@
 import Request from "../helpers/request";
 
-class eventHandlers {
+class EventHandlers {
 
-    getEvents = () => {
+    getEvents = (id) => {
         const request = new Request();
-        request.get(`/api/events/`)
+        return request.get(`/api/events?communityId=${id}`)
     }
 
     findEvent = (id) => {
         const request = new Request();
-        request.get(`/api/events/` + id)
+        console.log(id);
+        return request.get(`/api/events/${id}`)
     }
 
     handleEventPut = (event) => {
@@ -49,4 +50,4 @@ class eventHandlers {
     }
 };
 
-export default eventHandlers;
+export default EventHandlers;
