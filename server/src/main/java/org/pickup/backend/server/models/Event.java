@@ -112,6 +112,7 @@ public class Event {
             String textBody,
             String location,
             String eventDateTimeStart,
+            String eventDateTimeEnd,
             String imgBeforeLink
     ) {
         this.communityId = communityId;
@@ -120,6 +121,7 @@ public class Event {
         this.textBody = textBody;
         this.location = location;
         this.eventDateTimeStart = DateTimeParse.fromString(eventDateTimeStart);
+        this.eventDateTimeEnd = DateTimeParse.fromString(eventDateTimeEnd);
         this.imgBeforeLink = imgBeforeLink;
         this.litter = new ArrayList<>();
         this.comments = new ArrayList<>();

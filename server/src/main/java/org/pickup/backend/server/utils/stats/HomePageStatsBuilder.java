@@ -40,7 +40,7 @@ public class HomePageStatsBuilder {
         String sql =
                 "SELECT count(*) " +
                 "FROM events e " +
-                "WHERE e.is_active = true";
+                "WHERE e.is_active = true and e.event_date_time_end <= NOW()";
         return jdbcTemplate.queryForObject(sql, Long.class);
     }
 
