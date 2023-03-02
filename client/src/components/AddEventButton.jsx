@@ -75,14 +75,22 @@ const AddEventButton = () => {
                   htmlFor="time"
                   className="text-sm font-medium text-slate-800"
                 >
-                  Event time*
+                  Event start and finish*
                 </label>
-                <input
-                  type="text"
-                  className="min-w-[280px] max-w-[448px] flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
-                  id="time"
-                  placeholder="12/07/2023, 3pm-6pm"
-                />
+                <div className="max-w-[448px] flex flex-1 gap-4">
+                  <input
+                    type="datetime-local"
+                    className="flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
+                    id="time"
+                    placeholder="12/07/2023, 3pm-6pm"
+                  />
+                  <input
+                    type="datetime-local"
+                    className="flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
+                    id="time"
+                    placeholder="12/07/2023, 3pm-6pm"
+                  />
+                </div>
               </div>
               <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
                 <label
