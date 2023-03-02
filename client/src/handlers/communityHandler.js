@@ -1,14 +1,14 @@
 import Request from "../helpers/request";
 
-class communityHandlers {
+class CommunityHandler {
   getCommunities = () => {
     const request = new Request();
-    request.get(`api/communities`);
+    return request.get(`api/communities`);
   };
 
   findCommunity = (id) => {
     const request = new Request();
-    request.get(`/api/communities/` + id);
+    return request.get(`/api/communities/` + id);
   };
 
   handleCommunityPut = (community) => {
@@ -34,4 +34,4 @@ class communityHandlers {
   };
 }
 
-export default communityHandlers;
+export default CommunityHandler;
