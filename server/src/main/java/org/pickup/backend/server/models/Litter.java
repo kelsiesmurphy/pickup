@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.pickup.backend.server.utils.DateTimeParse;
 import org.pickup.backend.server.views.LitterView;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "litter")
@@ -69,7 +71,7 @@ public class Litter {
     @Column(name = "collection_date_time")
     @JsonView(LitterView.Summary.class)
     @JsonProperty("collection_date_time")
-    private String collectionDateTime;
+    private LocalDateTime collectionDateTime;
 
     @Column(name = "is_active")
     private Boolean isActive = true;
@@ -84,7 +86,7 @@ public class Litter {
         this.eventId = eventId;
         this.userId = userId;
         this.litterTypeId = litterTypeId;
-        this.collectionDateTime = collectionDateTime;
+        this.collectionDateTime = DateTimeParse.fromString(collectionDateTime);
         this.isActive = true;
     }
     public Litter() {}
@@ -102,40 +104,24 @@ public class Litter {
         return community;
     }
 
-//    public void setCommunity(Community community) {
-//        this.community = community;
-//    }
-
     public Event getEvent() {
         return event;
     }
-
-//    public void setEvent(Event event) {
-//        this.event = event;
-//    }
 
     public User getUser() {
         return user;
     }
 
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-
     public LitterType getLitterType() {
         return litterType;
     }
 
-//    public void setLitterType(LitterType litterType) {
-//        this.litterType = litterType;
-//    }
-
     public String getCollectionDateTime() {
-        return collectionDateTime;
+        return DateTimeParse.toString(collectionDateTime);
     }
 
     public void setCollectionDateTime(String collectionDateTime) {
-        this.collectionDateTime = collectionDateTime;
+        this.collectionDateTime = DateTimeParse.fromString(collectionDateTime);
     }
 
     public Boolean getActive() {

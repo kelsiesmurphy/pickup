@@ -3,10 +3,12 @@ package org.pickup.backend.server.models;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.pickup.backend.server.models.stats.EventStats;
+import org.pickup.backend.server.utils.DateTimeParse;
 import org.pickup.backend.server.utils.RawJsonDeserializer;
 import org.pickup.backend.server.views.EventView;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,8 @@ import java.util.List;
         "description",
         "text_body",
         "location",
-        "event_date_time",
+        "event_date_time_start",
+        "event_date_time_end",
         "img_before_link",
         "img_after_link",
         "is_active",
@@ -63,10 +66,15 @@ public class Event {
     @JsonView(EventView.Summary.class)
     private String location;
 
-    @Column(name = "event_date_time", nullable=false)
+    @Column(name = "event_date_time_start", nullable=false)
     @JsonView(EventView.Summary.class)
-    @JsonProperty("event_date_time")
-    private String eventDateTime;
+    @JsonProperty("event_date_time_start")
+    private LocalDateTime eventDateTimeStart;
+
+    @Column(name = "event_date_time_end", nullable=true)
+    @JsonView(EventView.Summary.class)
+    @JsonProperty("event_date_time_end")
+    private LocalDateTime eventDateTimeEnd;
 
     @Column(name = "img_before_link", nullable=false)
     @JsonView(EventView.Summary.class)
@@ -103,7 +111,7 @@ public class Event {
             String description,
             String textBody,
             String location,
-            String eventDateTime,
+            String eventDateTimeStart,
             String imgBeforeLink
     ) {
         this.communityId = communityId;
@@ -111,7 +119,7 @@ public class Event {
         this.description = description;
         this.textBody = textBody;
         this.location = location;
-        this.eventDateTime = eventDateTime;
+        this.eventDateTimeStart = DateTimeParse.fromString(eventDateTimeStart);
         this.imgBeforeLink = imgBeforeLink;
         this.litter = new ArrayList<>();
         this.comments = new ArrayList<>();
@@ -131,10 +139,6 @@ public class Event {
     public Community getCommunity() {
         return community;
     }
-//
-//    public void setCommunity(Community community) {
-//        this.community = community;
-//    }
 
     public long getCommunityId() {
         return communityId;
@@ -176,12 +180,20 @@ public class Event {
         this.location = location;
     }
 
-    public String getEventDateTime() {
-        return eventDateTime;
+    public String getEventDateTimeStart() {
+        return DateTimeParse.toString(eventDateTimeStart);
     }
 
-    public void setEventDateTime(String eventDateTime) {
-        this.eventDateTime = eventDateTime;
+    public void setEventDateTimeStart(String eventDateTimeStart) {
+        this.eventDateTimeStart = DateTimeParse.fromString(eventDateTimeStart);
+    }
+
+    public String getEventDateTimeEnd() {
+        return DateTimeParse.toString(eventDateTimeEnd);
+    }
+
+    public void setEventDateTimeEnd(String eventDateTimeEnd) {
+        this.eventDateTimeEnd = DateTimeParse.fromString(eventDateTimeEnd);
     }
 
     public String getImgBeforeLink() {

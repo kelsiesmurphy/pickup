@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.pickup.backend.server.utils.DateTimeParse;
 import org.pickup.backend.server.views.EventCommentView;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "event_comments")
@@ -48,7 +50,7 @@ public class EventComment {
     @Column(name = "comment_date_time", nullable=false)
     @JsonProperty("comment_date_time")
     @JsonView(EventCommentView.Summary.class)
-    private String commentDateTime;
+    private LocalDateTime commentDateTime;
 
     @Column(name = "text_body", nullable=false)
     @JsonProperty("text_body")
@@ -66,7 +68,7 @@ public class EventComment {
             String textBody) {
         this.event_id = event_id;
         this.user_id = user_id;
-        this.commentDateTime = commentDateTime;
+        this.commentDateTime = DateTimeParse.fromString(commentDateTime);
         this.textBody = textBody;
     }
     public EventComment() {}
@@ -83,25 +85,16 @@ public class EventComment {
     public Event getEvent() {
         return event;
     }
-//
-//    public void setEvent(Event event) {
-//        this.event = event;
-//    }
 
     public User getUser() {
         return user;
     }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
 
     public String getCommentDateTime() {
-        return commentDateTime;
+        return DateTimeParse.toString(commentDateTime);
     }
-
     public void setCommentDateTime(String commentDateTime) {
-        this.commentDateTime = commentDateTime;
+        this.commentDateTime = DateTimeParse.fromString(commentDateTime);
     }
 
     public String getTextBody() {

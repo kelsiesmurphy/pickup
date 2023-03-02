@@ -86,7 +86,7 @@ public class DataLoader implements ApplicationRunner {
                 "Beach pickup description",
                 "some texty text",
                 "some location",
-                "some datetime",
+                "2023-02-27 15:15:30",
                 "some before link");
 
         Event event2 = new Event(
@@ -95,7 +95,7 @@ public class DataLoader implements ApplicationRunner {
                 "Forest pickup description",
                 "some text text",
                 "some location",
-                "some datetime",
+                "2023-02-27 15:15:30",
                 "some before link");
         event2.setImgAfterLink("some after link");
 
