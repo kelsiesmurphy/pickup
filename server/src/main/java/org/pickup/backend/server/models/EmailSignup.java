@@ -26,10 +26,12 @@ public class EmailSignup {
     @Column(name = "email", nullable=false)
     @JsonView(EmailSignupView.PostReturn.class)
     private String email;
+
     @Column(name = "signup_date_time", nullable=false)
     @JsonView(EmailSignupView.PostReturn.class)
     @JsonProperty("signup_date_time")
     private String signupDateTime;
+
     @Column(name = "is_active", nullable=false)
     @JsonProperty("is_active")
     private boolean isActive = true;

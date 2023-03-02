@@ -44,14 +44,17 @@ public class EventComment {
     @Column(name = "user_id", nullable=false)
     @JsonProperty("user_id")
     private Long user_id;
+
     @Column(name = "comment_date_time", nullable=false)
     @JsonProperty("comment_date_time")
     @JsonView(EventCommentView.Summary.class)
     private String commentDateTime;
+
     @Column(name = "text_body", nullable=false)
     @JsonProperty("text_body")
     @JsonView(EventCommentView.Summary.class)
     private String textBody;
+
     @Column(name = "is_active", nullable=false)
     @JsonProperty("is_active")
     private boolean isActive = true;
