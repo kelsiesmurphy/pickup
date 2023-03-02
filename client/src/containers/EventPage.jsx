@@ -21,7 +21,7 @@ const EventPage = () => {
   }
 
   return (
-    <>
+    <div className="p-4">
       <div className="flex justify-center pt-24 pb-6">
         <div className="flex flex-1 max-w-7xl flex-col gap-16">
           <div className="flex flex-col gap-12">
@@ -140,7 +140,7 @@ const EventPage = () => {
           </footer>
         </div>
       </div >
-    </>
+    </div>
   )
 };
 
