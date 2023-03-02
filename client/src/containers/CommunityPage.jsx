@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import CommunityHandler from "../handlers/communityHandler";
+import UserHandlers from "../handlers/userHandlers";
 
 const CommunityPage = () => {
   const { id } = useParams();
@@ -22,9 +23,15 @@ const CommunityPage = () => {
 
   useEffect(() => {
     const communityHandler = new CommunityHandler();
+    const userHandler = new UserHandlers();
+
     communityHandler
       .findCommunity(urlId)
       .then((result) => setCommunity(result));
+
+    userHandler
+      .findUsersFromCommunity(urlId)
+      .then((result) => setCommunityMembers(result));
   }, [urlId]);
 
   return (

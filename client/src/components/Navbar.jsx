@@ -108,7 +108,7 @@ const Navbar = ({ community }) => {
       {navOpen && isAuthenticated && (
         <div className="flex flex-col justify-center gap-4 p-4">
           <Link
-            to={`/communities/${community.id}`}
+            to={`/communities/1`}
             className=" flex flex-1 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white py-2.5 px-4 text-slate-700 shadow-sm outline-slate-900 transition-colors hover:bg-slate-50 md:flex-none"
           >
             <Heart color="#334155" size={20} />
