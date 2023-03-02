@@ -4,7 +4,6 @@ import { Copy, Twitter, Facebook, Linkedin } from "react-feather";
 
 const EventPage = () => {
 
-
   const { id } = useParams();
 
   const event = {
@@ -143,6 +142,9 @@ const EventPage = () => {
     </div>
   )
 };
+
+
+
 
 
 export default EventPage;
