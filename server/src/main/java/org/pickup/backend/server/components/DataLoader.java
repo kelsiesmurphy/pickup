@@ -107,18 +107,18 @@ public class DataLoader implements ApplicationRunner {
         litterTypeRepository.save(can);
 
         Litter litter1 = new Litter(
-                test1,
-                event1,
-                user1,
-                can,
+                test1.getId(),
+                event1.getId(),
+                user1.getId(),
+                can.getId(),
                 "2023-02-27 15:15:30"
         );
 
         Litter litter2 = new Litter(
-                test1,
+                test1.getId(),
                 null,
-                user2,
-                can,
+                user2.getId(),
+                can.getId(),
                 "2023-02-27 15:20:10"
         );
         litterRepository.save(litter1);

@@ -23,18 +23,12 @@ public class EventCommentController {
             @RequestBody EventComment comment
     ) {
         try {
-            eventCommentRepository.saveAndFlush(comment);
+            eventCommentRepository.save(comment);
             eventCommentRepository.refresh(comment);
-            return new ResponseEntity<>(
-                    comment,
-                    HttpStatus.OK
-            );
+            return new ResponseEntity<>(comment, HttpStatus.OK);
         }
         catch (Exception e) {
-            return new ResponseEntity<>(
-                    e,
-                    HttpStatus.BAD_REQUEST
-            );
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
 

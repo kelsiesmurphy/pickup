@@ -13,7 +13,7 @@ public class EventStatsBuilder {
 
     public EventStats build(Long eventId) {
         EventStats stats = new EventStats();
-        stats.setUsersTotal(getCountLitterForEvent(eventId));
+        stats.setUsersTotal(getCountUsersForEvent(eventId));
         stats.setLitterTotal(getCountLitterForEvent(eventId));
         return stats;
     }
