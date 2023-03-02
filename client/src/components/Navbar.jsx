@@ -62,7 +62,7 @@ const Navbar = ({ community }) => {
             <>
               <div className="hidden items-center gap-4 md:flex">
                 <Link
-                  to={`/communities/${community.id}`}
+                  to={`/communities/1`}
                   className=" flex items-center gap-2 rounded-lg border border-slate-300 bg-white py-2.5 px-4 text-slate-700 shadow-sm outline-slate-900 transition-colors hover:bg-slate-50"
                 >
                   <Heart color="#334155" size={20} />
