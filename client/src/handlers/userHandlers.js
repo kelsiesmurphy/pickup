@@ -13,7 +13,7 @@ class UserHandlers {
 
   findUsersFromCommunity = (id) => {
     const request = new Request();
-    return request.get(`/api/users/?communityId=${id}`);
+    return request.get(`/api/users?communityId=${id}`);
   };
 
   handleUserPut = (user) => {

@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import CommunityHandler from "../handlers/communityHandler";
 import UserHandlers from "../handlers/userHandlers";
+import EventHandlers from "../handlers/eventHandlers";
 
 const CommunityPage = () => {
   const { id } = useParams();
@@ -24,6 +25,7 @@ const CommunityPage = () => {
   useEffect(() => {
     const communityHandler = new CommunityHandler();
     const userHandler = new UserHandlers();
+    const eventHandler = new EventHandlers();
 
     communityHandler
       .findCommunity(urlId)
@@ -32,6 +34,10 @@ const CommunityPage = () => {
     userHandler
       .findUsersFromCommunity(urlId)
       .then((result) => setCommunityMembers(result));
+
+    eventHandler
+      .getEvents(urlId)
+      .then((result) => setUpcomingEvents(result))
   }, [urlId]);
 
   return (

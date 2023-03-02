@@ -1,26 +1,35 @@
+import { Link } from "react-router-dom";
+
 const UpcomingEvents = ({ upcomingEvents }) => {
-  const eventNodes = upcomingEvents.splice(0, 2).map((event) => {
+  const eventNodes = upcomingEvents.splice(0,2).map((event, index) => {
     return (
-      <li className="rounded-2xl border shadow-sm">
-        <img src={event.before_img_link} />
-        <div className="px-6 py-8">
-          <h3 className="text-xl md:text-2xl text-slate-900 font-semibold">{event.name}</h3>
-          <p className="text-slate-600">{event.descripion}</p>
-        </div>
+      <li key={index} className="flex-1 rounded-2xl border bg-white shadow-sm">
+        <Link to={`/events/${event.id}`}>
+          <img
+            src={event.img_before_link}
+            className="aspect-[592/192] rounded-t-2xl object-cover"
+          />
+          <div className="space-y-2 px-6 py-6">
+            <h3 className="text-xl font-semibold text-slate-900 md:text-2xl">
+              {event.name}
+            </h3>
+            <p className="text-slate-600">{event.description}</p>
+          </div>
+        </Link>
       </li>
-    )
-  })
+    );
+  });
 
   return (
-    <div className="py-12 px-4 flex justify-center">
-      <div className="flex-1 max-w-7xl">
-        <h2 className="text-slate-900 text-2xl font-medium">Upcoming events</h2>
-        <ul className="flex flex-wrap gap-8 flex-1 max-w-7xl">
+    <div className="flex justify-center py-12 px-4">
+      <div className="max-w-7xl flex-1 space-y-6">
+        <h2 className="text-2xl font-medium text-slate-900">Upcoming events</h2>
+        <ul className="flex flex-1 flex-wrap justify-between gap-8">
           {eventNodes}
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UpcomingEvents
+export default UpcomingEvents;
