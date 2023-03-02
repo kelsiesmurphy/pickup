@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const UpcomingEvents = ({ upcomingEvents }) => {
-  const eventNodes = upcomingEvents.map((event, index) => {
+  const eventNodes = upcomingEvents.splice(0,2).map((event, index) => {
     return (
       <li key={index} className="flex-1 rounded-2xl border bg-white shadow-sm">
         <Link to={`/events/${event.id}`}>

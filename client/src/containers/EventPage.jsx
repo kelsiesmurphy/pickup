@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Copy, Twitter, Facebook, Linkedin } from "react-feather";
 import EventHandlers from "../handlers/eventHandlers";
+import Footer from "../components/Footer";
 
 const EventPage = () => {
   const { id } = useParams();
@@ -11,7 +12,9 @@ const EventPage = () => {
   useEffect(() => {
     const eventHandler = new EventHandlers();
 
-    eventHandler.findEvent(urlId).then((result) => setEvent(result));
+    eventHandler.findEvent(urlId).then((result) => {
+      setEvent(result);
+    });
   }, [urlId]);
 
   const handleCopyLink = () => {
@@ -57,59 +60,20 @@ const EventPage = () => {
             Introduction
           </h1>
           <p className="text-lg text-slate-500 md:text-xl">
-            Lorem ipsum dolor sit amet. Nam aspernatur esse ut consectetur quod
-            non molestiae incidunt et omnis nemo qui totam culpa. Ut ratione
-            recusandae qui consequuntur aperiam et maxime obcaecati. Id
-            accusantium provident hic accusantium voluptatem cum perspiciatis
-            consequatur et beatae quae. Ex quia consequuntur est consectetur
-            laboriosam ut voluptas mollitia est facere molestiae quo enim dolor
-            sed voluptatem placeat. Ut incidunt odio sed molestiae odio sed
-            repellendus velit vel eligendi reiciendis est delectus illo et quasi
-            quia ea inventore necessitatibus. Nam magnam consequuntur aut dicta
-            sint cum quidem omnis qui voluptatem amet a architecto
-            necessitatibus ut tenetur debitis. A enim dolorem et velit
-            voluptatibus et tempore sint. In expedita commodi ut amet obcaecati
-            sit laborum pariatur et dolorem ipsa quo nihil galisum.
-          </p>
-          <p className="text-lg text-slate-500 md:text-xl">
-            Lorem ipsum dolor sit amet. Nam aspernatur esse ut consectetur quod
-            non molestiae incidunt et omnis nemo qui totam culpa. Ut ratione
-            recusandae qui consequuntur aperiam et maxime obcaecati. Id
-            accusantium provident hic accusantium voluptatem cum perspiciatis
-            consequatur et beatae quae. Ex quia consequuntur est consectetur
-            laboriosam ut voluptas mollitia est facere molestiae quo enim dolor
-            sed voluptatem placeat. Ut incidunt odio sed molestiae odio sed
-            repellendus velit vel eligendi reiciendis est delectus illo et quasi
-            quia ea inventore necessitatibus. Nam magnam consequuntur aut dicta
-            sint cum quidem omnis qui voluptatem amet a architecto
-            necessitatibus ut tenetur debitis. A enim dolorem et velit
-            voluptatibus et tempore sint. In expedita commodi ut amet obcaecati
-            sit laborum pariatur et dolorem ipsa quo nihil galisum.
+            {event.text_body === undefined ? '' : event.text_body["1"]}
           </p>
           <img
             src={event.img_before_link}
             width="1248"
-            className="aspect-[375/272] object-cover md:aspect-[1216/700] xl:rounded-2xl"
+            className="aspect-[375/272] object-cover shadow-sm md:aspect-[1216/700] xl:rounded-2xl"
           />
           <p className="text-lg text-slate-500 md:text-xl">
-            Lorem ipsum dolor sit amet. Nam aspernatur esse ut consectetur quod
-            non molestiae incidunt et omnis nemo qui totam culpa. Ut ratione
-            recusandae qui consequuntur aperiam et maxime obcaecati. Id
-            accusantium provident hic accusantium voluptatem cum perspiciatis
-            consequatur et beatae quae. Ex quia consequuntur est consectetur
-            laboriosam ut voluptas mollitia est facere molestiae quo enim dolor
-            sed voluptatem placeat. Ut incidunt odio sed molestiae odio sed
-            repellendus velit vel eligendi reiciendis est delectus illo et quasi
-            quia ea inventore necessitatibus. Nam magnam consequuntur aut dicta
-            sint cum quidem omnis qui voluptatem amet a architecto
-            necessitatibus ut tenetur debitis. A enim dolorem et velit
-            voluptatibus et tempore sint. In expedita commodi ut amet obcaecati
-            sit laborum pariatur et dolorem ipsa quo nihil galisum.
+          {event.text_body === undefined ? '' : event.text_body["2"]}
           </p>
           <img
             src={event.img_after_link}
             width="1248"
-            className="aspect-[375/272] object-cover md:aspect-[1216/700] xl:rounded-2xl "
+            className="aspect-[375/272] object-cover shadow-sm md:aspect-[1216/700] xl:rounded-2xl "
           />
 
           <div className="py-18 mt-8 mb-8 flex justify-center">
@@ -119,34 +83,34 @@ const EventPage = () => {
               </p>
               <div className="flex gap-8">
                 <button
-                  className=" flex items-center gap-4 rounded-md border-2 border-slate-500 p-2.5 shadow-sm"
+                  className=" flex items-center gap-4 rounded-md border border-slate-300 p-2.5 shadow-sm"
                   onClick={handleCopyLink}
                 >
-                  <Copy colour="gray" size={30} />
+                  <Copy colour="#64748b" size={24} />
                   Copy Link
                 </button>
                 {event.twitter_link ? (
                   <a
-                    className="rounded-md border-2 border-slate-500 p-2.5 shadow-sm"
+                    className="rounded-md border border-slate-300 p-2.5 shadow-sm"
                     href={event.twitter_link}
                   >
-                    <Twitter color="gray" size={30} />
+                    <Twitter color="#64748b" size={24} />
                   </a>
                 ) : null}
                 {event.twitter_link ? (
                   <a
-                    className="rounded-md border-2 border-slate-500 p-2.5 shadow-sm"
+                    className="rounded-md border border-slate-300 p-2.5 shadow-sm"
                     href={event.facebook_link}
                   >
-                    <Facebook color="gray" size={30} />
+                    <Facebook color="#64748b" size={24} />
                   </a>
                 ) : null}
                 {event.twitter_link ? (
                   <a
-                    className="rounded-md border-2 border-slate-500 p-2.5 shadow-sm"
+                    className="rounded-md border border-slate-300 p-2.5 shadow-sm"
                     href={event.linkedin_link}
                   >
-                    <Linkedin color="gray" size={30} />
+                    <Linkedin color="#64748b" size={24} />
                   </a>
                 ) : null}
               </div>
@@ -154,6 +118,7 @@ const EventPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
