@@ -9,6 +9,7 @@ import org.pickup.backend.server.views.EventCommentView;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "event_comments")
@@ -29,7 +30,6 @@ public class EventComment {
 
     @ManyToOne(targetEntity = Event.class, fetch = FetchType.EAGER)
     @JoinColumn(name="event_id", insertable=false, updatable=false)
-//    @JsonIgnoreProperties({"comments"})
     private Event event;
 
     @Column(name = "event_id", nullable=false)
@@ -68,10 +68,11 @@ public class EventComment {
             String textBody) {
         this.event_id = event_id;
         this.user_id = user_id;
-        this.commentDateTime = DateTimeParse.fromString(commentDateTime);
+        this.commentDateTime = LocalDateTime.parse(commentDateTime, DateTimeFormatter.ISO_DATE_TIME);
         this.textBody = textBody;
     }
     public EventComment() {}
+
     // Getters and setters
 
     public long getId() {
@@ -91,10 +92,10 @@ public class EventComment {
     }
 
     public String getCommentDateTime() {
-        return DateTimeParse.toString(commentDateTime);
+        return commentDateTime.format(DateTimeFormatter.ISO_DATE_TIME);
     }
     public void setCommentDateTime(String commentDateTime) {
-        this.commentDateTime = DateTimeParse.fromString(commentDateTime);
+        this.commentDateTime = LocalDateTime.parse(commentDateTime, DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public String getTextBody() {

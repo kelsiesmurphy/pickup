@@ -21,4 +21,13 @@ public class MonthlyStatsQueryBuilder {
                 .collect(Collectors
                         .toMap(k -> k.get("month").toString(), v -> (Long)v.get("count")));
     }
+
+    public static String makeMonth(String columnName) {
+        String result =
+                "make_date(" +
+                    "EXTRACT(YEAR FROM " + columnName + ")::INTEGER, " +
+                    "EXTRACT(MONTH FROM " + columnName + ")::INTEGER, " +
+                    "1) ";
+        return result;
+    }
 }

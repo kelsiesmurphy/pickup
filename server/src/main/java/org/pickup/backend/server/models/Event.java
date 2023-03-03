@@ -9,6 +9,7 @@ import org.pickup.backend.server.views.EventView;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,14 +121,15 @@ public class Event {
         this.description = description;
         this.textBody = textBody;
         this.location = location;
-        this.eventDateTimeStart = DateTimeParse.fromString(eventDateTimeStart);
-        this.eventDateTimeEnd = DateTimeParse.fromString(eventDateTimeEnd);
+        this.eventDateTimeStart = LocalDateTime.parse(eventDateTimeStart, DateTimeFormatter.ISO_DATE_TIME);
+        this.eventDateTimeEnd = LocalDateTime.parse(eventDateTimeEnd, DateTimeFormatter.ISO_DATE_TIME);
         this.imgBeforeLink = imgBeforeLink;
         this.litter = new ArrayList<>();
         this.comments = new ArrayList<>();
     }
 
     public Event() {}
+
     // Getters and setters
 
     public long getId() {
@@ -183,19 +185,19 @@ public class Event {
     }
 
     public String getEventDateTimeStart() {
-        return DateTimeParse.toString(eventDateTimeStart);
+        return eventDateTimeStart.format(DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public void setEventDateTimeStart(String eventDateTimeStart) {
-        this.eventDateTimeStart = DateTimeParse.fromString(eventDateTimeStart);
+        this.eventDateTimeStart = LocalDateTime.parse(eventDateTimeStart, DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public String getEventDateTimeEnd() {
-        return DateTimeParse.toString(eventDateTimeEnd);
+        return eventDateTimeEnd.format(DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public void setEventDateTimeEnd(String eventDateTimeEnd) {
-        this.eventDateTimeEnd = DateTimeParse.fromString(eventDateTimeEnd);
+        this.eventDateTimeEnd = LocalDateTime.parse(eventDateTimeEnd, DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public String getImgBeforeLink() {

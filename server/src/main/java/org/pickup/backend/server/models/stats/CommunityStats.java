@@ -1,9 +1,6 @@
 package org.pickup.backend.server.models.stats;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.pickup.backend.server.utils.RawJsonDeserializer;
 import org.pickup.backend.server.views.CommunityView;
@@ -14,22 +11,50 @@ import java.util.Map;
 @JsonPropertyOrder({
         "users",
         "events",
-        "litter"
+        "litter",
+
 })
 public class CommunityStats {
 
-    @JsonView(CommunityView.Summary.class)
-    @JsonIncludeProperties({"total", "monthly_data"})
+//    @JsonView(CommunityView.Summary.class)
+//    @JsonIncludeProperties({"total", "monthly_data"})
+    @JsonProperty("users")
     private Map<String, Object> users;
 
-    @JsonView(CommunityView.Summary.class)
-    @JsonIncludeProperties({"total", "monthly_data"})
-    @JsonDeserialize(using = RawJsonDeserializer.class)
+    @JsonProperty("events")
     private Map<String, Object> events;
 
-    @JsonView(CommunityView.Summary.class)
-    @JsonIncludeProperties({"total", "monthly_data"})
+//    @JsonView(CommunityView.Summary.class)
+//    @JsonIncludeProperties({"total", "monthly_data"})
+    @JsonProperty
     private Map<String, Object> litter;
+
+    Long total;
+
+    Map<String, Long> monthlyData;
+
+    @JsonView(CommunityView.Summary.class)
+    @JsonProperty("events")
+//    @JsonIncludeProperties({"users", "events", "litter"})
+    @JsonPropertyOrder({"total", "monthly_data"})
+    private void unpackEventStats(Map<String, Object> nestedStat) {
+        total = (Long)nestedStat.get("total");
+        monthlyData = (Map<String, Long>)nestedStat.get("monthly_data");
+    }
+
+    @JsonView(CommunityView.Summary.class)
+    @JsonProperty("users")
+    private void unpackUsersStats(Map<String, Object> nestedStat) {
+        total = (Long)nestedStat.get("total");
+        monthlyData = (Map<String, Long>)nestedStat.get("monthly_data");
+    }
+
+    @JsonView(CommunityView.Summary.class)
+    @JsonProperty("litter")
+    private void unpackLitterStats(Map<String, Object> nestedStat) {
+        total = (Long)nestedStat.get("total");
+        monthlyData = (Map<String, Long>)nestedStat.get("monthly_data");
+    }
 
 //    @JsonView(CommunityView.Summary.class)
 //    @JsonInclude
