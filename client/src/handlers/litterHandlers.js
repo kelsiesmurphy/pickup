@@ -4,7 +4,7 @@ class litterHandlers {
 
     getLitter = () => {
         const request = new Request();
-        request.get(`api/litter-types`)
+        request.get(`/api/litter-types`)
     }
 
     handleLitterPost = (litter) => {

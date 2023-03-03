@@ -9,8 +9,9 @@ import { Menu } from "react-feather";
 import { useState } from "react";
 import { X } from "react-feather";
 
-const Navbar = ({ community }) => {
+const Navbar = ({ communityId }) => {
   const { user, isAuthenticated, logout } = useAuth0();
+
   const [navOpen, setNavOpen] = useState(false);
 
   const handleNavOpen = () => {
@@ -62,13 +63,13 @@ const Navbar = ({ community }) => {
             <>
               <div className="hidden items-center gap-4 md:flex">
                 <Link
-                  to={`/communities/1`}
+                  to={`/communities`}
                   className=" flex items-center gap-2 rounded-lg border border-slate-300 bg-white py-2.5 px-4 text-slate-700 shadow-sm outline-slate-900 transition-colors hover:bg-slate-50"
                 >
                   <Heart color="#334155" size={20} />
-                  Community
+                  Communities
                 </Link>
-                <AddEventButton />
+                <AddEventButton communityId={communityId} />
                 <img
                   src={user.picture}
                   className="aspect-square h-10 rounded-full"
@@ -108,13 +109,13 @@ const Navbar = ({ community }) => {
       {navOpen && isAuthenticated && (
         <div className="flex flex-col justify-center gap-4 p-4">
           <Link
-            to={`/communities/1`}
+            to={`/communities/${communityId}`}
             className=" flex flex-1 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white py-2.5 px-4 text-slate-700 shadow-sm outline-slate-900 transition-colors hover:bg-slate-50 md:flex-none"
           >
             <Heart color="#334155" size={20} />
             Community
           </Link>
-          <AddEventButton />
+          <AddEventButton communityId={communityId} />
           <button
             onClick={() => logoutWithRedirect()}
             className="flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-slate-700 outline-slate-900 transition-colors hover:border-slate-100 hover:bg-slate-100 md:max-w-[132px] md:flex-none"

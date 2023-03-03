@@ -3,7 +3,7 @@ import Request from "../helpers/request";
 class UserHandlers {
   getUsers = () => {
     const request = new Request();
-    request.get(`api/users`);
+    request.get(`/api/users`);
   };
 
   findUser = (id) => {

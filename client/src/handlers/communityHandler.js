@@ -3,7 +3,7 @@ import Request from "../helpers/request";
 class CommunityHandler {
   getCommunities = () => {
     const request = new Request();
-    return request.get(`api/communities`);
+    return request.get(`/api/communities`);
   };
 
   findCommunity = (id) => {

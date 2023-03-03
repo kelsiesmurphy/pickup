@@ -78,8 +78,8 @@ const EventPage = () => {
 
           <div className="py-18 mt-8 mb-8 flex justify-center">
             <div className="flex flex-1 flex-wrap justify-between gap-16">
-              <p className="md:text-1.5xl text-2xl text-slate-500">
-                Share this post
+              <p className="text-xl text-slate-500">
+                Share this event
               </p>
               <div className="flex gap-8">
                 <button
