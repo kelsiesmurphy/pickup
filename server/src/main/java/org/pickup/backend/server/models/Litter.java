@@ -1,14 +1,13 @@
 package org.pickup.backend.server.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
-import org.pickup.backend.server.utils.DateTimeParse;
 import org.pickup.backend.server.views.LitterView;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "litter")
@@ -30,7 +29,6 @@ public class Litter {
 
     @ManyToOne(targetEntity = Community.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "community_id", insertable=false, updatable=false)
-//    @JsonIgnoreProperties({"litter"})
     private Community community;
 
     @Column(name = "community_id", nullable = false)
@@ -40,7 +38,6 @@ public class Litter {
 
     @ManyToOne(targetEntity = Event.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "event_id", insertable=false, updatable=false)
-//    @JsonIgnoreProperties({"litter"})
     private Event event;
 
     @Column(name = "event_id", nullable=true)
@@ -50,7 +47,6 @@ public class Litter {
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", insertable=false, updatable=false)
-//    @JsonIgnoreProperties({"litter"})
     private User user;
 
     @Column(name = "user_id", nullable=false)
@@ -60,7 +56,6 @@ public class Litter {
 
     @ManyToOne(targetEntity = LitterType.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "litter_type_id", insertable=false, updatable=false)
-//    @JsonIgnoreProperties({"litter"})
     private LitterType litterType;
 
     @Column(name = "litter_type_id", nullable=false)
@@ -86,10 +81,11 @@ public class Litter {
         this.eventId = eventId;
         this.userId = userId;
         this.litterTypeId = litterTypeId;
-        this.collectionDateTime = DateTimeParse.fromString(collectionDateTime);
+        this.collectionDateTime = LocalDateTime.parse(collectionDateTime, DateTimeFormatter.ISO_DATE_TIME);
         this.isActive = true;
     }
     public Litter() {}
+
     // Getters and setters
 
     public long getId() {
@@ -117,11 +113,11 @@ public class Litter {
     }
 
     public String getCollectionDateTime() {
-        return DateTimeParse.toString(collectionDateTime);
+        return collectionDateTime.format(DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public void setCollectionDateTime(String collectionDateTime) {
-        this.collectionDateTime = DateTimeParse.fromString(collectionDateTime);
+        this.collectionDateTime = LocalDateTime.parse(collectionDateTime, DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public Boolean getActive() {
