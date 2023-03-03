@@ -3,20 +3,60 @@ import { useState } from "react";
 import Rodal from "rodal";
 // Include rodal styles
 import "rodal/lib/rodal.css";
+import EventHandlers from "../handlers/eventHandlers";
 
-const AddEventButton = () => {
+const AddEventButton = ({ community }) => {
   const [openModal, setOpenModal] = useState(false);
+
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [eventStart, setEventStart] = useState("");
+  const [eventEnd, setEventEnd] = useState("");
+  const [coverImage, setCoverImage] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleNewEventModal = () => {
     setOpenModal(true);
   };
-
   const handleClose = () => {
     setOpenModal(false);
   };
 
-  const handleSubmit = () => {};
+  const handleTitle = (event) => {
+    setTitle(event.target.value);
+  };
+  const handleLocation = (event) => {
+    setLocation(event.target.value);
+  };
+  const handleEventStart = (event) => {
+    setEventStart(event.target.value);
+  };
+  const handleEventEnd = (event) => {
+    setEventEnd(event.target.value);
+  };
+  const handleCoverImage = (event) => {
+    setCoverImage(event.target.value);
+  };
+  const handleDescription = (event) => {
+    setDescription(event.target.value);
+  };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("submitted: " + eventEnd);
+    const formSubmission = {
+      title: title,
+      location: location,
+      eventStart: eventStart,
+      eventEnd: eventEnd,
+      coverImage: coverImage,
+      description: description,
+    };
+
+    EventHandlers.handleEventPost(formSubmission);
+
+    handleClose();
+  };
   return (
     <>
       <button
@@ -42,7 +82,7 @@ const AddEventButton = () => {
               Create your event and share with your community members.
             </p>
           </div>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="px-3">
               <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
                 <label
@@ -53,6 +93,9 @@ const AddEventButton = () => {
                 </label>
                 <input
                   type="text"
+                  name="title"
+                  value={title}
+                  onChange={handleTitle}
                   className="min-w-[280px] max-w-[448px] flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
                   id="title"
                   placeholder="e.g. Monthly litter pick"
@@ -67,6 +110,9 @@ const AddEventButton = () => {
                 </label>
                 <input
                   type="text"
+                  name="location"
+                  value={location}
+                  onChange={handleLocation}
                   className="min-w-[280px] max-w-[448px] flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
                   id="location"
                   placeholder="e.g. Community playing fields"
@@ -82,15 +128,21 @@ const AddEventButton = () => {
                 <div className="flex max-w-[448px] flex-1 gap-4">
                   <input
                     type="datetime-local"
+                    name="date_time_start"
+                    value={eventStart}
+                    onChange={handleEventStart}
                     className="flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
                     id="time"
-                    placeholder="12/07/2023, 3pm-6pm"
+                    placeholder="12/07/2023, 3pm"
                   />
                   <input
                     type="datetime-local"
+                    name="date_time_end"
+                    value={eventEnd}
+                    onChange={handleEventEnd}
                     className="flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
                     id="time"
-                    placeholder="12/07/2023, 3pm-6pm"
+                    placeholder="12/07/2023, 6pm"
                   />
                 </div>
               </div>
@@ -103,6 +155,9 @@ const AddEventButton = () => {
                 </label>
                 <input
                   type="text"
+                  name="cover_image"
+                  value={coverImage}
+                  onChange={handleCoverImage}
                   id="image"
                   placeholder="image link"
                   className="min-w-[280px] max-w-[448px] flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
@@ -116,6 +171,7 @@ const AddEventButton = () => {
                   Cover image*
                 </label>
                 <input
+                  name="cover_image"
                   type="file"
                   id="image"
                   placeholder="image link"
@@ -132,6 +188,8 @@ const AddEventButton = () => {
                 <textarea
                   id="description"
                   name="description"
+                  value={description}
+                  onChange={handleDescription}
                   placeholder="Write a few sentences about the event..."
                   className=" min-w-[280px] max-w-[448px] flex-1 resize-none rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
                 ></textarea>
@@ -146,8 +204,7 @@ const AddEventButton = () => {
               </button>
               <input
                 type="submit"
-                className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-green-800 bg-green-800 py-2.5 px-4 text-white shadow-sm outline-slate-900 transition-colors hover:border-green-900 hover:bg-green-900 cursor-pointer"
-                onClick={handleSubmit}
+                className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg border border-green-800 bg-green-800 py-2.5 px-4 text-white shadow-sm outline-slate-900 transition-colors hover:border-green-900 hover:bg-green-900"
                 value="Add Event"
               />
             </div>
