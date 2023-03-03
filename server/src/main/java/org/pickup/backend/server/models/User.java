@@ -72,7 +72,7 @@ public class User {
     @JsonProperty("create_date")
     private LocalDate createDate;
 
-    @JsonView(UserView.Summary.class)
+//    @JsonView(UserView.Summary.class)
     @Transient
     @JsonProperty("stats")
     private UserStats stats;

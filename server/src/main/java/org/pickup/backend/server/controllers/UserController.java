@@ -29,9 +29,9 @@ public class UserController {
     ) {
         try {
             List<User> result = userRepository.findByCommunityId(communityId);
-            for (User user : result) {
-                user.setStats(userStatsBuilder.build(user.getId()));
-            }
+//            for (User user : result) {
+//                user.setStats(userStatsBuilder.build(user.getId()));
+//            }
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         catch (Exception e) {
@@ -47,7 +47,7 @@ public class UserController {
         try {
             Optional<User> result = userRepository.findById(id);
             return result.map(user -> {
-                user.setStats(userStatsBuilder.build(user.getId()));
+//                user.setStats(userStatsBuilder.build(user.getId()));
                 return new ResponseEntity<>(user, HttpStatus.OK);
             }).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
         }
@@ -67,7 +67,7 @@ public class UserController {
             return result.map(user -> {
                 user = updatedUser;
                 userRepository.save(user);
-                user.setStats(userStatsBuilder.build(user.getId()));
+//                user.setStats(userStatsBuilder.build(user.getId()));
                 return new ResponseEntity<>(user, HttpStatus.OK);
             }).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
         }
@@ -87,7 +87,7 @@ public class UserController {
             return result.map(user -> {
                 user.setActive((boolean)userStatus.get("is_active"));
                 userRepository.save(user);
-                user.setStats(userStatsBuilder.build(user.getId()));
+//                user.setStats(userStatsBuilder.build(user.getId()));
                 return new ResponseEntity<>(user, HttpStatus.OK);
             }).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.BAD_REQUEST));
         }
