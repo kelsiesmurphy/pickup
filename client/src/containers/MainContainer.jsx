@@ -7,6 +7,7 @@ import CommunitiesList from "./CommunitiesList";
 import EventPage from "./EventPage";
 import Error from "./Error";
 import { useState } from "react";
+import Admin from "./Admin";
 
 const MainContainer = () => {
   const [communityId, setTempId] = useState(1)
@@ -20,6 +21,7 @@ const MainContainer = () => {
         <Route path="/communities/:id" element={<CommunityPage />} />
         <Route path="/communities/:id/edit" element={<CommunityEditPage />} />
         <Route path="/events/:id" element={<EventPage />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>
