@@ -3,7 +3,6 @@ package org.pickup.backend.server.models;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.pickup.backend.server.models.stats.EventStats;
-import org.pickup.backend.server.utils.DateTimeParse;
 import org.pickup.backend.server.utils.RawJsonDeserializer;
 import org.pickup.backend.server.views.EventView;
 

@@ -4,7 +4,6 @@ package org.pickup.backend.server.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
-import org.pickup.backend.server.utils.DateTimeParse;
 import org.pickup.backend.server.views.EmailSignupView;
 
 import javax.persistence.*;
