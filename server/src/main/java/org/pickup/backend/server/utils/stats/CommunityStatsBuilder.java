@@ -37,10 +37,8 @@ public class CommunityStatsBuilder {
 
         }
         catch (Exception e) {
-            System.out.println(e);
+//            System.out.println(e);
         }
-        System.out.println(stats.getEvents());
-        System.out.println(stats.getEvents().get("monthly_data"));
         return stats;
     }
 
