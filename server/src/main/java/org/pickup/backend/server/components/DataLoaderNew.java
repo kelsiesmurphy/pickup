@@ -13,8 +13,8 @@ import org.springframework.web.client.RestTemplate;
 import java.lang.reflect.Array;
 import java.util.*;
 
-@Profile("dev")// Run when flagged in dev mode
-@Component
+//@Profile("dev")// Run when flagged in dev mode
+//@Component
 public class DataLoaderNew implements ApplicationRunner {
 
     @Autowired

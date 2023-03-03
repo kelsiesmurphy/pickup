@@ -1,8 +1,11 @@
 package org.pickup.backend.server.models.stats;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.pickup.backend.server.utils.RawJsonDeserializer;
 import org.pickup.backend.server.views.CommunityView;
 
 import java.util.HashMap;
@@ -16,17 +19,21 @@ import java.util.Map;
 public class CommunityStats {
 
     @JsonView(CommunityView.Summary.class)
-    @JsonIncludeProperties({"total"})
+    @JsonIncludeProperties({"total", "monthly_data"})
     private Map<String, Object> users;
 
     @JsonView(CommunityView.Summary.class)
-    @JsonIncludeProperties({"total"})
+    @JsonIncludeProperties({"total", "monthly_data"})
+    @JsonDeserialize(using = RawJsonDeserializer.class)
     private Map<String, Object> events;
 
     @JsonView(CommunityView.Summary.class)
-    @JsonIncludeProperties({"total"})
+    @JsonIncludeProperties({"total", "monthly_data"})
     private Map<String, Object> litter;
 
+//    @JsonView(CommunityView.Summary.class)
+//    @JsonInclude
+//    private Map<String, Long> monthlyData;
 
     public CommunityStats() {
         this.users = new HashMap<>();
