@@ -8,14 +8,9 @@ import { Heart } from "react-feather";
 import { Menu } from "react-feather";
 import { useState } from "react";
 import { X } from "react-feather";
-import { useEffect } from "react";
 
 const Navbar = ({ communityId }) => {
   const { user, isAuthenticated, logout } = useAuth0();
-
-  useEffect(()=> {
-    console.log(communityId);
-  }, [])
 
   const [navOpen, setNavOpen] = useState(false);
 
@@ -68,11 +63,11 @@ const Navbar = ({ communityId }) => {
             <>
               <div className="hidden items-center gap-4 md:flex">
                 <Link
-                  to={`/communities/${communityId}`}
+                  to={`/communities`}
                   className=" flex items-center gap-2 rounded-lg border border-slate-300 bg-white py-2.5 px-4 text-slate-700 shadow-sm outline-slate-900 transition-colors hover:bg-slate-50"
                 >
                   <Heart color="#334155" size={20} />
-                  Community
+                  Communities
                 </Link>
                 <AddEventButton communityId={communityId} />
                 <img

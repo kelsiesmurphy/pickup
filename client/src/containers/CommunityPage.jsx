@@ -43,7 +43,7 @@ const CommunityPage = () => {
   return (
     <div className="bg-slate-100">
       <SocialHeader community={community} />
-      <CommunityStats communityStats={communityStats} />
+      <CommunityStats community={community} />
       <UpcomingEvents upcomingEvents={upcomingEvents} />
       <PastEvents pastEvents={pastEvents} />
       <Leaderboard communityMembers={communityMembers} />

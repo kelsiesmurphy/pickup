@@ -17,7 +17,7 @@ const Leaderboard = ({ communityMembers }) => {
           </h3>
           <h3 className="text-sm text-slate-500">
             Picked up
-            <span className="font-medium text-green-900"> {member.name} </span>
+            <span className="font-medium text-green-900"> {member.stats != undefined ? member.stats.litter.total : "Error"} </span>
             items
           </h3>
         </div>

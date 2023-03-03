@@ -43,7 +43,6 @@ const AddEventButton = ({ communityId }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submitted: " + eventEnd);
     const formSubmission = {
       community_id: communityId,
       name: title,

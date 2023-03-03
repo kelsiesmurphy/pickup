@@ -3,6 +3,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { BrowserRouter as Router } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import ScrollToTop from "./components/scrollToTop"
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       authorizationParams={{ redirect_uri: window.location.origin }}
     >
       <Router>
+        <ScrollToTop />
         <App />
       </Router>
     </Auth0Provider>
