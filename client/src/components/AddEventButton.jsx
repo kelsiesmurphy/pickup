@@ -5,7 +5,7 @@ import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import EventHandlers from "../handlers/eventHandlers";
 
-const AddEventButton = ({ community }) => {
+const AddEventButton = ({ communityId }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const [title, setTitle] = useState("");
@@ -45,15 +45,17 @@ const AddEventButton = ({ community }) => {
     event.preventDefault();
     console.log("submitted: " + eventEnd);
     const formSubmission = {
-      title: title,
-      location: location,
-      eventStart: eventStart,
-      eventEnd: eventEnd,
-      coverImage: coverImage,
+      community_id: communityId,
+      name: title,
       description: description,
+      location: location,
+      event_date_time_start: eventStart,
+      event_date_time_end: eventEnd,
+      img_before_link: coverImage,
     };
 
-    EventHandlers.handleEventPost(formSubmission);
+    const eventHandlers = new EventHandlers();
+    eventHandlers.handleEventPost(formSubmission);
 
     handleClose();
   };

@@ -29,7 +29,8 @@ class EventHandlers {
   handleEventPost = (event) => {
     const request = new Request();
     request.post("/api/events", event).then(() => {
-      window.location = "/events";
+      console.log(event);
+      // window.location = "/events";
     });
   };
 
