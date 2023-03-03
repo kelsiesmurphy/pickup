@@ -15,6 +15,8 @@ const AddEventButton = () => {
     setOpenModal(false);
   };
 
+  const handleSubmit = () => {};
+
   return (
     <>
       <button
@@ -77,7 +79,7 @@ const AddEventButton = () => {
                 >
                   Event start and finish*
                 </label>
-                <div className="max-w-[448px] flex flex-1 gap-4">
+                <div className="flex max-w-[448px] flex-1 gap-4">
                   <input
                     type="datetime-local"
                     className="flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
@@ -122,13 +124,14 @@ const AddEventButton = () => {
               </div> */}
               <div className="flex flex-wrap justify-between gap-8 py-4">
                 <label
-                  htmlFor="Description"
+                  htmlFor="description"
                   className="text-sm font-medium text-slate-800"
                 >
-                  Event title*
+                  Event description*
                 </label>
                 <textarea
-                  id="title"
+                  id="description"
+                  name="description"
                   placeholder="Write a few sentences about the event..."
                   className=" min-w-[280px] max-w-[448px] flex-1 resize-none rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
                 ></textarea>
@@ -141,12 +144,12 @@ const AddEventButton = () => {
               >
                 Cancel
               </button>
-              <button
-                className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-green-800 bg-green-800 py-2.5 px-4 text-white shadow-sm outline-slate-900 transition-colors hover:border-green-900 hover:bg-green-900"
-                onClick={handleClose}
-              >
-                Add Event
-              </button>
+              <input
+                type="submit"
+                className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-green-800 bg-green-800 py-2.5 px-4 text-white shadow-sm outline-slate-900 transition-colors hover:border-green-900 hover:bg-green-900 cursor-pointer"
+                onClick={handleSubmit}
+                value="Add Event"
+              />
             </div>
           </form>
         </div>
