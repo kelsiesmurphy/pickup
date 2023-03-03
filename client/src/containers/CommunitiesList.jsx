@@ -14,15 +14,18 @@ const CommunitiesList = () => {
 
   const communityNodes = communities.map((community, index) => {
     return (
-      <li key={index} className="flex-1 rounded-2xl border bg-white shadow-sm">
-        <Link to={`/communities/${community.id}`} className="flex flex-wrap gap-4 p-6">
+      <li key={index} className="flex-1 rounded-2xl border bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+        <Link
+          to={`/communities/${community.id}`}
+          className="flex flex-wrap gap-4 p-6"
+        >
           <img
             src={community.img_logo_link}
-            className="aspect-square object-cover rounded-lg"
+            className="aspect-square rounded-lg object-cover"
             width="120"
             height="120"
           />
-          <div className="space-y-2 flex-1">
+          <div className="flex-1 space-y-2">
             <h3 className="text-xl font-semibold text-slate-900 md:text-2xl">
               {community.name}
             </h3>
@@ -34,19 +37,20 @@ const CommunitiesList = () => {
   });
 
   return (
-    <div className="bg-slate-50">
-      <div className="flex min-h-screen flex-col items-center gap-5 px-4 pt-16 pb-16 text-center md:pt-24 md:pb-0 lg:px-32">
+    <>
+      <div className="flex flex-col items-center gap-5 px-4 pt-16 pb-16 text-center md:pt-24 md:pb-0 lg:px-32">
         <h2 className="text-4xl font-semibold text-slate-900">
           View all communities
         </h2>
         <p className="text-lg text-slate-500">
           Find a community you like, and see what events they are running!
         </p>
-        <ul className="flex flex-col gap-5 text-left max-w-2xl mt-8">{communityNodes}</ul>
+        <ul className="mt-8 flex max-w-2xl flex-col gap-5 text-left">
+          {communityNodes}
+        </ul>
       </div>
-
       <Footer />
-    </div>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import { Award } from "react-feather";
 
 const Leaderboard = ({ communityMembers }) => {
-  const memberNodes = communityMembers.map((member, index) => {
+  const memberNodes = communityMembers.slice(0, 50).map((member, index) => {
     return (
       <li key={index} className="flex items-center gap-5">
         <p className="w-[24px] text-lg text-slate-500">#{index + 1}</p>

@@ -8,6 +8,7 @@ const EventPage = () => {
   const { id } = useParams();
   const [urlId, setUrlId] = useState(id);
   const [event, setEvent] = useState({});
+  const [copyLinkText, setCopyLinkText] = useState("Copy Link")
 
   useEffect(() => {
     const eventHandler = new EventHandlers();
@@ -17,8 +18,17 @@ const EventPage = () => {
     });
   }, [urlId]);
 
+  // Change button text to show user the url has been copied
+  const delay = (ms) => new Promise(res => setTimeout(res, ms));
+  const changeText = async () => {
+    setCopyLinkText("Copied!")
+    await delay(1000);
+    setCopyLinkText("Copy Link")
+  };
+
   const handleCopyLink = () => {
     if (navigator.clipboard) {
+      changeText()
       navigator.clipboard.writeText(window.location.href);
     } else {
       document.execCommand("copy");
@@ -60,7 +70,7 @@ const EventPage = () => {
             Introduction
           </h1>
           <p className="text-lg text-slate-500 md:text-xl">
-            {event.text_body === undefined ? '' : event.text_body["1"]}
+            {event.text_body === undefined ? "" : event.text_body["1"]}
           </p>
           <img
             src={event.img_before_link}
@@ -68,7 +78,7 @@ const EventPage = () => {
             className="aspect-[375/272] object-cover shadow-sm md:aspect-[1216/700] xl:rounded-2xl"
           />
           <p className="text-lg text-slate-500 md:text-xl">
-          {event.text_body === undefined ? '' : event.text_body["2"]}
+            {event.text_body === undefined ? "" : event.text_body["2"]}
           </p>
           <img
             src={event.img_after_link}
@@ -78,20 +88,18 @@ const EventPage = () => {
 
           <div className="py-18 mt-8 mb-8 flex justify-center">
             <div className="flex flex-1 flex-wrap justify-between gap-16">
-              <p className="text-xl text-slate-500">
-                Share this event
-              </p>
+              <p className="text-xl text-slate-500">Share this event</p>
               <div className="flex gap-8">
                 <button
-                  className=" flex items-center gap-4 rounded-md border border-slate-300 p-2.5 shadow-sm"
+                  className=" flex items-center gap-4 rounded-md border border-slate-300 bg-white p-2.5 shadow-sm transition-shadow duration-300 hover:shadow-md"
                   onClick={handleCopyLink}
                 >
                   <Copy colour="#64748b" size={24} />
-                  Copy Link
+                  {copyLinkText}
                 </button>
                 {event.twitter_link ? (
                   <a
-                    className="rounded-md border border-slate-300 p-2.5 shadow-sm"
+                    className="rounded-md border border-slate-300 bg-white p-2.5 shadow-sm transition-shadow duration-300 hover:shadow-md"
                     href={event.twitter_link}
                   >
                     <Twitter color="#64748b" size={24} />
@@ -99,7 +107,7 @@ const EventPage = () => {
                 ) : null}
                 {event.twitter_link ? (
                   <a
-                    className="rounded-md border border-slate-300 p-2.5 shadow-sm"
+                    className="rounded-md border border-slate-300 bg-white p-2.5 shadow-sm transition-shadow duration-300 hover:shadow-md"
                     href={event.facebook_link}
                   >
                     <Facebook color="#64748b" size={24} />
@@ -107,7 +115,7 @@ const EventPage = () => {
                 ) : null}
                 {event.twitter_link ? (
                   <a
-                    className="rounded-md border border-slate-300 p-2.5 shadow-sm"
+                    className="rounded-md border border-slate-300 bg-white p-2.5 shadow-sm transition-shadow duration-300 hover:shadow-md"
                     href={event.linkedin_link}
                   >
                     <Linkedin color="#64748b" size={24} />

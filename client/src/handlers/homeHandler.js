@@ -1,11 +1,10 @@
 import Request from "../helpers/request";
 
-class homeHandlers {
-
-    getLitterByParameters = () => {
-        const request = new Request();
-        request.get(`/api/home_stats`)
-    }
+class HomeHandler {
+  getHomeStats = () => {
+    const request = new Request();
+    request.get("/api/home-stats");
+  };
 }
 
-export default homeHandlers;
+export default HomeHandler;
