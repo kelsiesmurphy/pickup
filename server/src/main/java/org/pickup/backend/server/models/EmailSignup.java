@@ -4,11 +4,12 @@ package org.pickup.backend.server.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
-import org.pickup.backend.server.utils.DateTimeParse;
 import org.pickup.backend.server.views.EmailSignupView;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Entity
 @Table(name = "email_signups")
@@ -40,7 +41,7 @@ public class EmailSignup {
 
     public EmailSignup(String email, String signupDateTime) {
         this.email = email;
-        this.signupDateTime = DateTimeParse.fromString(signupDateTime);
+        this.signupDateTime = LocalDateTime.parse(signupDateTime, DateTimeFormatter.ISO_DATE_TIME);
     }
     public EmailSignup() {}
 
@@ -63,11 +64,11 @@ public class EmailSignup {
     }
 
     public String getSignupDateTime() {
-        return DateTimeParse.toString(signupDateTime);
+        return signupDateTime.format(DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public void setSignupDateTime(String signupDateTime) {
-        this.signupDateTime = DateTimeParse.fromString(signupDateTime);
+        this.signupDateTime = LocalDateTime.parse(signupDateTime, DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public boolean isActive() {
