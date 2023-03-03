@@ -104,7 +104,7 @@ public class DataLoaderNew implements ApplicationRunner {
         Community community2 = new Community(
                 "Ashton Primary School",
                 "Our school cares about the environment, and we run a school litter picking programme to clean up our local area!",
-                true,
+                false,
                 "https://images.pexels.com/photos/301926/pexels-photo-301926.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
                 "https://www.shutterstock.com/image-vector/vector-logo-school-260nw-427910128.jpg"
         );
@@ -191,8 +191,8 @@ public class DataLoaderNew implements ApplicationRunner {
                         eventName1 + " description",
                         textBodyJson,
                         apiCoordsData.get("lat") + ", " + apiCoordsData.get("long"),
-                        date1 + " 09:00:00",
-                        date1 + " 15:00:00",
+                        date1 + "T09:00:00",
+                        date1 + "T15:00:00",
                         "https://images.unsplash.com/photo-1588803103006-2822e4b2619d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
                 );
                 if (i % 2 == 0) {

@@ -10,7 +10,7 @@ public class DateTimeParse {
 
     public static LocalDateTime fromString(String input) {
         try {
-            return LocalDateTime.parse(input, formatter);
+            return LocalDateTime.parse(input);
         }
         catch (Exception e) {
             return null;
