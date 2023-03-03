@@ -109,8 +109,8 @@ public class DataLoader implements ApplicationRunner {
             LocalDate iterDate = startDate.plusMonths(i);
             String sql =
                     "INSERT INTO db_months (month) values ('" +
-                            iterDate.format(DateTimeFormatter.ISO_DATE) +
-                            "')";
+                    iterDate.format(DateTimeFormatter.ISO_DATE) +
+                    "')";
             jdbcTemplate.execute(sql);
         }
         System.out.println("Standing data loaded.");

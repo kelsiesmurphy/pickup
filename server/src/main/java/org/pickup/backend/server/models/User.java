@@ -8,6 +8,8 @@ import org.pickup.backend.server.models.stats.UserStats;
 import org.pickup.backend.server.views.UserView;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,8 @@ import java.util.List;
         "img_profile_link",
         "stats",
         "is_active",
-        "is_admin"
+        "is_admin",
+        "create_date"
 })
 public class User {
 
@@ -33,7 +36,6 @@ public class User {
 
     @ManyToOne(targetEntity = Community.class, fetch = FetchType.EAGER)
     @JoinColumn(name="community_id", insertable=false, updatable=false)
-//    @JsonIgnoreProperties({"users"})
     private Community community;
 
     @Column(name = "community_id", nullable=false)
@@ -65,6 +67,11 @@ public class User {
     @JsonProperty("is_admin")
     private boolean isAdmin;
 
+    @Column(name = "create_date")
+    @JsonView(UserView.Detail.class)
+    @JsonProperty("create_date")
+    private LocalDate createDate;
+
     @JsonView(UserView.Summary.class)
     @Transient
     @JsonProperty("stats")
@@ -82,13 +89,15 @@ public class User {
                 String userName,
                 String email,
                 String imgProfileLink,
-                boolean isAdmin) {
+                boolean isAdmin,
+                String createDate) {
         this.community_id = community_id;
         this.userName = userName;
         this.email = email;
         this.imgProfileLink = imgProfileLink;
         this.isAdmin = isAdmin;
         this.isActive = true;
+        this.createDate = LocalDate.parse(createDate, DateTimeFormatter.ISO_DATE);
         this.litter = new ArrayList<>();
         this.comments = new ArrayList<>();
     }
@@ -143,13 +152,17 @@ public class User {
         isAdmin = admin;
     }
 
+    public String getCreateDate() {
+        return createDate.format(DateTimeFormatter.ISO_DATE);
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = LocalDate.parse(createDate, DateTimeFormatter.ISO_DATE);
+    }
+
     public Community getCommunity() {
         return community;
     }
-
-//    public void setCommunity(Community community) {
-//        this.community = community;
-//    }
 
     public List<Litter> getLitter() {
         return litter;

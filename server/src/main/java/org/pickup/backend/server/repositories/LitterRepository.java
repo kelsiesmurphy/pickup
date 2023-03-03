@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.Query;
 public interface LitterRepository extends BaseRepository<Litter, Long> {
 
 
+
 }

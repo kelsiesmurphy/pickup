@@ -5,6 +5,8 @@ import org.pickup.backend.server.models.stats.CommunityStats;
 import org.pickup.backend.server.views.CommunityView;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import java.util.List;
         "is_private",
         "img_hero_link",
         "img_logo_link",
+        "create_date",
         "stats"
 })
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -55,6 +58,11 @@ public class Community  {
     @JsonProperty("is_active")
     private boolean isActive = true;
 
+    @Column(name = "create_date", nullable=false)
+    @JsonView(CommunityView.Summary.class)
+    @JsonProperty("create_date")
+    private LocalDate createDate;
+
     @OneToMany(mappedBy="community", fetch=FetchType.LAZY)
     @JsonIgnoreProperties({"community"})
     private List<User> users;
@@ -67,7 +75,6 @@ public class Community  {
     @JsonIgnoreProperties({"community"})
     private List<Litter> litter;
 
-//    @JsonInclude()
     @JsonView(CommunityView.Summary.class)
     @Transient
     @JsonProperty("stats")
@@ -77,12 +84,14 @@ public class Community  {
                      String description,
                      boolean isPrivate,
                      String imgHeroLink,
-                     String imgLogoLink) {
+                     String imgLogoLink,
+                     String createDate) {
         this.name = name;
         this.description = description;
         this.isPrivate = isPrivate;
         this.imgHeroLink = imgHeroLink;
         this.imgLogoLink = imgLogoLink;
+        this.createDate = LocalDate.parse(createDate, DateTimeFormatter.ISO_DATE);
         this.users = new ArrayList<>();
         this.events = new ArrayList<>();
         this.litter = new ArrayList<>();
@@ -133,6 +142,17 @@ public class Community  {
     public void setImgLogoLink(String imgLogoLink) {
         this.imgLogoLink = imgLogoLink;
     }
+
+    public String getCreateDate() {
+        return createDate.format(DateTimeFormatter.ISO_DATE);
+    }
+
+    public LocalDate getCreateDateLocalDate() {return createDate;}
+
+    public void setCreateDate(String createDate) {
+        this.createDate = LocalDate.parse(createDate, DateTimeFormatter.ISO_DATE);
+    }
+
     public boolean isActive() {
         return isActive;
     }

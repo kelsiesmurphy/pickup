@@ -35,6 +35,7 @@ public class LitterType {
         this.litterTypeDesc = litterTypeDesc;
     }
     public LitterType() {}
+
     // Getters and setters
 
     public long getId() {
