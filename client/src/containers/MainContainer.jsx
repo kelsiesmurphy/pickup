@@ -22,7 +22,7 @@ const MainContainer = () => {
     <div className="flex min-h-screen basis-full flex-col bg-slate-50">
       <Navbar communityId={communityId} />
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage kFormatter={kFormatter}/>} />
         <Route path="/communities" element={<CommunitiesList />} />
         <Route path="/communities/:id" element={<CommunityPage kFormatter={kFormatter}/>} />
         <Route path="/communities/:id/edit" element={<CommunityEditPage />} />

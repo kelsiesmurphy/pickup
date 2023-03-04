@@ -7,19 +7,19 @@ import Newsletter from "../components/landing/Newsletter";
 import Statistics from "../components/landing/Statistics";
 import HomeHandler from "../handlers/homeHandler";
 
-const Landing = () => {
+const Landing = ({ kFormatter }) => {
   const [homeStats, setHomeStats] = useState({});
 
   useEffect(() => {
     const homeHandler = new HomeHandler();
-    homeHandler.getHomeStats()
+    homeHandler.getHomeStats().then((result) => setHomeStats(result));
   }, []);
 
   return (
     <div className="bg-white">
       <Hero />
       <AboutPoints />
-      <Statistics homeStats={homeStats}/>
+      <Statistics homeStats={homeStats} kFormatter={kFormatter} />
       <Features />
       <Newsletter />
       <Footer />

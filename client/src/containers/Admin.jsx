@@ -1,43 +1,40 @@
 import { useState } from "react";
 import CommunityDetails from "../components/admin/communityDetails";
-import Members from "../components/admin/Members"
-import Events from "../components/admin/Events"
-import Password from "../components/admin/Password"
+import Members from "../components/admin/Members";
+import Events from "../components/admin/Events";
+import Password from "../components/admin/Password";
 
 const Admin = () => {
   const [currentPage, setCurrentPage] = useState("Community details");
   const adminPages = ["Community details", "Members", "Events", "Password"];
 
-  const pageNavNodes = adminPages.map((pageNav, index) => {
+  const pageNavNodesDesktop = adminPages.map((pageNav, index) => {
     return (
-      <>
-        <li
-          key={index}
-          onClick={() => setCurrentPage(pageNav)}
-          className={`hidden h-8 cursor-pointer hover:border-b-2 md:block  ${
-            pageNav == currentPage
-              ? "border-b-2 border-green-900 text-green-900"
-              : "text-slate-500"
-          }`}
-        >
-          <h2 className="text-sm font-medium">{pageNav}</h2>
-        </li>
-        <option className="md:hidden">{pageNav}</option>
-      </>
+      <li
+        key={index}
+        onClick={() => setCurrentPage(pageNav)}
+        className={`hidden h-8 cursor-pointer hover:border-b-2 md:block  ${
+          pageNav == currentPage
+            ? "border-b-2 border-green-900 text-green-900"
+            : "text-slate-500"
+        }`}
+      >
+        <h2 className="text-sm font-medium">{pageNav}</h2>
+      </li>
     );
   });
 
-  // const pageNodes = () => {
-  //   if (currentPage === "Members") {
-  //     return <Members />;
-  //   } else if (currentPage === "Events") {
-  //     return <Events />
-  //   } else if (currentPage === "Password") {
-  //     return <Password />
-  //   } else {
-  //     return <CommunityDetails />;
-  //   }
-  // };
+  const pageNavNodesMobile = adminPages.map((pageNav, index) => {
+    return (
+      <option
+        key={index}
+        className="md:hidden"
+        value={pageNav}
+      >
+        {pageNav}
+      </option>
+    );
+  });
 
   return (
     <div className="flex basis-full justify-center">
@@ -47,13 +44,18 @@ const Admin = () => {
             Settings
           </h1>
           <ul className="hidden flex-1 gap-4 md:flex md:border-b">
-            {pageNavNodes}
+            {pageNavNodesDesktop}
           </ul>
-          <select className="flex gap-4 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500 md:hidden md:border-b">
-            {pageNavNodes}
+          <select value={currentPage} onChange={(e) => setCurrentPage(e.target.value)} className="flex gap-4 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500 md:hidden md:border-b">
+            {pageNavNodesMobile}
           </select>
+          <div>
+            {currentPage === "Community details" && <CommunityDetails />}
+            {currentPage === "Members" && <Members />}
+            {currentPage === "Events" && <Events />}
+            {currentPage === "Password" && <Password />}
+          </div>
         </div>
-        {/* {pageNodes} */}
       </div>
     </div>
   );
