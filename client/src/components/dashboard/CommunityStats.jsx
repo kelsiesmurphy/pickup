@@ -1,38 +1,45 @@
-import { useEffect } from "react"
-
-const CommunityStats = ({community}) => {
-
-  const totalLitterPicked = 2424
-  const totalEventsRan = 10
-  const members = 316
+const CommunityStats = ({ community, kFormatter }) => {
+  
 
   return (
-    <div className="py-12 px-4 flex justify-center">
-      <ul className="flex flex-wrap gap-6 flex-1 max-w-7xl">
-        <li className="bg-white flex-1 min-w-[280px] rounded-xl flex justify-between min-h-[176px] gap-4 shadow-sm border border-slate-200 p-6">
+    <div className="flex justify-center py-12 px-4">
+      <ul className="flex max-w-7xl flex-1 flex-wrap gap-6">
+        <li className="flex min-h-[176px] min-w-[280px] flex-1 justify-between gap-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="flex flex-col gap-6">
-            <h2 className="text-slate-900 font-medium">Total litter picked</h2>
-            <p className="text-slate-900 font-semibold text-3xl md:text-4xl">{community.stats != undefined ? community.stats.litter.total : "Error"}</p>
+            <h2 className="font-medium text-slate-900">Total litter picked</h2>
+            <p className="text-3xl font-semibold text-slate-900 md:text-4xl">
+              {community.stats != undefined
+                ? kFormatter(community.stats.litter.total)
+                : "Error"}
+            </p>
           </div>
           <p className="mt-auto">graph here</p>
         </li>
-        <li className="bg-white flex-1 min-w-[280px] rounded-xl flex justify-between min-h-[176px] gap-4 shadow-sm border border-slate-200 p-6">
+        <li className="flex min-h-[176px] min-w-[280px] flex-1 justify-between gap-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="flex flex-col gap-6">
-            <h2 className="text-slate-900 font-medium">Total events ran</h2>
-            <p className="text-slate-900 font-semibold text-3xl md:text-4xl">{community.stats != undefined ? community.stats.events.total : "Error"}</p>
+            <h2 className="font-medium text-slate-900">Total events ran</h2>
+            <p className="text-3xl font-semibold text-slate-900 md:text-4xl">
+              {community.stats != undefined
+                ? community.stats.events.total
+                : "Error"}
+            </p>
           </div>
           <p className="mt-auto">graph here</p>
         </li>
-        <li className="bg-white flex-1 min-w-[280px] rounded-xl flex justify-between min-h-[176px] gap-4 shadow-sm border border-slate-200 p-6">
+        <li className="flex min-h-[176px] min-w-[280px] flex-1 justify-between gap-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="flex flex-col gap-6">
-            <h2 className="text-slate-900 font-medium">Members</h2>
-            <p className="text-slate-900 font-semibold text-3xl md:text-4xl">{community.stats != undefined ? community.stats.users.total : "Error"}</p>
+            <h2 className="font-medium text-slate-900">Members</h2>
+            <p className="text-3xl font-semibold text-slate-900 md:text-4xl">
+              {community.stats != undefined
+                ? community.stats.users.total
+                : "Error"}
+            </p>
           </div>
           <p className="mt-auto">graph here</p>
         </li>
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default CommunityStats
+export default CommunityStats;

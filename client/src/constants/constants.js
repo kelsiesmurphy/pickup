@@ -30,18 +30,3 @@ export const AboutPointsConstant = [
     icon: BarChart2,
   },
 ];
-
-export const StatisticsConstant = [
-  {
-    stat: "400+",
-    description: "Events completed",
-  },
-  {
-    stat: "63k",
-    description: "Litter cleaned up",
-  },
-  {
-    stat: "2k",
-    description: "Global users",
-  },
-];

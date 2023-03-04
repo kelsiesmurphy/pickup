@@ -11,7 +11,7 @@ import CommunityHandler from "../handlers/communityHandler";
 import UserHandlers from "../handlers/userHandlers";
 import EventHandlers from "../handlers/eventHandlers";
 
-const CommunityPage = () => {
+const CommunityPage = ({kFormatter}) => {
   const { id } = useParams();
 
   const [community, setCommunity] = useState({});
@@ -41,14 +41,14 @@ const CommunityPage = () => {
   }, [urlId]);
 
   return (
-    <div className="bg-slate-100">
+    <>
       <SocialHeader community={community} />
-      <CommunityStats community={community} />
+      <CommunityStats community={community} kFormatter={kFormatter} />
       <UpcomingEvents upcomingEvents={upcomingEvents} />
       <PastEvents pastEvents={pastEvents} />
       <Leaderboard communityMembers={communityMembers} />
       <Footer />
-    </div>
+    </>
   );
 };
 

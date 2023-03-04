@@ -36,7 +36,7 @@ const Navbar = ({ communityId }) => {
 
   return (
     <>
-      <nav className="flex basis-full justify-center">
+      <nav className="flex basis-full bg-white justify-center">
         <div className="flex flex-1 items-center justify-between py-4 px-4 transition-all lg:px-28">
           <Link to="/" className="outline-slate-900">
             <img src={wordmark} className="aspect-[156/48] h-12" />
