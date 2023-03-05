@@ -4,26 +4,27 @@ import Members from "../components/admin/Members";
 import Events from "../components/admin/Events";
 import CommunityHandler from "../handlers/communityHandler";
 import UserHandlers from "../handlers/userHandlers";
+import EventHandlers from "../handlers/eventHandlers";
 
 const Admin = () => {
   const [community, setCommunity] = useState({});
   const [communityMembers, setCommunityMembers] = useState([]);
-  
+  const [communityEvents, setCommunityEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState("Community details");
 
   useEffect(() => {
     const communityHandler = new CommunityHandler();
     const userHandler = new UserHandlers();
+    const eventHandler = new EventHandlers();
 
     communityHandler.findCommunity(1).then((result) => setCommunity(result));
 
     userHandler
       .findUsersFromCommunity(1)
       .then((result) => setCommunityMembers(result));
+
+    eventHandler.getEvents(1).then((result) => setCommunityEvents(result));
   }, []);
-
-
-
 
   const adminPages = ["Community details", "Members", "Events"];
 
@@ -53,7 +54,7 @@ const Admin = () => {
 
   return (
     <div className="flex basis-full justify-center">
-      <div className="flex flex-col flex-1 justify-between gap-6 py-4 pb-24 pt-12 transition-all lg:px-28">
+      <div className="flex flex-1 flex-col justify-between gap-6 py-4 pb-24 pt-12 transition-all lg:px-28">
         <div className="mx-4 flex flex-1 flex-col gap-6">
           <h1 className="text-2xl font-semibold text-slate-900 md:text-3xl">
             Settings
@@ -71,8 +72,12 @@ const Admin = () => {
         </div>
         <div className="flex flex-1 justify-center">
           {currentPage === "Community details" && <CommunityDetails />}
-          {currentPage === "Members" && <Members communityMembers={communityMembers}/>}
-          {currentPage === "Events" && <Events />}
+          {currentPage === "Members" && (
+            <Members communityMembers={communityMembers} />
+          )}
+          {currentPage === "Events" && (
+            <Events communityEvents={communityEvents} />
+          )}
         </div>
       </div>
     </div>

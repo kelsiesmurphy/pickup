@@ -70,11 +70,10 @@ const AddEventButton = ({ communityId }) => {
       <Rodal
         visible={openModal}
         onClose={handleClose}
-        width={688}
-        height={610}
-        customStyles={{ borderRadius: "12px" }}
+
+        customStyles={{ width:"auto", height:"auto", borderRadius: "12px", display: "flex", maxWidth: 688, flex:1, margin:"16px"}}
       >
-        <div>
+        <div className="flex flex-col">
           <div className="border-b px-3 py-4">
             <h2 className="text-lg font-semibold text-slate-900">
               Add your event
