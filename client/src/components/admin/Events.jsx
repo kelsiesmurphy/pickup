@@ -1,8 +1,13 @@
-import { Trash2, Edit3 } from "react-feather";
+import { Edit3 } from "react-feather";
 import AddEventButton from "../AddEventButton";
+import DeleteItem from "../DeleteItem";
 
 const Events = ({ communityEvents }) => {
-  const eventNodes = communityMembers.map((event, index) => {
+  const removeItem = () => {
+    console.log("removed!");
+  };
+
+  const eventNodes = communityEvents.map((event, index) => {
     return (
       <tr
         key={index}
@@ -15,23 +20,26 @@ const Events = ({ communityEvents }) => {
           />
           <p className="text-sm font-medium text-slate-900">{event.name}</p>
         </td>
-        <td className="hidden max-w-[268px] flex-1 px-6 md:block">
+        <td className="hidden max-w-[200px] flex-1 px-6 md:block">
           <p className="text-sm text-slate-500">
             {event.event_date_time_start}
           </p>
         </td>
-        <td className="hidden max-w-[198px] flex-1 md:block">
+        <td className="hidden max-w-[200px] flex-1 px-6  md:block">
           <p className="text-sm text-slate-500">{event.event_date_time_end}</p>
         </td>
         <td className="hidden max-w-[168px] flex-1 px-6 md:block">
           <p className="text-sm text-slate-500">102</p>
         </td>
-        <td className="hidden max-w-[120px]  flex-1 px-6 md:block">
+        <td className="hidden max-w-[168px]  flex-1 px-6 md:block">
           <p className="text-sm text-slate-500">103</p>
         </td>
         <td className="flex max-w-[116px] flex-1 justify-center gap-4 px-6">
-          <Edit3 color="#64748b" size={20} />
-          <Trash2 color="#64748b" size={20} />
+          <Edit3
+            size={20}
+            className="cursor-pointer text-slate-500 transition-colors hover:text-slate-900"
+          />
+          <DeleteItem itemToRemove={event.name} removeItem={removeItem} />
         </td>
       </tr>
     );
@@ -56,12 +64,12 @@ const Events = ({ communityEvents }) => {
             <th className="max-w-[412px] flex-1 px-6">
               <h4 className="text-xs font-medium text-slate-500">Name</h4>
             </th>
-            <th className="hidden max-w-[268px] flex-1 px-6 md:block">
+            <th className="hidden max-w-[200px] flex-1 px-6 md:block">
               <h4 className="text-xs font-medium text-slate-500">
                 Start of event
               </h4>
             </th>
-            <th className="hidden max-w-[198px] flex-1 md:block">
+            <th className="hidden max-w-[200px] flex-1 px-6 md:block">
               <h4 className="text-xs font-medium text-slate-500">
                 End of event
               </h4>
@@ -71,7 +79,7 @@ const Events = ({ communityEvents }) => {
                 Total attendees
               </h4>
             </th>
-            <th className="hidden max-w-[120px]  flex-1 px-6 md:block">
+            <th className="hidden max-w-[168px] flex-1 px-6 md:block">
               <h4 className="text-xs font-medium text-slate-500">
                 Total litter gathered
               </h4>

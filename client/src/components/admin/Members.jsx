@@ -1,7 +1,12 @@
-import { Trash2, Edit3 } from "react-feather";
+import { Edit3 } from "react-feather";
 import AddUserButton from "../AddMemberButton";
+import DeleteItem from "../DeleteItem";
 
 const Members = ({ communityMembers }) => {
+  const removeItem = () => {
+    console.log("removed!");
+  };
+
   const memberNodes = communityMembers.map((member, index) => {
     return (
       <tr
@@ -18,9 +23,13 @@ const Members = ({ communityMembers }) => {
           </p>
         </td>
         <td className="hidden max-w-[268px] flex-1 px-6 md:block">
-          <p className="text-sm text-slate-500">{member.email}</p>
+          <p className="text-sm text-slate-500">
+            <a className="hover:underline" href={`mailto:${member.email}`}>
+              {member.email}
+            </a>
+          </p>
         </td>
-        <td className="hidden max-w-[198px] flex-1 md:block">
+        <td className="hidden max-w-[220px] flex-1 px-6 md:block">
           <p className="text-sm text-slate-500">101</p>
         </td>
         <td className="hidden max-w-[168px] flex-1 px-6 md:block">
@@ -31,7 +40,7 @@ const Members = ({ communityMembers }) => {
         </td>
         <td className="flex max-w-[116px] flex-1 justify-center gap-4 px-6">
           <Edit3 color="#64748b" size={20} />
-          <Trash2 color="#64748b" size={20} />
+          <DeleteItem itemToRemove={member.user_name} removeItem={removeItem} />
         </td>
       </tr>
     );
@@ -57,9 +66,11 @@ const Members = ({ communityMembers }) => {
               <h4 className="text-xs font-medium text-slate-500">Name</h4>
             </th>
             <th className="hidden max-w-[268px] flex-1 px-6 md:block">
-              <h4 className="text-xs font-medium text-slate-500">Email address</h4>
+              <h4 className="text-xs font-medium text-slate-500">
+                Email address
+              </h4>
             </th>
-            <th className="hidden max-w-[198px] flex-1 md:block">
+            <th className="hidden max-w-[220px] flex-1 px-6 md:block">
               <h4 className="text-xs font-medium text-slate-500">
                 Litter gathered this month
               </h4>
