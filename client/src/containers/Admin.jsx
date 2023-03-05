@@ -7,10 +7,12 @@ import UserHandlers from "../handlers/userHandlers";
 import EventHandlers from "../handlers/eventHandlers";
 
 const Admin = () => {
+  const adminPages = ["Members", "Events", "Community details"];
+
   const [community, setCommunity] = useState({});
   const [communityMembers, setCommunityMembers] = useState([]);
   const [communityEvents, setCommunityEvents] = useState([]);
-  const [currentPage, setCurrentPage] = useState("Community details");
+  const [currentPage, setCurrentPage] = useState("Members");
 
   useEffect(() => {
     const communityHandler = new CommunityHandler();
@@ -25,8 +27,6 @@ const Admin = () => {
 
     eventHandler.getEvents(1).then((result) => setCommunityEvents(result));
   }, []);
-
-  const adminPages = ["Community details", "Members", "Events"];
 
   const pageNavNodesDesktop = adminPages.map((pageNav, index) => {
     return (
@@ -71,7 +71,9 @@ const Admin = () => {
           </select>
         </div>
         <div className="flex flex-1 justify-center">
-          {currentPage === "Community details" && <CommunityDetails />}
+          {currentPage === "Community details" && (
+            <CommunityDetails community={community} />
+          )}
           {currentPage === "Members" && (
             <Members communityMembers={communityMembers} />
           )}

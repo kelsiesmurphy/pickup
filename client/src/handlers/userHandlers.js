@@ -27,7 +27,7 @@ class UserHandlers {
     const request = new Request();
     const url = "/api/users/" + id;
     request.delete(url).then(() => {
-      window.location = "/users";
+      window.location = "/admin";
     });
   };
 

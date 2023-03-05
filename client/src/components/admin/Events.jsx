@@ -1,10 +1,12 @@
 import { Edit3 } from "react-feather";
 import AddEventButton from "../AddEventButton";
 import DeleteItem from "../DeleteItem";
+import EventHandlers from "../../handlers/eventHandlers";
 
 const Events = ({ communityEvents }) => {
+
   const removeItem = () => {
-    console.log("removed!");
+    // Todo
   };
 
   const eventNodes = communityEvents.map((event, index) => {
