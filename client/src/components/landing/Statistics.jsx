@@ -11,19 +11,19 @@ const Statistics = ({ homeStats, kFormatter }) => {
       <ul className="mt-12 flex flex-wrap justify-around gap-8 rounded-lg bg-green-50 p-16">
         <li className="flex flex-col items-center gap-2">
           <h3 className="text-4xl font-semibold text-green-900 md:text-6xl">
-            {homeStats.total_events_completed}
+            {String(homeStats.total_events_completed)}
           </h3>
           <p className="text-green-800">Events completed</p>
         </li>
         <li className="flex flex-col items-center gap-2">
           <h3 className="text-4xl font-semibold text-green-900 md:text-6xl">
-            {kFormatter(homeStats.total_litter_collected)}
+            {String(kFormatter(homeStats.total_litter_collected))}
           </h3>
           <p className="text-green-800">Litter cleaned up</p>
         </li>
         <li className="flex flex-col items-center gap-2">
           <h3 className="text-4xl font-semibold text-green-900 md:text-6xl">
-            {homeStats.total_users}
+            {String(homeStats.total_users)}
           </h3>
           <p className="text-green-800">Global users</p>
         </li>

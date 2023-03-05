@@ -15,10 +15,10 @@ const CommunityPage = ({kFormatter}) => {
   const { id } = useParams();
 
   const [community, setCommunity] = useState({});
+  const [communityMembers, setCommunityMembers] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [communityStats, setCommunityStats] = useState([]);
   const [pastEvents, setPastEvents] = useState([]);
-  const [communityMembers, setCommunityMembers] = useState([]);
 
   const [urlId, setUrlId] = useState(id);
 
