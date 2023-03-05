@@ -22,7 +22,7 @@ class EventHandlers {
     const request = new Request();
     const url = "/api/events/" + id;
     request.delete(url).then(() => {
-      window.location = "/events";
+      window.location = "/admin";
     });
   };
 

@@ -11,7 +11,7 @@ import CommunityHandler from "../handlers/communityHandler";
 import UserHandlers from "../handlers/userHandlers";
 import EventHandlers from "../handlers/eventHandlers";
 
-const CommunityPage = ({kFormatter}) => {
+const CommunityPage = ({ kFormatter }) => {
   const { id } = useParams();
 
   const [community, setCommunity] = useState({});
@@ -35,9 +35,7 @@ const CommunityPage = ({kFormatter}) => {
       .findUsersFromCommunity(urlId)
       .then((result) => setCommunityMembers(result));
 
-    eventHandler
-      .getEvents(urlId)
-      .then((result) => setUpcomingEvents(result))
+    eventHandler.getEvents(urlId).then((result) => setUpcomingEvents(result));
   }, [urlId]);
 
   return (

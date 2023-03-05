@@ -11,8 +11,8 @@ const DeleteItem = ({ itemToRemove, removeItem }) => {
     setOpenModal(false);
   };
 
-  const handleRemove = () => {
-    removeItem()
+  const handleRemove = (id) => {
+    removeItem(id)
     handleClose()
   }
 

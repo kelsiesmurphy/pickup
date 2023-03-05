@@ -1,13 +1,34 @@
 import { useState } from "react";
 import { Upload } from "react-feather";
+import CommunityHandler from "../../handlers/communityHandler";
 
-const CommunityDetails = () => {
-  const [communityName, setCommunityName] = useState("");
-  const [communityLogoImg, setCommunityLogoImg] = useState("");
-  const [communityHeroImg, setCommunityHeroImg] = useState("");
+const CommunityDetails = ({ community }) => {
+  const [stateCommunity, setStateCommunity] = useState({
+    id: community.id,
+    name: community.name,
+    description: community.description,
+    img_hero_link: community.img_hero_link,
+    img_logo_link: community.img_logo_link,
+    create_date: community.create_date,
+    is_private: community.is_private
+  });
+
+  const handleChange = function (event) {
+    let propertyName = event.target.name;
+    let copiedCommunity = { ...stateCommunity };
+    copiedCommunity[propertyName] = event.target.value;
+    setStateCommunity(copiedCommunity);
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    console.log("handle saved");
+    const communityHandler = new CommunityHandler();
+    communityHandler.handleCommunityPut(stateCommunity)
+  }
 
   return (
-    <div className="max-w-2xl flex-1">
+    <form onSubmit={handleSave} className="mx-4 max-w-2xl flex-1">
       <div className="flex flex-col gap-2 border-b py-5">
         <label htmlFor="image" className="text-sm font-medium text-slate-600">
           Community name
@@ -15,13 +36,29 @@ const CommunityDetails = () => {
         <input
           type="text"
           name="name"
-          value={communityName}
-          onChange={(e) => setCommunityName(e.target.value)}
+          value={stateCommunity.name}
+          onChange={handleChange}
           id="name"
           placeholder="Enter your communities name"
           required
           className="flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
         />
+      </div>
+      <div className="flex flex-col gap-2 border-b py-5">
+        <label
+          htmlFor="description"
+          className="text-sm font-medium text-slate-600"
+        >
+          Community description
+        </label>
+        <textarea
+          id="description"
+          name="description"
+          value={stateCommunity.description}
+          onChange={handleChange}
+          placeholder="Enter your communities description"
+          className="min-h-[80px] resize-y rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
+        ></textarea>
       </div>
       <div className="flex flex-1 flex-wrap gap-6 border-b py-5">
         <div className="flex flex-1 items-center justify-center">
@@ -44,17 +81,17 @@ const CommunityDetails = () => {
             <input id="file" type="file" className="hidden" />
           </label>
         </div>
-        {communityLogoImg ? (
+        {stateCommunity.img_logo_link ? (
           <img
-            src={communityLogoImg}
+            src={stateCommunity.img_logo_link}
             className="flex aspect-square h-32 rounded-full border border-slate-300 object-cover shadow-sm"
           />
         ) : null}
       </div>
       <div className="flex flex-1 flex-col flex-wrap gap-6 border-b py-5">
-        {communityHeroImg ? (
+        {stateCommunity.img_hero_link ? (
           <img
-            src={communityHeroImg}
+            src={stateCommunity.img_hero_link}
             className="flex h-32 rounded-lg border border-slate-300 object-cover shadow-sm"
           />
         ) : null}
@@ -85,7 +122,7 @@ const CommunityDetails = () => {
           Save
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 

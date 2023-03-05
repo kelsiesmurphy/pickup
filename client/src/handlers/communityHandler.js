@@ -13,8 +13,8 @@ class CommunityHandler {
 
   handleCommunityPut = (community) => {
     const request = new Request();
-    request.put(`/api/community/${community.id}`, community).then(() => {
-      window.location = "/communities";
+    return request.put(`/api/communities/${community.id}`, community).then(() => {
+      console.log(community);
     });
   };
 

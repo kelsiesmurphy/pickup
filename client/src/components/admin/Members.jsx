@@ -1,10 +1,12 @@
 import { Edit3 } from "react-feather";
 import AddUserButton from "../AddMemberButton";
 import DeleteItem from "../DeleteItem";
+import UserHandlers from "../../handlers/userHandlers"
 
 const Members = ({ communityMembers }) => {
+
   const removeItem = () => {
-    console.log("removed!");
+    // Todo
   };
 
   const memberNodes = communityMembers.map((member, index) => {
