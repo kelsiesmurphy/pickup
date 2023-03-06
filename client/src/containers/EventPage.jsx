@@ -4,6 +4,7 @@ import { Copy, Twitter, Facebook, Linkedin } from "react-feather";
 import EventHandlers from "../handlers/eventHandlers";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
+import Comments from "../components/Comments";
 
 const EventPage = () => {
   const { id } = useParams();
@@ -128,6 +129,7 @@ const EventPage = () => {
           </div>
         </div>
       </div>
+      {/* <Comments event={event}/> */}
       <Footer />
     </div>
   );
