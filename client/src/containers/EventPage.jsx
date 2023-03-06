@@ -4,18 +4,21 @@ import { Copy, Twitter, Facebook, Linkedin } from "react-feather";
 import EventHandlers from "../handlers/eventHandlers";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
+import Comments from "../components/Comments";
 
 const EventPage = () => {
   const { id } = useParams();
   const [urlId, setUrlId] = useState(id);
   const [event, setEvent] = useState({});
   const [copyLinkText, setCopyLinkText] = useState("Copy Link");
+  const [allComments, setAllComments] = useState([]);
 
   useEffect(() => {
     const eventHandler = new EventHandlers();
 
     eventHandler.findEvent(urlId).then((result) => {
       setEvent(result);
+      setAllComments(result.comments);
     });
   }, [urlId]);
 
@@ -57,38 +60,47 @@ const EventPage = () => {
           />
         </div>
       </div>
-      <div className="flex justify-center px-8">
-        <div className="flex max-w-7xl flex-1 flex-col gap-4">
-          <p className="text-lg text-teal-500">Event ran on</p>
-          <p className="text-lg text-slate-500 md:text-xl">
-            {event.event_date_time_start}
-          </p>
-        </div>
-        <Link to={`/add/${urlId}`} className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-green-800 bg-green-800 py-2.5 px-4 text-white shadow-sm outline-slate-900 transition-colors hover:border-green-900 hover:bg-green-900">Add</Link>
-      </div>
-      <div className="py-18 mt-24 flex justify-center">
-        <div className="flex max-w-4xl flex-1 flex-col gap-16">
-          <h1 className="md:text-3.5xl text-4xl font-semibold text-slate-900 transition-all">
-            Introduction
-          </h1>
-          <p className="text-lg text-slate-500 md:text-xl">
-            {event.text_body === undefined ? "" : event.text_body["1"]}
-          </p>
-          <img
-            src={event.img_before_link}
-            width="1248"
-            className="aspect-[375/272] object-cover shadow-sm md:aspect-[1216/700] xl:rounded-2xl"
-          />
-          <p className="text-lg text-slate-500 md:text-xl">
-            {event.text_body === undefined ? "" : event.text_body["2"]}
-          </p>
-          <img
-            src={event.img_after_link}
-            width="1248"
-            className="aspect-[375/272] object-cover shadow-sm md:aspect-[1216/700] xl:rounded-2xl "
-          />
 
-          <div className="py-18 mt-8 mb-8 flex justify-center">
+      <div className="py-18 flex justify-center">
+        <div className="flex max-w-4xl flex-col gap-6">
+          <div className="flex items-center justify-between">
+            <div className="flex max-w-7xl flex-col gap-2">
+              <p className="font-medium text-green-800">Event on</p>
+              <p className="text-lg text-slate-500 md:text-xl">
+                {event.event_date_time_start}
+              </p>
+            </div>
+            <Link
+              to={`/add/${urlId}`}
+              className="flex-0 rounded-lg border border-green-800 bg-green-800 py-2.5 px-4 text-white shadow-sm outline-slate-900 transition-colors hover:border-green-900 hover:bg-green-900"
+            >
+              Add Litter
+            </Link>
+          </div>
+          <div className="my-8 h-[1px] bg-slate-300" />
+          <div className="flex flex-1 flex-col gap-16">
+            <h1 className="md:text-3.5xl text-4xl font-semibold text-slate-900 transition-all">
+              Introduction
+            </h1>
+            <p className="text-lg text-slate-500 md:text-xl">
+              {event.text_body === undefined ? "" : event.text_body["1"]}
+            </p>
+            <img
+              src={event.img_before_link}
+              width="1248"
+              className="aspect-[375/272] object-cover shadow-sm md:aspect-[1216/700] xl:rounded-2xl"
+            />
+            <p className="text-lg text-slate-500 md:text-xl">
+              {event.text_body === undefined ? "" : event.text_body["2"]}
+            </p>
+            <img
+              src={event.img_after_link}
+              width="1248"
+              className="aspect-[375/272] object-cover shadow-sm md:aspect-[1216/700] xl:rounded-2xl "
+            />
+          </div>
+          <div className="my-8 h-[1px] bg-slate-300" />
+          <div className="flex justify-center">
             <div className="flex flex-1 flex-wrap justify-between gap-16">
               <p className="text-xl text-slate-500">Share this event</p>
               <div className="flex gap-8">
@@ -126,6 +138,11 @@ const EventPage = () => {
               </div>
             </div>
           </div>
+          <Comments
+            event={event}
+            allComments={allComments}
+            setAllComments={setAllComments}
+          />
         </div>
       </div>
       <Footer />

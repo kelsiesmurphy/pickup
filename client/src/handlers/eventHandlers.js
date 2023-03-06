@@ -45,9 +45,7 @@ class EventHandlers {
 
   handleComment = (event) => {
     const request = new Request();
-    request.post(`/api/events/${event.id}/comment`, event).then(() => {
-      window.location = "/events";
-    });
+    request.post("/api/comments", event)
   };
 }
 

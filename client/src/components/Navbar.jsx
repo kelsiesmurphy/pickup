@@ -10,12 +10,17 @@ import { useState } from "react";
 import { X } from "react-feather";
 
 const Navbar = ({ communityId }) => {
-  const { user, isAuthenticated, logout } = useAuth0();
+  const { user, isAuthenticated, logout, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
 
   const [navOpen, setNavOpen] = useState(false);
 
   const handleNavOpen = () => {
     setNavOpen(!navOpen);
+    console.log(user);
+    // const token = getAccessTokenSilently().then(res => console.log(res))
+    // console.log(token);
+    const tokenClaim = getIdTokenClaims().then(res => console.log(res))
+    console.log(tokenClaim);
   };
 
   const logoutWithRedirect = () => {
