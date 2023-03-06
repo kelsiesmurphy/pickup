@@ -197,7 +197,7 @@ public class DataLoader implements ApplicationRunner {
                     community.getCreateDate()
             ));
 
-            // Create random number of users between 0 and 3 for each day between
+            // Create random number of users between 0 and 1 for each day between
             // community create date and today
             for (int i=0; i < DAYS.between(community.getCreateDateLocalDate(), LocalDate.now()) ; i++) {
                 LocalDate loopDate = community.getCreateDateLocalDate().plusDays(i);
@@ -297,36 +297,37 @@ public class DataLoader implements ApplicationRunner {
         litterTypeRepository.save(new LitterType("Plastic Bags"));
         litterTypeRepository.save(new LitterType("Cans"));
         litterTypeRepository.save(new LitterType("Packaging"));
+        
 
-        List<User> users = userRepository.findAll();
-        int userLoopCount = 0;
+        List<Event> pastEvents = eventRepository.findByEventDateTimeStartBefore(LocalDateTime.now());
 
-        for (User user : users) {
-            userLoopCount++;
-            if ((int)(Math.random() * (5)) % 5 == 0) {
-                List<Event> events = eventRepository.findByCommunityId(user.getCommunity_id());
-                for (Event e : events) {
-                    if (LocalDateTime.parse(e.getEventDateTimeEnd()).isBefore(LocalDateTime.now())) {
-                        List<Litter> listLitter = new ArrayList<>();
-                        for (int i=0; i < 100 + (int)(Math.random() * (200 - 100) + 1); i++) {
-                            Litter litter = new Litter(
-                                    user.getCommunity_id(),
-                                    e.getId(),
-                                    user.getId(),
-                                    litterType1.getId(),
-                                    e.getEventDateTimeStart()
-                            );
-                            listLitter.add(litter);
-                        }
-                        litterRepository.saveAll(listLitter);
+        int eventLoopCount = 0;
+
+        for (Event event : pastEvents) {
+            eventLoopCount++;
+            LocalDate eventDate = LocalDate.parse(event.getEventDateTimeStart().substring(0,10));
+            List<User> communityUsers = userRepository.findByCreateDateBeforeAndCommunityIdEquals(eventDate, event.getCommunityId());
+            for (User user : communityUsers) {
+                if ((int)(Math.random() * (4)) % 4 == 0) {
+                    List<Litter> listLitter = new ArrayList<>();
+                    for (int i=0; i < 150 + (int)(Math.random() * ((250 - 150) + 1)); i++ ) {
+                        listLitter.add(new Litter(
+                                user.getCommunity_id(),
+                                event.getId(),
+                                user.getId(),
+                                litterType1.getId(),
+                                event.getEventDateTimeStart()
+                        ));
                     }
+                    litterRepository.saveAll(listLitter);
                 }
             }
 
-            if (users.size() >= 10 && userLoopCount % (users.size()/10) == 0) {
-                System.out.println(String.format("Litter load is %s%s complete.", (int)((userLoopCount * 100.00f)/users.size()), "%"));
+            if (pastEvents.size() >= 10 && eventLoopCount % (pastEvents.size()/10) == 0) {
+                System.out.println(String.format("Litter load is %s%s complete.", (int)((eventLoopCount * 100.00f)/pastEvents.size()), "%"));
             }
         }
+
 
         System.out.println(String.format("%s items of litter loaded.", litterRepository.count()));
 
