@@ -1,12 +1,10 @@
 import Request from "../helpers/request";
 
-class emailHandler {
+class EmailHandler {
     handleEmailPost = (email) => {
         const request = new Request();
-        request.post(`/api/email-signup`, email).then(() => {
-            window.location = `/`
-        })
+        request.post("/api/email-signup", email)
     }
 }
 
-export default emailHandler;
+export default EmailHandler;
