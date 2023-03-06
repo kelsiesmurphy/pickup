@@ -3,12 +3,13 @@ import { useParams } from "react-router-dom";
 import { Copy, Twitter, Facebook, Linkedin } from "react-feather";
 import EventHandlers from "../handlers/eventHandlers";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 const EventPage = () => {
   const { id } = useParams();
   const [urlId, setUrlId] = useState(id);
   const [event, setEvent] = useState({});
-  const [copyLinkText, setCopyLinkText] = useState("Copy Link")
+  const [copyLinkText, setCopyLinkText] = useState("Copy Link");
 
   useEffect(() => {
     const eventHandler = new EventHandlers();
@@ -19,16 +20,16 @@ const EventPage = () => {
   }, [urlId]);
 
   // Change button text to show user the url has been copied
-  const delay = (ms) => new Promise(res => setTimeout(res, ms));
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const changeText = async () => {
-    setCopyLinkText("Copied!")
+    setCopyLinkText("Copied!");
     await delay(1000);
-    setCopyLinkText("Copy Link")
+    setCopyLinkText("Copy Link");
   };
 
   const handleCopyLink = () => {
     if (navigator.clipboard) {
-      changeText()
+      changeText();
       navigator.clipboard.writeText(window.location.href);
     } else {
       document.execCommand("copy");
@@ -63,6 +64,7 @@ const EventPage = () => {
             {event.event_date_time_start}
           </p>
         </div>
+        <Link to={`/add/${urlId}`} className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-green-800 bg-green-800 py-2.5 px-4 text-white shadow-sm outline-slate-900 transition-colors hover:border-green-900 hover:bg-green-900">Add</Link>
       </div>
       <div className="py-18 mt-24 flex justify-center">
         <div className="flex max-w-4xl flex-1 flex-col gap-16">

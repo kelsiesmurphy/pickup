@@ -4,7 +4,7 @@ class litterHandlers {
 
     getLitter = () => {
         const request = new Request();
-        request.get(`/api/litter-types`)
+        return request.get(`/api/litter-types`)
     }
 
     handleLitterPost = (litter) => {
@@ -16,9 +16,7 @@ class litterHandlers {
 
     handleLitterRegister = (litterCollection) => {
         const request = new Request();
-        request.post('/api/litter', litterCollection).then(() => {
-            window.location = '/litter'
-        })
+        return request.post('/api/litter', litterCollection)
     }
 
 
