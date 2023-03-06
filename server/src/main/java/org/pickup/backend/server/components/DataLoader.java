@@ -292,6 +292,12 @@ public class DataLoader implements ApplicationRunner {
         LitterType litterType1 = new LitterType("General");
         litterTypeRepository.save(litterType1);
 
+        litterTypeRepository.save(new LitterType("Smoking"));
+        litterTypeRepository.save(new LitterType("Crisp Packets"));
+        litterTypeRepository.save(new LitterType("Plastic Bags"));
+        litterTypeRepository.save(new LitterType("Cans"));
+        litterTypeRepository.save(new LitterType("Packaging"));
+
         List<User> users = userRepository.findAll();
         int userLoopCount = 0;
 
