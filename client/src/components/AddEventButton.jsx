@@ -4,6 +4,7 @@ import Rodal from "rodal";
 // Include rodal styles
 import "rodal/lib/rodal.css";
 import EventHandlers from "../handlers/eventHandlers";
+import UploadImage from "../s3bucket/pages/uploadImage";
 
 const AddEventButton = ({ communityId }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -14,6 +15,8 @@ const AddEventButton = ({ communityId }) => {
   const [eventEnd, setEventEnd] = useState("");
   const [coverImage, setCoverImage] = useState("");
   const [description, setDescription] = useState("");
+
+
 
   const handleNewEventModal = () => {
     setOpenModal(true);
@@ -34,8 +37,9 @@ const AddEventButton = ({ communityId }) => {
   const handleEventEnd = (event) => {
     setEventEnd(event.target.value);
   };
-  const handleCoverImage = (event) => {
-    setCoverImage(event.target.value);
+  const handleCoverImage = async (file) => {
+    const imageUrl = await handleFileUpload(file);
+    setCoverImage(imageUrl);
   };
   const handleDescription = (event) => {
     setDescription(event.target.value);
@@ -71,7 +75,7 @@ const AddEventButton = ({ communityId }) => {
         visible={openModal}
         onClose={handleClose}
 
-        customStyles={{ width:"auto", height:"auto", borderRadius: "12px", display: "flex", maxWidth: 688, flex:1, margin:"16px"}}
+        customStyles={{ width: "auto", height: "auto", borderRadius: "12px", display: "flex", maxWidth: 688, flex: 1, margin: "16px" }}
       >
         <div className="flex flex-col">
           <div className="border-b px-3 py-4">
@@ -146,38 +150,7 @@ const AddEventButton = ({ communityId }) => {
                   />
                 </div>
               </div>
-              <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
-                <label
-                  htmlFor="image"
-                  className="text-sm font-medium text-slate-800"
-                >
-                  Cover image*
-                </label>
-                <input
-                  type="text"
-                  name="cover_image"
-                  value={coverImage}
-                  onChange={handleCoverImage}
-                  id="image"
-                  placeholder="image link"
-                  className="min-w-[280px] max-w-[448px] flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
-                />
-              </div>
-              {/* <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
-                <label
-                  htmlFor="image"
-                  className="text-sm font-medium text-slate-800"
-                >
-                  Cover image*
-                </label>
-                <input
-                  name="cover_image"
-                  type="file"
-                  id="image"
-                  placeholder="image link"
-                  className="min-w-[280px] max-w-[448px] flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
-                />
-              </div> */}
+              <UploadImage onUpload={handleCoverImage} />
               <div className="flex flex-wrap justify-between gap-8 py-4">
                 <label
                   htmlFor="description"

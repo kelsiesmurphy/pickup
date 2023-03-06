@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.time.Month;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class CommunityStatsBuilder {
@@ -23,7 +20,7 @@ public class CommunityStatsBuilder {
         stats.setCompletedEventsTotal(getCountEventsForCommunity(communityId));
         stats.setLitterPickedTotal(getCountLitterForCommunity(communityId));
         try {
-//            System.out.println(getCountEventsByMonthForCommunity2(communityId).toString());
+//            System.out.println(getCountEventsByMonthForCommunity(communityId).toString());
             stats.setCompletedEventsMonthlyData(
                     getCountEventsByMonthForCommunity(communityId)
             );
@@ -37,7 +34,7 @@ public class CommunityStatsBuilder {
 
         }
         catch (Exception e) {
-//            System.out.println(e);
+            System.out.println(e);
         }
         return stats;
     }
@@ -70,44 +67,80 @@ public class CommunityStatsBuilder {
 
     private Map<String, Long> getCountEventsByMonthForCommunity(Long communityId) {
         String sql =
-                "SELECT " + MonthlyStatsQueryBuilder.makeDate +
-                        "as month, count(*) as count " +
-                        "FROM events e " +
-                        "WHERE e.is_active = true " +
+                "WITH months (month) AS (" +
+                    "SELECT * " +
+                    "FROM db_months " +
+                    "WHERE month BETWEEN (SELECT create_date FROM communities WHERE id = ?) AND NOW() " +
+                ") " +
+
+                "SELECT months.month, count(distinct e.id) as count " +
+                    "FROM events e " +
+                    "RIGHT JOIN months " +
+                        "ON months.month = make_date(" +
+                                                "EXTRACT(YEAR FROM e.event_date_time_start)::INTEGER, " +
+                                                "EXTRACT(MONTH FROM e.event_date_time_start)::INTEGER, " +
+                                                "1) " +
+                    "WHERE e.is_active = true " +
                         "AND e.community_id = ? " +
                         "AND e.event_date_time_end < NOW() " +
-                        "GROUP BY " + MonthlyStatsQueryBuilder.makeDate;
+                    "GROUP BY months.month " +
+                    "ORDER BY months.month DESC " +
+                    "LIMIT 12";
 
         return MonthlyStatsQueryBuilder.processResults(
-                jdbcTemplate.queryForList(sql, communityId)
+                jdbcTemplate.queryForList(sql, communityId, communityId)
         );
     }
 
     private Map<String, Long> getCountUsersByMonthForCommunity(Long communityId) {
         String sql =
-                "SELECT " + MonthlyStatsQueryBuilder.makeMonth("collection_date_time") +
-                        "as month, count(distinct user_id) as count " +
-                        "FROM litter l " +
-                        "WHERE l.is_active = true " +
-                        "AND l.community_id = ? " +
-                        "GROUP BY " + MonthlyStatsQueryBuilder.makeMonth("collection_date_time");
+                "WITH months (month) AS (" +
+                        "SELECT * " +
+                        "FROM db_months " +
+                        "WHERE month BETWEEN (SELECT create_date FROM communities WHERE id = ?) AND NOW() " +
+                        ") " +
+
+                        "SELECT months.month, count(distinct u.id) as count " +
+                        "FROM users u " +
+                        "RIGHT JOIN months " +
+                        "ON months.month = make_date(" +
+                                                "EXTRACT(YEAR FROM u.create_date)::INTEGER, " +
+                                                "EXTRACT(MONTH FROM u.create_date)::INTEGER, " +
+                                                "1) " +
+                        "WHERE u.is_active = true " +
+                        "AND u.community_id = ? " +
+                        "GROUP BY months.month " +
+                        "ORDER BY months.month DESC " +
+                        "LIMIT 12 ";
 
         return MonthlyStatsQueryBuilder.processResults(
-                jdbcTemplate.queryForList(sql, communityId)
+                jdbcTemplate.queryForList(sql, communityId, communityId)
         );
     }
 
     private Map<String, Long> getLitterCountByMonthForCommunity(Long communityId) {
         String sql =
-                "SELECT " + MonthlyStatsQueryBuilder.makeMonth("collection_date_time") +
-                        "as month, count(*) as count " +
+                "WITH months (month) AS (" +
+                        "SELECT * " +
+                        "FROM db_months " +
+                        "WHERE month BETWEEN (SELECT create_date FROM communities WHERE id = ?) AND NOW() " +
+                        ") " +
+
+                        "SELECT months.month, count(distinct l.id) as count " +
                         "FROM litter l " +
+                        "RIGHT JOIN months " +
+                        "ON months.month = make_date(" +
+                                                "EXTRACT(YEAR FROM l.collection_date_time)::INTEGER, " +
+                                                "EXTRACT(MONTH FROM l.collection_date_time)::INTEGER, " +
+                                                "1) " +
                         "WHERE l.is_active = true " +
                         "AND l.community_id = ? " +
-                        "GROUP BY " + MonthlyStatsQueryBuilder.makeMonth("collection_date_time");
+                        "GROUP BY months.month " +
+                        "ORDER BY months.month DESC " +
+                        "LIMIT 12";
 
         return MonthlyStatsQueryBuilder.processResults(
-                jdbcTemplate.queryForList(sql, communityId)
+                jdbcTemplate.queryForList(sql, communityId, communityId)
         );
     }
 
