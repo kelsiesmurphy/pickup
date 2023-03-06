@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { Upload } from 'react-feather';
 import handleFileUpload from './api/upload_url';
 
-const UploadImage = () => {
+const UploadImage = ({ onUpload }) => {
     const [uploaded, setUploaded] = useState(false);
 
     const handleUpload = async (event) => {
         const file = event.target.files[0];
         const uploadUrl = await handleFileUpload(file);
-        console.log(uploadUrl);
         setUploaded(true);
+        onUpload(uploadUrl);
     };
 
     return (

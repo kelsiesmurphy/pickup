@@ -16,6 +16,8 @@ const AddEventButton = ({ communityId }) => {
   const [coverImage, setCoverImage] = useState("");
   const [description, setDescription] = useState("");
 
+
+
   const handleNewEventModal = () => {
     setOpenModal(true);
   };
@@ -35,8 +37,9 @@ const AddEventButton = ({ communityId }) => {
   const handleEventEnd = (event) => {
     setEventEnd(event.target.value);
   };
-  const handleCoverImage = (event) => {
-    setCoverImage(event.target.value);
+  const handleCoverImage = async (file) => {
+    const imageUrl = await handleFileUpload(file);
+    setCoverImage(imageUrl);
   };
   const handleDescription = (event) => {
     setDescription(event.target.value);
@@ -147,39 +150,7 @@ const AddEventButton = ({ communityId }) => {
                   />
                 </div>
               </div>
-              <UploadImage />
-              {/* <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
-                <label
-                  htmlFor="image"
-                  className="text-sm font-medium text-slate-800"
-                >
-                  Cover image*
-                </label>
-                <input
-                  type="text"
-                  name="cover_image"
-                  value={coverImage}
-                  onChange={handleCoverImage}
-                  id="image"
-                  placeholder="image link"
-                  className="min-w-[280px] max-w-[448px] flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
-                />
-              </div> */}
-              {/* <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
-                <label
-                  htmlFor="image"
-                  className="text-sm font-medium text-slate-800"
-                >
-                  Cover image*
-                </label>
-                <input
-                  name="cover_image"
-                  type="file"
-                  id="image"
-                  placeholder="image link"
-                  className="min-w-[280px] max-w-[448px] flex-1 rounded-lg border border-slate-300 py-3 px-3.5 shadow-sm outline-slate-900 placeholder:text-slate-500"
-                />
-              </div> */}
+              <UploadImage onUpload={handleCoverImage} />
               <div className="flex flex-wrap justify-between gap-8 py-4">
                 <label
                   htmlFor="description"
