@@ -36,6 +36,23 @@ class UserHandlers {
     const request = new Request();
     request.patch(`/api/users/${user.id}`, user);
   };
+
+  handleGetUserContext = (auth0Id) => {
+    try {
+      const request = new Request();
+      return request.get(
+        request
+          .get(`/api/user-context?auth0Id=auth0%7Ctesty_mctestface`)
+          .then((res) => {
+            console.log("here");
+            console.log(res);
+          })
+      );
+    } catch (e) {
+      console.log(e.status);
+    }
+    // return request.get(`/api/user-context?auth0Id=${auth0Id}`);
+  };
 }
 
 export default UserHandlers;

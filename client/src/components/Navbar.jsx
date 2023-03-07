@@ -7,7 +7,7 @@ import LoginButton from "./LoginButton";
 import AddEventButton from "./AddEventButton";
 import SignupButton from "./SignupButton";
 
-const Navbar = ({ communityId }) => {
+const Navbar = ({communityId}) => {
   const {
     user,
     isAuthenticated,
