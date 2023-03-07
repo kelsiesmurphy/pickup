@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 @RestController
@@ -29,7 +31,8 @@ public class UserContextController {
             @RequestParam String auth0Id
     ) {
         try {
-            Optional<User> result = userRepository.findByAuth0Id(auth0Id);
+            String decodedAuth0Id = URLDecoder.decode(auth0Id, StandardCharsets.UTF_8.name());
+            Optional<User> result = userRepository.findByAuth0Id(decodedAuth0Id);
             return result.map(user -> {
                 user.setStats(userStatsBuilder.build(user.getId()));
                 return new ResponseEntity<>(user, HttpStatus.OK);
