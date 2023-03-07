@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import CommunityDetails from "../components/admin/communityDetails";
 import Members from "../components/admin/Members";
 import Events from "../components/admin/Events";
-import CommunityHandler from "../handlers/communityHandler";
-import UserHandlers from "../handlers/userHandlers";
-import EventHandlers from "../handlers/eventHandlers";
+import CommunityHandler from "../handlers/CommunityHandler";
+import UserHandlers from "../handlers/UserHandlers";
+import EventHandlers from "../handlers/EventHandlers";
 
 const Admin = () => {
   const adminPages = ["Members", "Events", "Community details"];

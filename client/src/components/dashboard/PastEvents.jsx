@@ -1,26 +1,26 @@
 const PastEvents = ({ pastEvents }) => {
-    const eventNodes = pastEvents.splice(0, 2).map((event) => {
-      return (
-        <li className="rounded-2xl border shadow-sm">
-          <img src={event.after_img_link} />
-          <div className="px-6 py-8">
-            <h3 className="text-xl md:text-2xl text-slate-900 font-semibold">{event.name}</h3>
-            <p className="text-slate-600">{event.descripion}</p>
-          </div>
-        </li>
-      )
-    })
-  
+  const eventNodes = pastEvents.splice(0, 2).map((event) => {
     return (
-      <div className="py-12 px-4 flex justify-center">
-        <div className="flex-1 max-w-7xl">
-          <h2 className="text-slate-900 text-2xl font-medium">Past events</h2>
-          <ul className="flex flex-wrap gap-8 flex-1 max-w-7xl">
-            {eventNodes}
-          </ul>
+      <li className="rounded-2xl border shadow-sm">
+        <img src={event.after_img_link} />
+        <div className="px-6 py-8">
+          <h3 className="text-xl font-semibold text-slate-900 md:text-2xl">
+            {event.name}
+          </h3>
+          <p className="text-slate-600">{event.descripion}</p>
         </div>
-      </div>
-    )
-}
+      </li>
+    );
+  });
 
-export default PastEvents
+  return (
+    <div className="flex justify-center py-12 px-4">
+      <div className="max-w-7xl flex-1">
+        <h2 className="text-2xl font-medium text-slate-900">Past events</h2>
+        <ul className="flex max-w-7xl flex-1 flex-wrap gap-8">{eventNodes}</ul>
+      </div>
+    </div>
+  );
+};
+
+export default PastEvents;

@@ -3,12 +3,12 @@ import Request from "../helpers/request";
 class UserHandlers {
   getUsers = () => {
     const request = new Request();
-    request.get(`/api/users`);
+    request.get("/api/users");
   };
 
   findUser = (id) => {
     const request = new Request();
-    request.get(`/api/users/` + id);
+    request.get(`/api/users/${id}`);
   };
 
   findUsersFromCommunity = (id) => {
@@ -18,30 +18,23 @@ class UserHandlers {
 
   handleUserPut = (user) => {
     const request = new Request();
-    request.put(`/api/users/${user.id}`, user).then(() => {
-      window.location = "/users";
-    });
+    request.put(`/api/users/${user.id}`, user);
   };
 
   handleUserDelete = (id) => {
     const request = new Request();
-    const url = "/api/users/" + id;
-    request.delete(url).then(() => {
-      window.location = "/admin";
-    });
+    const url = `/api/users/${id}`;
+    request.delete(url);
   };
 
   handleUserPost = (user) => {
     const request = new Request();
-    request.post("/api/users", user).then(() => {
-      window.location = "/users";
-    });
+    request.post("/api/users", user);
   };
+
   handleUpdateUser = (user) => {
     const request = new Request();
-    request.patch(`/api/users/${user.id}`, user).then(() => {
-      window.location = "/users";
-    });
+    request.patch(`/api/users/${user.id}`, user);
   };
 }
 

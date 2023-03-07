@@ -5,7 +5,7 @@ const SocialHeader = ({ community }) => {
         src={community.img_hero_link}
         className="aspect-[375/160] flex-1 object-cover md:aspect-[1440/261]"
       />
-      <div className="flex flex-col gap-6 pt-10 pb-6 px-4 md:flex-row lg:px-28">
+      <div className="flex flex-col gap-6 px-4 pt-10 pb-6 md:flex-row lg:px-28">
         <img
           src={community.img_logo_link}
           className="mt-[-80px] aspect-square w-24 rounded-full border-4 border-white shadow-md md:w-40"

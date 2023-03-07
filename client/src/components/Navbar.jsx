@@ -1,16 +1,20 @@
-import { Link } from "react-router-dom";
-import { wordmark } from "../assets/AssetFiles";
-import AddEventButton from "./AddEventButton";
-import LoginButton from "./LoginButton";
-import { useAuth0 } from "@auth0/auth0-react";
-import SignupButton from "./SignupButton";
-import { Heart } from "react-feather";
-import { Menu } from "react-feather";
 import { useState } from "react";
-import { X } from "react-feather";
+import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { wordmark } from "../assets/AssetFiles";
+import { Heart, Menu, X } from "react-feather";
+import LoginButton from "./LoginButton";
+import AddEventButton from "./AddEventButton";
+import SignupButton from "./SignupButton";
 
 const Navbar = ({ communityId }) => {
-  const { user, isAuthenticated, logout, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
+  const {
+    user,
+    isAuthenticated,
+    logout,
+    getAccessTokenSilently,
+    getIdTokenClaims,
+  } = useAuth0();
 
   const [navOpen, setNavOpen] = useState(false);
 
@@ -19,7 +23,7 @@ const Navbar = ({ communityId }) => {
     console.log(user);
     // const token = getAccessTokenSilently().then(res => console.log(res))
     // console.log(token);
-    const tokenClaim = getIdTokenClaims().then(res => console.log(res))
+    const tokenClaim = getIdTokenClaims().then((res) => console.log(res));
     console.log(tokenClaim);
   };
 
@@ -41,7 +45,7 @@ const Navbar = ({ communityId }) => {
 
   return (
     <>
-      <nav className="flex basis-full bg-white justify-center">
+      <nav className="flex basis-full justify-center bg-white">
         <div className="flex flex-1 items-center justify-between py-4 px-4 transition-all lg:px-28">
           <Link to="/" className="outline-slate-900">
             <img src={wordmark} className="aspect-[156/48] h-12" />

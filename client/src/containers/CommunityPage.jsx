@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import CommunityStats from "../components/dashboard/CommunityStats";
 import SocialHeader from "../components/dashboard/SocialHeader";
 import Leaderboard from "../components/dashboard/Leaderboard";
 import UpcomingEvents from "../components/dashboard/UpcomingEvents";
 import PastEvents from "../components/dashboard/PastEvents";
 import Footer from "../components/Footer";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import CommunityHandler from "../handlers/communityHandler";
-import UserHandlers from "../handlers/userHandlers";
-import EventHandlers from "../handlers/eventHandlers";
+import CommunityHandler from "../handlers/CommunityHandler";
+import UserHandlers from "../handlers/UserHandlers";
+import EventHandlers from "../handlers/EventHandlers";
 
 const CommunityPage = ({ kFormatter }) => {
   const { id } = useParams();
