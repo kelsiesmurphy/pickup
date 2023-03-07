@@ -1,9 +1,8 @@
-import { Plus, Upload } from "react-feather";
 import { useState } from "react";
+import { Plus, Upload } from "react-feather";
 import Rodal from "rodal";
 // Include rodal styles
 import "rodal/lib/rodal.css";
-import EventHandlers from "../handlers/eventHandlers";
 
 const AddUserButton = ({ communityId }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -20,7 +19,7 @@ const AddUserButton = ({ communityId }) => {
   const closeModal = (e) => {
     e.preventDefault();
     setOpenModal(false);
-  }
+  };
 
   return (
     <>
@@ -90,7 +89,7 @@ const AddUserButton = ({ communityId }) => {
                 >
                   Profile image*
                 </label>
-                <div className="min-w-[280px] max-w-[448px] flex flex-1 items-center justify-center">
+                <div className="flex min-w-[280px] max-w-[448px] flex-1 items-center justify-center">
                   <label
                     htmlFor="file"
                     className="flex h-32 w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-slate-300 bg-white shadow-sm transition-colors hover:bg-slate-100"

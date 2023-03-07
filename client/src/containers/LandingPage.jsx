@@ -5,7 +5,7 @@ import Features from "../components/landing/Features";
 import Hero from "../components/landing/Hero";
 import Newsletter from "../components/landing/Newsletter";
 import Statistics from "../components/landing/Statistics";
-import HomeHandler from "../handlers/homeHandler";
+import HomeHandler from "../handlers/HomeHandler";
 
 const Landing = ({ kFormatter }) => {
   const [homeStats, setHomeStats] = useState({});

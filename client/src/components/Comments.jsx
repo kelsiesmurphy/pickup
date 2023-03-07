@@ -1,8 +1,6 @@
-import all from "gsap/all";
-import { useEffect } from "react";
 import { useState } from "react";
 import { Send } from "react-feather";
-import EventHandlers from "../handlers/eventHandlers";
+import EventHandlers from "../handlers/EventHandlers";
 
 const Comments = ({ event, allComments, setAllComments }) => {
   const [comment, setComment] = useState({
@@ -51,7 +49,7 @@ const Comments = ({ event, allComments, setAllComments }) => {
 
   let commentNodes;
   if (allComments) {
-    const sortedComments = allComments.sort(function(a,b){
+    const sortedComments = allComments.sort(function (a, b) {
       return new Date(b.comment_date_time) - new Date(a.comment_date_time);
     });
     commentNodes = sortedComments.map((comment, index) => {

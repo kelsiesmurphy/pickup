@@ -1,10 +1,9 @@
 import { Edit3 } from "react-feather";
 import AddUserButton from "../AddMemberButton";
 import DeleteItem from "../DeleteItem";
-import UserHandlers from "../../handlers/userHandlers"
+import UserHandlers from "../../handlers/UserHandlers";
 
 const Members = ({ communityMembers }) => {
-
   const removeItem = () => {
     // Todo
   };

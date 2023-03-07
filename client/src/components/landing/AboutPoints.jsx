@@ -1,4 +1,3 @@
-import { Sun } from "react-feather";
 import { AboutPointsConstant } from "../../constants/constants";
 
 const AboutPoints = () => {

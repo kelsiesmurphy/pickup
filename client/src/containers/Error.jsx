@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import { image404 } from "../assets/AssetFiles";
 import Footer from "../components/Footer";
 

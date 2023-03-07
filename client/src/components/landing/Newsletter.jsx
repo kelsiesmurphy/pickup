@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import EmailHandler from "../../handlers/emailHandler";
+import EmailHandler from "../../handlers/EmailHandler";
 import toast, { Toaster } from "react-hot-toast";
 
 const Newsletter = () => {
   const [emailText, setEmailText] = useState("");
 
-  const notify = () => toast.success("Thank you for subscribing!", {
-    iconTheme: {
-      primary: '#166534',
-      secondary: '#fff',
-    },
-  });
+  const notify = () =>
+    toast.success("Thank you for subscribing!", {
+      iconTheme: {
+        primary: "#166534",
+        secondary: "#fff",
+      },
+    });
 
   const handleNewsletter = (e) => {
     e.preventDefault();

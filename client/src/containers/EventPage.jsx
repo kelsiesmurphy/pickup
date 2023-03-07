@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Copy, Twitter, Facebook, Linkedin } from "react-feather";
-import EventHandlers from "../handlers/eventHandlers";
+import EventHandlers from "../handlers/EventHandlers";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
 import Comments from "../components/Comments";
 
 const EventPage = () => {

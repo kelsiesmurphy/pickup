@@ -1,6 +1,4 @@
 const CommunityStats = ({ community, kFormatter }) => {
-  
-
   return (
     <div className="flex justify-center py-12 px-4">
       <ul className="flex max-w-7xl flex-1 flex-wrap gap-6">
