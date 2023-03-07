@@ -19,7 +19,6 @@ ChartJS.register(
 );
 
 const BarChart = ({ data }) => {
-
     const options = {
         responsive: true,
         plugins: {
@@ -27,13 +26,11 @@ const BarChart = ({ data }) => {
             title: { display: true, text: 'Total Litter Collected' }
         }
     }
-
     return (
         <>
             <Bar options={options} data={data} />
         </>
     )
-
 };
 
 export default BarChart;

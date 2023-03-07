@@ -21,55 +21,20 @@ const MainContainer = () => {
 
   useEffect(() => {
     async function fetchData() {
-      // try {
       const response = await fetch(
         `/api/user-context?auth0Id=${user.sub.replace("|", "%7C")}`
       );
-
       if (response.status === 200) {
         const json = await response.json();
         console.log(json);
         setLoggedInUserData(json);
-        // return response;
       } else {
-        // if (response.status === 404) {
         navigate("/onboarding");
-        // }
       }
-      // } catch (e) {
-      //   console.log(e);
-      // }
     }
-
-    // const fetchData = async () => {
-    //   const response = await fetch(
-    //     `/api/user-context?auth0Id=${user.sub.replace("|", "%7C")}`
-    //   );
-    //   return response;
-    // };
-
-    // const resolveData = async (data) => {
-    //   const json = await data.json();
-    //   return json;
-    // };
-
     if (!isLoading && isAuthenticated) {
       fetchData();
-      // const response = fetchData();
-      // if (response.status === 404) {
-      //   navigate("/onboarding");
-      // }
     }
-    // if (!isLoading && isAuthenticated === true) {
-    //   fetch(`/api/user-context?auth0Id=${user.sub.replace("|", "%7C")}`)
-    //     .then((res) => {
-    //       if (res.status === 404) {
-    //         navigate("/onboarding");
-    //       }
-    //       return res.json();
-    //     })
-    //     .then((data) => setLoggedInUserData(data));
-    // }
   }, [isAuthenticated]);
 
   function kFormatter(num) {
