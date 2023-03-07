@@ -18,8 +18,12 @@ const AddEventButton = ({ communityId }) => {
   const [description, setDescription] = useState("");
 
   useEffect(() => {
-    if (coverImage !== "") {
-      handleFileUpload(file);
+    try {
+      if (coverImage !== "") {
+        handleFileUpload(file);
+      }
+    } catch {
+      console.log("error in add event button use effect");
     }
   }, [coverImage]);
 
