@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import Navbar from "../components/Navbar";
 import LandingPage from "./LandingPage";
 import CommunityPage from "./CommunityPage";
 import CommunitiesList from "./CommunitiesList";
 import EventPage from "./EventPage";
+import Onboarding from "./Onboarding";
 import Error from "./Error";
 import Admin from "./Admin";
 import Mobile from "./Mobile";
 
 const MainContainer = () => {
+  const { isAuthenticated } = useAuth0();
   const [communityId, setTempId] = useState(1);
 
   function kFormatter(num) {
@@ -24,6 +27,7 @@ const MainContainer = () => {
       <Routes>
         <Route path="/" element={<LandingPage kFormatter={kFormatter} />} />
         <Route path="/communities" element={<CommunitiesList />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route
           path="/communities/:id"
           element={<CommunityPage kFormatter={kFormatter} />}
