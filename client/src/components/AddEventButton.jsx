@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { Plus } from "react-feather";
+import { useState, useEffect } from "react";
 import { Plus } from "react-feather";
 import Rodal from "rodal";
 // Include rodal styles
 import "rodal/lib/rodal.css";
 import EventHandlers from "../handlers/EventHandlers";
 import UploadImage from "../s3bucket/pages/uploadImage";
+import handleFileUpload from "../s3bucket/pages/api/upload_url";
 
 const AddEventButton = ({ communityId }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -15,6 +17,11 @@ const AddEventButton = ({ communityId }) => {
   const [eventEnd, setEventEnd] = useState("");
   const [coverImage, setCoverImage] = useState("");
   const [description, setDescription] = useState("");
+
+
+  useEffect(() => {
+    handleFileUpload(file);
+  }, [coverImage]);
 
   const handleNewEventModal = () => {
     setOpenModal(true);
@@ -35,9 +42,8 @@ const AddEventButton = ({ communityId }) => {
   const handleEventEnd = (event) => {
     setEventEnd(event.target.value);
   };
-  const handleCoverImage = async (file) => {
-    const imageUrl = await handleFileUpload(file);
-    setCoverImage(imageUrl);
+  const handleCoverImage = (file) => {
+    setCoverImage(file);
   };
   const handleDescription = (event) => {
     setDescription(event.target.value);
