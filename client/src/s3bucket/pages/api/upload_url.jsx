@@ -12,13 +12,14 @@ const handleFileUpload = async (file) => {
     })
 
     const s3 = new AWS.S3();
+    const newFile = file.name.replace(/[^\w\s]/gi, '').replace(/\s+/g, '');
 
     const post = s3.createPresignedPost({
         // Bucket: process.env.BUCKET_NAME,
         Bucket: "awss3stack-mybucket15d133bf-1uuipzeff8hkx",
         Region: "eu-west-2",
         Fields: {
-            key: file.name,
+            key: newFile,
             'Content-Type': file.type,
         },
         Expires: 60,
@@ -37,8 +38,7 @@ const handleFileUpload = async (file) => {
         body: formData,
     });
 
-    const imageUrl = `${response.url}/${file.name}`;
-    console.log(imageUrl);
+    const imageUrl = `${response.url}/${newFile}`;
     return imageUrl;
 
 

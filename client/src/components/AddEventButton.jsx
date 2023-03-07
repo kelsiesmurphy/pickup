@@ -1,6 +1,5 @@
 import { Plus } from "react-feather";
 import { useState, useEffect } from "react";
-import { Plus } from "react-feather";
 import Rodal from "rodal";
 // Include rodal styles
 import "rodal/lib/rodal.css";
