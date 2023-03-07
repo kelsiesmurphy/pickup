@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Upload } from "react-feather";
 import CommunityHandler from "../../handlers/CommunityHandler";
+import UploadImage from "../../s3bucket/pages/uploadImage";
 
 const CommunityDetails = ({ community }) => {
   const [stateCommunity, setStateCommunity] = useState({
@@ -13,12 +14,14 @@ const CommunityDetails = ({ community }) => {
     is_private: community.is_private,
   });
 
+
   const handleChange = function (event) {
     let propertyName = event.target.name;
     let copiedCommunity = { ...stateCommunity };
     copiedCommunity[propertyName] = event.target.value;
     setStateCommunity(copiedCommunity);
   };
+
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -81,17 +84,19 @@ const CommunityDetails = ({ community }) => {
             <input id="file" type="file" className="hidden" />
           </label>
         </div>
-        {stateCommunity.img_logo_link ? (
+        {stateCommunity.img_hero_link ? (
           <img
-            src={stateCommunity.img_logo_link}
+            src={stateCommunity.img_hero_link}
             className="flex aspect-square h-32 rounded-full border border-slate-300 object-cover shadow-sm"
           />
         ) : null}
       </div>
+      <UploadImage />
+      <UploadImage />
       <div className="flex flex-1 flex-col flex-wrap gap-6 border-b py-5">
-        {stateCommunity.img_hero_link ? (
+        {stateCommunity.img_logo_link ? (
           <img
-            src={stateCommunity.img_hero_link}
+            src={stateCommunity.img_logo_link}
             className="flex h-32 rounded-lg border border-slate-300 object-cover shadow-sm"
           />
         ) : null}
@@ -125,5 +130,6 @@ const CommunityDetails = ({ community }) => {
     </form>
   );
 };
+
 
 export default CommunityDetails;
