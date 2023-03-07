@@ -36,6 +36,11 @@ class UserHandlers {
     const request = new Request();
     request.patch(`/api/users/${user.id}`, user);
   };
+
+  handleGetUserContext = (auth0Id) => {
+    const request = new Request();
+    return request.get(`/api/user-context?auth0Id=${auth0Id}`);
+  };
 }
 
 export default UserHandlers;

@@ -10,10 +10,21 @@ import Onboarding from "./Onboarding";
 import Error from "./Error";
 import Admin from "./Admin";
 import Mobile from "./Mobile";
+import { useEffect } from "react";
+import UserHandlers from "../handlers/UserHandlers";
 
 const MainContainer = () => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const [communityId, setTempId] = useState(1);
+
+  useEffect(() => {
+    if(isAuthenticated === true){
+      console.log("Logged in!")
+      console.log(user)
+      const userHandlers = new UserHandlers()
+      userHandlers.handleGetUserContext(user.auth0_id)
+    }
+  }, [isAuthenticated])
 
   function kFormatter(num) {
     return Math.abs(num) > 999
