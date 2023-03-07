@@ -1,0 +1,8 @@
+auth0:
+  audience: https://dev-xytuy5bn1opxvetk.uk.auth0.com/api/v2/
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-xytuy5bn1opxvetk.uk.auth0.com/
