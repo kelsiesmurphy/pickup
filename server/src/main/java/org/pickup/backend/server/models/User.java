@@ -67,6 +67,11 @@ public class User {
     @JsonProperty("is_admin")
     private boolean isAdmin;
 
+    @Column(name = "auth0_id", nullable=true, unique=true)
+    @JsonView(UserView.Detail.class)
+    @JsonProperty("auth0_id")
+    private String auth0Id;
+
     @Column(name = "create_date")
     @JsonView(UserView.Detail.class)
     @JsonProperty("create_date")
@@ -194,5 +199,13 @@ public class User {
 
     public void setStats(UserStats stats) {
         this.stats = stats;
+    }
+
+    public String getAuth0Id() {
+        return auth0Id;
+    }
+
+    public void setAuth0Id(String auth0Id) {
+        this.auth0Id = auth0Id;
     }
 }
