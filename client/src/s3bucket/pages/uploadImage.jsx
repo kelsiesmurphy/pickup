@@ -9,6 +9,7 @@ const UploadImage = ({ onUpload }) => {
         const file = event.target.files[0];
         const uploadUrl = await handleFileUpload(file);
         setUploaded(true);
+        console.log('uploadUrl', uploadUrl);
         onUpload(uploadUrl);
     };
 
