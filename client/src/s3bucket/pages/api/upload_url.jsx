@@ -4,8 +4,8 @@ import AWS from 'aws-sdk';
 const handleFileUpload = async (file) => {
 
     AWS.config.update({
-        accessKeyId: "AKIA5ZK6F75ARSJBNA4K",
-        secretAccessKey: "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",
+        accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY,
+        secretAccessKey: import.meta.env.VITE_AWS_SECRET_KEY,
         region: "eu-west-2",
         signatureVersion: "v4"
     })
