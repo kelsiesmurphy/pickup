@@ -17,9 +17,10 @@ const AddEventButton = ({ communityId }) => {
   const [coverImage, setCoverImage] = useState("");
   const [description, setDescription] = useState("");
 
-
   useEffect(() => {
-    handleFileUpload(file);
+    if (coverImage !== "") {
+      handleFileUpload(file);
+    }
   }, [coverImage]);
 
   const handleNewEventModal = () => {

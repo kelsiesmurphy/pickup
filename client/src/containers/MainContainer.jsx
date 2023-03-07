@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Navbar from "../components/Navbar";
 import LandingPage from "./LandingPage";
@@ -11,20 +11,66 @@ import Error from "./Error";
 import Admin from "./Admin";
 import Mobile from "./Mobile";
 import { useEffect } from "react";
-import UserHandlers from "../handlers/UserHandlers";
 
 const MainContainer = () => {
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, isLoading } = useAuth0();
   const [communityId, setTempId] = useState(1);
+  const [loggedInUserData, setLoggedInUserData] = useState({});
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if(isAuthenticated === true){
-      console.log("Logged in!")
-      console.log(user)
-      const userHandlers = new UserHandlers()
-      userHandlers.handleGetUserContext(user.auth0_id)
+    async function fetchData() {
+      // try {
+      const response = await fetch(
+        `/api/user-context?auth0Id=${user.sub.replace("|", "%7C")}`
+      );
+
+      if (response.status === 200) {
+        const json = await response.json();
+        console.log(json);
+        setLoggedInUserData(json);
+        // return response;
+      } else {
+        // if (response.status === 404) {
+        navigate("/onboarding");
+        // }
+      }
+      // } catch (e) {
+      //   console.log(e);
+      // }
     }
-  }, [isAuthenticated])
+
+    // const fetchData = async () => {
+    //   const response = await fetch(
+    //     `/api/user-context?auth0Id=${user.sub.replace("|", "%7C")}`
+    //   );
+    //   return response;
+    // };
+
+    // const resolveData = async (data) => {
+    //   const json = await data.json();
+    //   return json;
+    // };
+
+    if (!isLoading && isAuthenticated) {
+      fetchData();
+      // const response = fetchData();
+      // if (response.status === 404) {
+      //   navigate("/onboarding");
+      // }
+    }
+    // if (!isLoading && isAuthenticated === true) {
+    //   fetch(`/api/user-context?auth0Id=${user.sub.replace("|", "%7C")}`)
+    //     .then((res) => {
+    //       if (res.status === 404) {
+    //         navigate("/onboarding");
+    //       }
+    //       return res.json();
+    //     })
+    //     .then((data) => setLoggedInUserData(data));
+    // }
+  }, [isAuthenticated]);
 
   function kFormatter(num) {
     return Math.abs(num) > 999
@@ -34,7 +80,7 @@ const MainContainer = () => {
 
   return (
     <div className="flex min-h-screen basis-full flex-col bg-slate-50">
-      <Navbar communityId={communityId} />
+      <Navbar communityId={1} />
       <Routes>
         <Route path="/" element={<LandingPage kFormatter={kFormatter} />} />
         <Route path="/communities" element={<CommunitiesList />} />
