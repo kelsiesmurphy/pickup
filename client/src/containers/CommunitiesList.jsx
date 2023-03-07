@@ -1,8 +1,7 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
-import CommunityHandler from "../handlers/communityHandler";
+import CommunityHandler from "../handlers/CommunityHandler";
 
 const CommunitiesList = () => {
   const [communities, setCommunities] = useState([]);

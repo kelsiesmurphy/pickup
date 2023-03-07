@@ -13,41 +13,28 @@ class EventHandlers {
 
   handleEventPut = (event) => {
     const request = new Request();
-    request.put(`/api/events/${event.id}`, event).then(() => {
-      window.location = "/events";
-    });
+    request.put(`/api/events/${event.id}`, event);
   };
 
   handleEventDelete = (id) => {
     const request = new Request();
-    const url = "/api/events/" + id;
-    request.delete(url).then(() => {
-      window.location = "/admin";
-    });
+    const url = `/api/events/${id}`;
+    request.delete(url);
   };
 
   handleEventPost = (event) => {
     const request = new Request();
-    request
-      .post("/api/events", event)
-      .then(() => {
-        console.log(event);
-        // window.location = "/events";
-      });
+    request.post("/api/events", event);
   };
 
   handleUpdateEvent = (event) => {
     const request = new Request();
-    request.patch(`/api/events/${event.id}`, event).then(() => {
-      window.location = "/events";
-    });
+    request.patch(`/api/events/${event.id}`, event);
   };
 
   handleComment = (event) => {
     const request = new Request();
-    request.post(`/api/events/${event.id}/comment`, event).then(() => {
-      window.location = "/events";
-    });
+    request.post("/api/comments", event);
   };
 }
 

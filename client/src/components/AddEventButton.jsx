@@ -1,9 +1,10 @@
 import { Plus } from "react-feather";
 import { useState, useEffect } from "react";
+import { Plus } from "react-feather";
 import Rodal from "rodal";
 // Include rodal styles
 import "rodal/lib/rodal.css";
-import EventHandlers from "../handlers/eventHandlers";
+import EventHandlers from "../handlers/EventHandlers";
 import UploadImage from "../s3bucket/pages/uploadImage";
 import handleFileUpload from "../s3bucket/pages/api/upload_url";
 
@@ -17,11 +18,10 @@ const AddEventButton = ({ communityId }) => {
   const [coverImage, setCoverImage] = useState("");
   const [description, setDescription] = useState("");
 
+
   useEffect(() => {
     handleFileUpload(file);
   }, [coverImage]);
-
-
 
   const handleNewEventModal = () => {
     setOpenModal(true);
@@ -78,8 +78,15 @@ const AddEventButton = ({ communityId }) => {
       <Rodal
         visible={openModal}
         onClose={handleClose}
-
-        customStyles={{ width: "auto", height: "auto", borderRadius: "12px", display: "flex", maxWidth: 688, flex: 1, margin: "16px" }}
+        customStyles={{
+          width: "auto",
+          height: "auto",
+          borderRadius: "12px",
+          display: "flex",
+          maxWidth: 688,
+          flex: 1,
+          margin: "16px",
+        }}
       >
         <div className="flex flex-col">
           <div className="border-b px-3 py-4">

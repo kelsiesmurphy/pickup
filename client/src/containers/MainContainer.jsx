@@ -1,12 +1,11 @@
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import LandingPage from "./LandingPage";
 import CommunityPage from "./CommunityPage";
-import CommunityEditPage from "./CommunityEditPage";
 import CommunitiesList from "./CommunitiesList";
 import EventPage from "./EventPage";
 import Error from "./Error";
-import { useState } from "react";
 import Admin from "./Admin";
 import Mobile from "./Mobile";
 
@@ -29,7 +28,6 @@ const MainContainer = () => {
           path="/communities/:id"
           element={<CommunityPage kFormatter={kFormatter} />}
         />
-        <Route path="/communities/:id/edit" element={<CommunityEditPage />} />
         <Route path="/events/:id" element={<EventPage />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/add/:id" element={<Mobile />} />

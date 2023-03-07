@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 
 const UpcomingEvents = ({ upcomingEvents }) => {
-  const eventNodes = upcomingEvents.splice(0,2).map((event, index) => {
+  const eventNodes = upcomingEvents.splice(0, 2).map((event, index) => {
     return (
-      <li key={index} className="flex-1 min-w-[280px] rounded-2xl border bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+      <li
+        key={index}
+        className="min-w-[280px] flex-1 rounded-2xl border bg-white shadow-sm transition-shadow duration-300 hover:shadow-md"
+      >
         <Link to={`/events/${event.id}`}>
           <img
             src={event.img_before_link}
