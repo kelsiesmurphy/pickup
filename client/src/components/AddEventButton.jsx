@@ -1,9 +1,9 @@
-import { Plus } from "react-feather";
 import { useState } from "react";
+import { Plus } from "react-feather";
 import Rodal from "rodal";
 // Include rodal styles
 import "rodal/lib/rodal.css";
-import EventHandlers from "../handlers/eventHandlers";
+import EventHandlers from "../handlers/EventHandlers";
 import UploadImage from "../s3bucket/pages/uploadImage";
 
 const AddEventButton = ({ communityId }) => {
@@ -15,8 +15,6 @@ const AddEventButton = ({ communityId }) => {
   const [eventEnd, setEventEnd] = useState("");
   const [coverImage, setCoverImage] = useState("");
   const [description, setDescription] = useState("");
-
-
 
   const handleNewEventModal = () => {
     setOpenModal(true);
@@ -74,8 +72,15 @@ const AddEventButton = ({ communityId }) => {
       <Rodal
         visible={openModal}
         onClose={handleClose}
-
-        customStyles={{ width: "auto", height: "auto", borderRadius: "12px", display: "flex", maxWidth: 688, flex: 1, margin: "16px" }}
+        customStyles={{
+          width: "auto",
+          height: "auto",
+          borderRadius: "12px",
+          display: "flex",
+          maxWidth: 688,
+          flex: 1,
+          margin: "16px",
+        }}
       >
         <div className="flex flex-col">
           <div className="border-b px-3 py-4">

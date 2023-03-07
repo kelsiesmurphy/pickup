@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Upload } from "react-feather";
-import CommunityHandler from "../../handlers/communityHandler";
+import CommunityHandler from "../../handlers/CommunityHandler";
 
 const CommunityDetails = ({ community }) => {
   const [stateCommunity, setStateCommunity] = useState({
@@ -10,7 +10,7 @@ const CommunityDetails = ({ community }) => {
     img_hero_link: community.img_hero_link,
     img_logo_link: community.img_logo_link,
     create_date: community.create_date,
-    is_private: community.is_private
+    is_private: community.is_private,
   });
 
   const handleChange = function (event) {
@@ -24,8 +24,8 @@ const CommunityDetails = ({ community }) => {
     e.preventDefault();
     console.log("handle saved");
     const communityHandler = new CommunityHandler();
-    communityHandler.handleCommunityPut(stateCommunity)
-  }
+    communityHandler.handleCommunityPut(stateCommunity);
+  };
 
   return (
     <form onSubmit={handleSave} className="mx-4 max-w-2xl flex-1">

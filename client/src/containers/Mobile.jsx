@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import litterHandlers from "../handlers/litterHandlers";
-import EventHandlers from "../handlers/eventHandlers";
+import LitterHandlers from "../handlers/LitterHandlers";
+import EventHandlers from "../handlers/EventHandlers";
 import BarChart from "./BarChart";
 
 const Mobile = () => {
@@ -13,7 +13,7 @@ const Mobile = () => {
   const [litterCounts, setLitterCounts] = useState([]);
   const [submitResult, setSubmitResult] = useState({});
 
-  const litterHandler = new litterHandlers();
+  const litterHandler = new LitterHandlers();
 
   useEffect(() => {
     const eventHandlers = new EventHandlers();
