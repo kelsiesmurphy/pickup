@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import CommunityDetails from "../components/admin/communityDetails";
+import CommunityDetails from "../components/admin/CommunityDetails";
 import Members from "../components/admin/Members";
 import Events from "../components/admin/Events";
 import CommunityHandler from "../handlers/CommunityHandler";
