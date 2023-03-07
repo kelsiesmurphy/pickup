@@ -1,8 +1,8 @@
-import S3 from 'aws-sdk/clients/s3';
 import AWS from 'aws-sdk';
 
 
 const handleFileUpload = async (file) => {
+    console.log('handle file upload called');
 
     AWS.config.update({
         accessKeyId: "AKIA5ZK6F75ARSJBNA4K",
@@ -37,7 +37,9 @@ const handleFileUpload = async (file) => {
         body: formData,
     });
 
-    return `${post.url}/${file.name}`;
+    const imageUrl = `${response.url}/${file.name}`;
+    console.log(imageUrl);
+    return imageUrl;
 
 
 };

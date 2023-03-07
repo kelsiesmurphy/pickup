@@ -7,10 +7,10 @@ specifiers:
   '@types/react-dom': ^18.0.11
   '@vitejs/plugin-react': ^3.1.0
   autoprefixer: ^10.4.13
-  chart.js: ^4.2.1
   aws-cdk: 2.27.0
   aws-cdk-lib: 2.27.0
   aws-sdk: ^2.1152.0
+  chart.js: ^4.2.1
   constructs: ^10.1.36
   dotenv: ^16.0.3
   eslint: ^8.35.0
@@ -50,9 +50,9 @@ devDependencies:
   '@types/react-dom': 18.0.11
   '@vitejs/plugin-react': 3.1.0_vite@4.1.4
   autoprefixer: 10.4.13_postcss@8.4.21
-  chart.js: 4.2.1
   aws-cdk: 2.27.0
   aws-sdk: 2.1328.0
+  chart.js: 4.2.1
   eslint: 8.35.0
   image-types: link:@types/next/image-types
   postcss: 8.4.21
@@ -593,6 +593,7 @@ packages:
 
   /@kurkle/color/0.3.2:
     resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
+
   /@next/env/13.2.3:
     resolution: {integrity: sha512-FN50r/E+b8wuqyRjmGaqvqNDuWBWYWQiigfZ50KnSFH0f+AMQQyaZl+Zm2+CIpKk0fL9QxhLxOpTVA3xFHgFow==}
     dev: true
