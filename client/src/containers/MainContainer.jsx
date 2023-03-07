@@ -1,33 +1,97 @@
-import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import Navbar from "../components/Navbar";
 import LandingPage from "./LandingPage";
 import CommunityPage from "./CommunityPage";
-import CommunityEditPage from "./CommunityEditPage";
+import CommunitiesList from "./CommunitiesList";
 import EventPage from "./EventPage";
+import Onboarding from "./Onboarding";
 import Error from "./Error";
+import Admin from "./Admin";
+import Mobile from "./Mobile";
+import { useEffect } from "react";
 
 const MainContainer = () => {
-  // Temporary Community object for testing, until backend is hooked up.
-  const community = {
-    id: 1,
-    name: "30th Glasgow Scout Group",
-    description:
-      "Each month we do a cleanup of our local beach. All equipment provided by the Western Rotary Club.",
-    is_private: false,
-    hero_img_link:
-      "https://pbs.twimg.com/profile_banners/523418837/1664179789/1500x500",
-    logo_img_link:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/8/87/World_Scout_Emblem_1955.svg/1200px-World_Scout_Emblem_1955.svg.png",
-  };
+  const { isAuthenticated, user, isLoading } = useAuth0();
+  const [communityId, setTempId] = useState(1);
+  const [loggedInUserData, setLoggedInUserData] = useState({});
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchData() {
+      // try {
+      const response = await fetch(
+        `/api/user-context?auth0Id=${user.sub.replace("|", "%7C")}`
+      );
+
+      if (response.status === 200) {
+        const json = await response.json();
+        console.log(json);
+        setLoggedInUserData(json);
+        // return response;
+      } else {
+        // if (response.status === 404) {
+        navigate("/onboarding");
+        // }
+      }
+      // } catch (e) {
+      //   console.log(e);
+      // }
+    }
+
+    // const fetchData = async () => {
+    //   const response = await fetch(
+    //     `/api/user-context?auth0Id=${user.sub.replace("|", "%7C")}`
+    //   );
+    //   return response;
+    // };
+
+    // const resolveData = async (data) => {
+    //   const json = await data.json();
+    //   return json;
+    // };
+
+    if (!isLoading && isAuthenticated) {
+      fetchData();
+      // const response = fetchData();
+      // if (response.status === 404) {
+      //   navigate("/onboarding");
+      // }
+    }
+    // if (!isLoading && isAuthenticated === true) {
+    //   fetch(`/api/user-context?auth0Id=${user.sub.replace("|", "%7C")}`)
+    //     .then((res) => {
+    //       if (res.status === 404) {
+    //         navigate("/onboarding");
+    //       }
+    //       return res.json();
+    //     })
+    //     .then((data) => setLoggedInUserData(data));
+    // }
+  }, [isAuthenticated]);
+
+  function kFormatter(num) {
+    return Math.abs(num) > 999
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
+      : Math.sign(num) * Math.abs(num);
+  }
 
   return (
-    <div className="flex flex-col basis-full min-h-screen">
-      <Navbar community={community} />
+    <div className="flex min-h-screen basis-full flex-col bg-slate-50">
+      <Navbar communityId={1} />
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/communities/:id" element={<CommunityPage />} />
-        <Route path="/communities/:id/edit" element={<CommunityEditPage />} />
+        <Route path="/" element={<LandingPage kFormatter={kFormatter} />} />
+        <Route path="/communities" element={<CommunitiesList />} />
+        <Route path="/onboarding" element={<Onboarding />} />
+        <Route
+          path="/communities/:id"
+          element={<CommunityPage kFormatter={kFormatter} />}
+        />
         <Route path="/events/:id" element={<EventPage />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/add/:id" element={<Mobile />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

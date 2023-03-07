@@ -1,12 +1,12 @@
+import { useAuth0 } from "@auth0/auth0-react";
+
 const LoginButton = ({ buttonText }) => {
-  const handleLogin = () => {
-    // TODO
-  };
+  const { loginWithRedirect } = useAuth0();
 
   return (
     <button
-      onClick={handleLogin}
-      className="flex items-center justify-center gap-2 rounded-lg border border-green-800 bg-green-800 py-2.5 px-4 text-white shadow-sm outline-slate-900 transition-colors hover:border-green-900 hover:bg-green-900 md:max-w-[132px]"
+      onClick={() => loginWithRedirect({})}
+      className="flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-slate-700 outline-slate-900 transition-colors hover:border-slate-100 hover:bg-slate-100 md:max-w-[132px] md:flex-none"
     >
       {buttonText}
     </button>

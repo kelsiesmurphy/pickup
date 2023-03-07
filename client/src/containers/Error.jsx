@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import { image404 } from "../assets/AssetFiles";
 import Footer from "../components/Footer";
 
@@ -10,7 +9,7 @@ const Error = () => {
         <div className="mt-16 mb-24 flex max-w-7xl flex-1 flex-wrap items-center justify-between gap-8">
           <div className="flex flex-1 flex-col gap-4 md:max-w-md">
             <h2 className="font-semibold text-green-800">404 error</h2>
-            <h1 className="text-4xl font-semibold md:text-6xl text-slate-900">
+            <h1 className="text-4xl font-semibold text-slate-900 md:text-6xl">
               Page not found
             </h1>
             <p className="text-slate-500">
@@ -24,7 +23,11 @@ const Error = () => {
               Take me home
             </Link>
           </div>
-          <img src={image404} width="592" className="aspect-[592/640] object-cover" />
+          <img
+            src={image404}
+            width="592"
+            className="aspect-[592/640] object-cover"
+          />
         </div>
       </div>
       <Footer />
