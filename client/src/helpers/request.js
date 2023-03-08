@@ -30,7 +30,7 @@ class Request {
     return fetch(url, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: Json.stringify(payload),
+      body: JSON.stringify(payload),
     });
   }
 }

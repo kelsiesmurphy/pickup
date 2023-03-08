@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Send } from "react-feather";
 import EventHandlers from "../handlers/EventHandlers";
 
-const Comments = ({ event, allComments, setAllComments }) => {
+const Comments = ({ event, allComments, setAllComments, loggedInUserData }) => {
   const [comment, setComment] = useState({
     event_id: event.id,
     user: {},
@@ -17,10 +17,9 @@ const Comments = ({ event, allComments, setAllComments }) => {
       comment_date_time: currentDate,
       text_body: e.target.value,
       user: {
-        id: 1,
-        user_name: "Esma_Çörekçi",
-        img_profile_link:
-          "https://randomuser.me/api/portraits/med/women/30.jpg",
+        id: loggedInUserData.id,
+        user_name: loggedInUserData.user_name,
+        img_profile_link: loggedInUserData.img_profile_link,
       },
     };
     setComment(commentSetup);
@@ -36,6 +35,7 @@ const Comments = ({ event, allComments, setAllComments }) => {
       text_body: comment.text_body,
     };
     eventHandlers.handleComment(commentForPosting);
+    console.log(commentForPosting);
     const allCommentsClone = [...allComments];
     allCommentsClone.push(comment);
     setAllComments(allCommentsClone);

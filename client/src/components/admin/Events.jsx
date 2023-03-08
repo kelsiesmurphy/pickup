@@ -3,9 +3,15 @@ import AddEventButton from "../AddEventButton";
 import DeleteItem from "../DeleteItem";
 import EventHandlers from "../../handlers/EventHandlers";
 
-const Events = ({ communityEvents }) => {
-  const removeItem = () => {
-    // Todo
+const Events = ({ communityEvents, setCommunityEvents }) => {
+  const removeItem = (event) => {
+    const eventToUpdate = {
+      id: event.id,
+      is_active: false,
+    };
+    const eventHandler = new EventHandlers();
+    eventHandler.handleUpdateEvent(eventToUpdate);
+    setCommunityEvents(communityEvents)
   };
 
   const eventNodes = communityEvents.map((event, index) => {
@@ -30,17 +36,21 @@ const Events = ({ communityEvents }) => {
           <p className="text-sm text-slate-500">{event.event_date_time_end}</p>
         </td>
         <td className="hidden max-w-[168px] flex-1 px-6 md:block">
-          <p className="text-sm text-slate-500">102</p>
+          <p className="text-sm text-slate-500">{event.stats != undefined
+                ? event.stats.users.total
+                : "Error"}</p>
         </td>
         <td className="hidden max-w-[168px]  flex-1 px-6 md:block">
-          <p className="text-sm text-slate-500">103</p>
+          <p className="text-sm text-slate-500">{event.stats != undefined
+                ? event.stats.litter.total
+                : "Error"}</p>
         </td>
         <td className="flex max-w-[116px] flex-1 justify-center gap-4 px-6">
-          <Edit3
+          {/* <Edit3
             size={20}
             className="cursor-pointer text-slate-500 transition-colors hover:text-slate-900"
-          />
-          <DeleteItem itemToRemove={event.name} removeItem={removeItem} />
+          /> */}
+          <DeleteItem itemToRemove={event.name} removeItem={() => removeItem(event)} />
         </td>
       </tr>
     );

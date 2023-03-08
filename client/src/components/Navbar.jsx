@@ -7,12 +7,8 @@ import LoginButton from "./LoginButton";
 import AddEventButton from "./AddEventButton";
 import SignupButton from "./SignupButton";
 
-const Navbar = ({communityId}) => {
-  const {
-    user,
-    isAuthenticated,
-    logout,
-  } = useAuth0();
+const Navbar = ({ loggedInUserData }) => {
+  const { user, isAuthenticated, logout } = useAuth0();
 
   const [navOpen, setNavOpen] = useState(false);
 
@@ -40,9 +36,17 @@ const Navbar = ({communityId}) => {
     <>
       <nav className="flex basis-full justify-center bg-white">
         <div className="flex flex-1 items-center justify-between py-4 px-4 transition-all lg:px-28">
-          <Link to="/" className="outline-slate-900">
-            <img src={wordmark} className="aspect-[156/48] h-12" />
-          </Link>
+          <div className="flex items-center gap-8">
+            <Link to="/" className="outline-slate-900">
+              <img src={wordmark} className="aspect-[156/48] h-12" />
+            </Link>
+            <Link
+              to="/communities"
+              className="hidden items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-slate-700 outline-slate-900 transition-colors hover:border-slate-100 hover:bg-slate-100 md:flex"
+            >
+              All communities
+            </Link>
+          </div>
           {!isAuthenticated && (
             <>
               <div className="hidden items-center gap-4 sm:flex">
@@ -65,13 +69,13 @@ const Navbar = ({communityId}) => {
             <>
               <div className="hidden items-center gap-4 md:flex">
                 <Link
-                  to={`/communities`}
+                  to={`/communities/${loggedInUserData.community_id}`}
                   className=" flex items-center gap-2 rounded-lg border border-slate-300 bg-white py-2.5 px-4 text-slate-700 shadow-sm outline-slate-900 transition-colors hover:bg-slate-50"
                 >
                   <Heart color="#334155" size={20} />
-                  Communities
+                  My community
                 </Link>
-                <AddEventButton communityId={communityId} />
+                {loggedInUserData.is_admin && <AddEventButton communityId={loggedInUserData.community_id} />}
                 <img
                   src={user.picture}
                   className="aspect-square h-10 rounded-full"
@@ -103,6 +107,12 @@ const Navbar = ({communityId}) => {
       {navOpen && !isAuthenticated && (
         <>
           <div className="flex flex-col justify-center gap-4 p-4">
+            <Link
+              to="/communities"
+              className="flex items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-slate-700 outline-slate-900 transition-colors hover:border-slate-100 hover:bg-slate-100"
+            >
+              All communities
+            </Link>
             <LoginButton buttonText={"Log in"} />
             <SignupButton buttonText={"Sign up"} />
           </div>
@@ -111,13 +121,19 @@ const Navbar = ({communityId}) => {
       {navOpen && isAuthenticated && (
         <div className="flex flex-col justify-center gap-4 p-4">
           <Link
-            to={`/communities/${communityId}`}
-            className=" flex flex-1 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white py-2.5 px-4 text-slate-700 shadow-sm outline-slate-900 transition-colors hover:bg-slate-50 md:flex-none"
+            to="/communities"
+            className="flex items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-slate-700 outline-slate-900 transition-colors hover:border-slate-100 hover:bg-slate-100"
+          >
+            All communities
+          </Link>
+          <Link
+            to={`/communities/${loggedInUserData.community_id}`}
+            className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white py-2.5 px-4 text-slate-700 shadow-sm outline-slate-900 transition-colors hover:bg-slate-50 md:flex-none"
           >
             <Heart color="#334155" size={20} />
-            Community
+            My community
           </Link>
-          <AddEventButton communityId={communityId} />
+          {loggedInUserData.is_admin && <AddEventButton communityId={loggedInUserData.community_id} />}
           <button
             onClick={() => logoutWithRedirect()}
             className="flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 px-4 text-slate-700 outline-slate-900 transition-colors hover:border-slate-100 hover:bg-slate-100 md:max-w-[132px] md:flex-none"

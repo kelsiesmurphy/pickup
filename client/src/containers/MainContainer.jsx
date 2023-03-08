@@ -14,7 +14,6 @@ import { useEffect } from "react";
 
 const MainContainer = () => {
   const { isAuthenticated, user, isLoading } = useAuth0();
-  const [communityId, setTempId] = useState(1);
   const [loggedInUserData, setLoggedInUserData] = useState({});
 
   const navigate = useNavigate();
@@ -26,7 +25,6 @@ const MainContainer = () => {
       );
       if (response.status === 200) {
         const json = await response.json();
-        console.log(json);
         setLoggedInUserData(json);
       } else {
         navigate("/onboarding");
@@ -45,7 +43,7 @@ const MainContainer = () => {
 
   return (
     <div className="flex min-h-screen basis-full flex-col bg-slate-50">
-      <Navbar communityId={1} />
+      <Navbar loggedInUserData={loggedInUserData} />
       <Routes>
         <Route path="/" element={<LandingPage kFormatter={kFormatter} />} />
         <Route path="/communities" element={<CommunitiesList />} />
@@ -54,9 +52,9 @@ const MainContainer = () => {
           path="/communities/:id"
           element={<CommunityPage kFormatter={kFormatter} />}
         />
-        <Route path="/events/:id" element={<EventPage />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/add/:id" element={<Mobile />} />
+        <Route path="/events/:id" element={<EventPage loggedInUserData={loggedInUserData}/>} />
+        <Route path="/admin" element={<Admin loggedInUserData={loggedInUserData}/>} />
+        <Route path="/add/:id" element={<Mobile loggedInUserData={loggedInUserData}/>} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

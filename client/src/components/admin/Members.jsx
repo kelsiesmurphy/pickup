@@ -1,11 +1,17 @@
-import { Edit3 } from "react-feather";
+// import { Edit3 } from "react-feather";
 import AddUserButton from "../AddMemberButton";
 import DeleteItem from "../DeleteItem";
 import UserHandlers from "../../handlers/UserHandlers";
 
-const Members = ({ communityMembers }) => {
-  const removeItem = () => {
-    // Todo
+const Members = ({ communityMembers, setCommunityMembers }) => {
+  const removeItem = (user) => {
+    const userToUpdate = {
+      id: user.id,
+      is_active: false,
+    };
+    const userHandler = new UserHandlers();
+    userHandler.handleUpdateUser(userToUpdate);
+    setCommunityMembers(communityMembers)
   };
 
   const memberNodes = communityMembers.map((member, index) => {
@@ -31,17 +37,26 @@ const Members = ({ communityMembers }) => {
           </p>
         </td>
         <td className="hidden max-w-[220px] flex-1 px-6 md:block">
-          <p className="text-sm text-slate-500">101</p>
+          <p className="text-sm text-slate-500">
+            {member.stats != undefined
+              ? member.stats.litter.this_month
+              : "Error"}
+          </p>
         </td>
         <td className="hidden max-w-[168px] flex-1 px-6 md:block">
-          <p className="text-sm text-slate-500">102</p>
+          <p className="text-sm text-slate-500">
+            {member.stats != undefined ? member.stats.litter.total : "Error"}
+          </p>
         </td>
-        <td className="hidden max-w-[120px]  flex-1 px-6 md:block">
+        {/* <td className="hidden max-w-[120px]  flex-1 px-6 md:block">
           <p className="text-sm text-slate-500">{member.is_active}</p>
-        </td>
+        </td> */}
         <td className="flex max-w-[116px] flex-1 justify-center gap-4 px-6">
-          <Edit3 color="#64748b" size={20} />
-          <DeleteItem itemToRemove={member.user_name} removeItem={removeItem} />
+          {/* <Edit3
+            size={20}
+            className="cursor-pointer text-slate-500 transition-colors hover:text-slate-900"
+          /> */}
+          <DeleteItem itemToRemove={member.user_name} removeItem={() => removeItem(member)} />
         </td>
       </tr>
     );
@@ -81,9 +96,9 @@ const Members = ({ communityMembers }) => {
                 Litter gathered total
               </h4>
             </th>
-            <th className="hidden max-w-[120px]  flex-1 px-6 md:block">
+            {/* <th className="hidden max-w-[120px]  flex-1 px-6 md:block">
               <h4 className="text-xs font-medium text-slate-500">Status</h4>
-            </th>
+            </th> */}
             <th className="max-w-[116px] flex-1 px-6" />
           </tr>
         </thead>

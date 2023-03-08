@@ -5,9 +5,8 @@ import EventHandlers from "../handlers/EventHandlers";
 import Footer from "../components/Footer";
 import Comments from "../components/Comments";
 
-const EventPage = () => {
+const EventPage = ({ loggedInUserData }) => {
   const { id } = useParams();
-  const [urlId, setUrlId] = useState(id);
   const [event, setEvent] = useState({});
   const [copyLinkText, setCopyLinkText] = useState("Copy Link");
   const [allComments, setAllComments] = useState([]);
@@ -15,11 +14,11 @@ const EventPage = () => {
   useEffect(() => {
     const eventHandler = new EventHandlers();
 
-    eventHandler.findEvent(urlId).then((result) => {
+    eventHandler.findEvent(id).then((result) => {
       setEvent(result);
       setAllComments(result.comments);
     });
-  }, [urlId]);
+  }, [id]);
 
   // Change button text to show user the url has been copied
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -66,11 +65,11 @@ const EventPage = () => {
             <div className="flex max-w-7xl flex-col gap-2">
               <p className="font-medium text-green-800">Event on</p>
               <p className="text-lg text-slate-500 md:text-xl">
-                {event.event_date_time_start}
+                {new Date(event.event_date_time_start).toLocaleString()}
               </p>
             </div>
             <Link
-              to={`/add/${urlId}`}
+              to={`/add/${id}`}
               className="flex-0 rounded-lg border border-green-800 bg-green-800 py-2.5 px-4 text-white shadow-sm outline-slate-900 transition-colors hover:border-green-900 hover:bg-green-900"
             >
               Add Litter
@@ -84,19 +83,23 @@ const EventPage = () => {
             <p className="text-lg text-slate-500 md:text-xl">
               {event.text_body === undefined ? "" : event.text_body["1"]}
             </p>
-            <img
-              src={event.img_before_link}
-              width="1248"
-              className="aspect-[375/272] object-cover shadow-sm md:aspect-[1216/700] xl:rounded-2xl"
-            />
+            {event.img_before_link && (
+              <img
+                src={event.img_before_link}
+                width="1248"
+                className="aspect-[375/272] object-cover shadow-sm md:aspect-[1216/700] xl:rounded-2xl"
+              />
+            )}
             <p className="text-lg text-slate-500 md:text-xl">
               {event.text_body === undefined ? "" : event.text_body["2"]}
             </p>
-            <img
-              src={event.img_after_link}
-              width="1248"
-              className="aspect-[375/272] object-cover shadow-sm md:aspect-[1216/700] xl:rounded-2xl "
-            />
+            {event.img_after_link && (
+              <img
+                src={event.img_after_link}
+                width="1248"
+                className="aspect-[375/272] object-cover shadow-sm md:aspect-[1216/700] xl:rounded-2xl "
+              />
+            )}
           </div>
           <div className="my-8 h-[1px] bg-slate-300" />
           <div className="flex justify-center">
@@ -141,6 +144,7 @@ const EventPage = () => {
             event={event}
             allComments={allComments}
             setAllComments={setAllComments}
+            loggedInUserData={loggedInUserData}
           />
         </div>
       </div>
