@@ -16,7 +16,7 @@ const CommunitiesList = () => {
       <li key={index} className="flex-1 rounded-2xl border bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
         <Link
           to={`/communities/${community.id}`}
-          className="flex flex-wrap gap-4 p-6"
+          className="flex flex-wrap items-center gap-4 p-6"
         >
           <img
             src={community.img_logo_link}
