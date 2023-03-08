@@ -49,7 +49,7 @@ class UserHandlers {
           })
       );
     } catch (e) {
-      console.log(e.status);
+      console.log(e);
     }
     // return request.get(`/api/user-context?auth0Id=${auth0Id}`);
   };
