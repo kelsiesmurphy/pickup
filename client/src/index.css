@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add Event Modal */
+.customModal {
+    max-width: 720px;
+    border-radius: 12px;
+}
+.react-responsive-modal-modal {
+    display: auto;
+}

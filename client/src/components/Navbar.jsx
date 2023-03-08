@@ -68,13 +68,13 @@ const Navbar = ({ loggedInUserData }) => {
           {isAuthenticated && (
             <>
               <div className="hidden items-center gap-4 md:flex">
-                <Link
+                {loggedInUserData.community_id && <Link
                   to={`/communities/${loggedInUserData.community_id}`}
                   className=" flex items-center gap-2 rounded-lg border border-slate-300 bg-white py-2.5 px-4 text-slate-700 shadow-sm outline-slate-900 transition-colors hover:bg-slate-50"
                 >
                   <Heart color="#334155" size={20} />
                   My community
-                </Link>
+                </Link>}
                 {loggedInUserData.is_admin && <AddEventButton communityId={loggedInUserData.community_id} />}
                 <img
                   src={user.picture}
@@ -126,13 +126,13 @@ const Navbar = ({ loggedInUserData }) => {
           >
             All communities
           </Link>
-          <Link
+          {loggedInUserData.community_id && <Link
             to={`/communities/${loggedInUserData.community_id}`}
             className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white py-2.5 px-4 text-slate-700 shadow-sm outline-slate-900 transition-colors hover:bg-slate-50 md:flex-none"
           >
             <Heart color="#334155" size={20} />
             My community
-          </Link>
+          </Link> }
           {loggedInUserData.is_admin && <AddEventButton communityId={loggedInUserData.community_id} />}
           <button
             onClick={() => logoutWithRedirect()}
