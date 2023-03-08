@@ -1,7 +1,7 @@
 // import AWS from "aws-sdk";
 
 const handleFileUpload = async (file) => {
-  return "https://www.pexels.com/photo/clear-plastic-bottle-on-white-sand-near-body-of-water-9034661/";
+  return "https://images.pexels.com/photos/9034661/pexels-photo-9034661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
   // try {
   //   AWS.config.update({
   //     accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY,
