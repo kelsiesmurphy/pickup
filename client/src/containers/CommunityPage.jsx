@@ -15,11 +15,7 @@ const CommunityPage = ({ kFormatter }) => {
 
   const [community, setCommunity] = useState({});
   const [communityMembers, setCommunityMembers] = useState([]);
-  const [upcomingEvents, setUpcomingEvents] = useState([]);
-  const [communityStats, setCommunityStats] = useState([]);
-  const [pastEvents, setPastEvents] = useState([]);
-
-  const [urlId, setUrlId] = useState(id);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     const communityHandler = new CommunityHandler();
@@ -27,22 +23,22 @@ const CommunityPage = ({ kFormatter }) => {
     const eventHandler = new EventHandlers();
 
     communityHandler
-      .findCommunity(urlId)
+      .findCommunity(id)
       .then((result) => setCommunity(result));
 
     userHandler
-      .findUsersFromCommunity(urlId)
+      .findUsersFromCommunity(id)
       .then((result) => setCommunityMembers(result));
 
-    eventHandler.getEvents(urlId).then((result) => setUpcomingEvents(result));
-  }, [urlId]);
+    eventHandler.getEvents(id).then((result) => setEvents(result));
+  }, [id]);
 
   return (
     <>
       <SocialHeader community={community} />
       <CommunityStats community={community} kFormatter={kFormatter} />
-      <UpcomingEvents upcomingEvents={upcomingEvents} />
-      <PastEvents pastEvents={pastEvents} />
+      <UpcomingEvents events={events} />
+      <PastEvents events={events} />
       <Leaderboard communityMembers={communityMembers} />
       <Footer />
     </>

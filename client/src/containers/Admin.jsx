@@ -6,7 +6,7 @@ import CommunityHandler from "../handlers/CommunityHandler";
 import UserHandlers from "../handlers/UserHandlers";
 import EventHandlers from "../handlers/EventHandlers";
 
-const Admin = () => {
+const Admin = ({ loggedInUserData }) => {
   const adminPages = ["Members", "Events", "Community details"];
 
   const [community, setCommunity] = useState({});
@@ -19,14 +19,21 @@ const Admin = () => {
     const userHandler = new UserHandlers();
     const eventHandler = new EventHandlers();
 
-    communityHandler.findCommunity(1).then((result) => setCommunity(result));
+    // The problem is the "1" params below. They should be "loggedInUserData.community_id", but the useEffect reads them as undefined, despite it being a dependency on the useEffect. I am displaying the community id on page (line 67), so it definitely comes through.
+    if (loggedInUserData.community_id !== undefined) {
+      communityHandler
+        .findCommunity(loggedInUserData.community_id)
+        .then((result) => setCommunity(result));
 
-    userHandler
-      .findUsersFromCommunity(1)
-      .then((result) => setCommunityMembers(result));
+      userHandler
+        .findUsersFromCommunity(loggedInUserData.community_id)
+        .then((result) => setCommunityMembers(result));
 
-    eventHandler.getEvents(1).then((result) => setCommunityEvents(result));
-  }, []);
+      eventHandler
+        .getEvents(loggedInUserData.community_id)
+        .then((result) => setCommunityEvents(result));
+    }
+  }, [communityMembers, communityEvents, loggedInUserData]);
 
   const pageNavNodesDesktop = adminPages.map((pageNav, index) => {
     return (
@@ -75,10 +82,16 @@ const Admin = () => {
             <CommunityDetails community={community} />
           )}
           {currentPage === "Members" && (
-            <Members communityMembers={communityMembers} />
+            <Members
+              communityMembers={communityMembers}
+              setCommunityMembers={setCommunityMembers}
+            />
           )}
           {currentPage === "Events" && (
-            <Events communityEvents={communityEvents} />
+            <Events
+              communityEvents={communityEvents}
+              setCommunityEvents={setCommunityEvents}
+            />
           )}
         </div>
       </div>

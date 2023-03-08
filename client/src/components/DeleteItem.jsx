@@ -36,7 +36,7 @@ const DeleteItem = ({ itemToRemove, removeItem }) => {
               Remove {itemToRemove}
             </h2>
             <p className="text-slate-500">
-              Are you sure you want to remove {itemToRemove}?
+              This will delete '{itemToRemove}'. Are you sure? This cannot be undone.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 px-3">

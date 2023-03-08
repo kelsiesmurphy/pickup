@@ -4,7 +4,7 @@ import LitterHandlers from "../handlers/LitterHandlers";
 import EventHandlers from "../handlers/EventHandlers";
 import BarChart from "./BarChart";
 
-const Mobile = () => {
+const Mobile = ({ loggedInUserData }) => {
   const { id } = useParams();
   const [urlId, setUrlId] = useState(id);
 
@@ -57,7 +57,7 @@ const Mobile = () => {
     const litterItem = {
       community_id: event.community_id,
       event_id: urlId,
-      user_id: 1,
+      user_id: loggedInUserData.id,
       litter_type_id: litterTypeId,
       collection_date_time: currentDate,
     };

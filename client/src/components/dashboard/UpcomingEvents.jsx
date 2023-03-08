@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
 
-const UpcomingEvents = ({ upcomingEvents }) => {
-  const eventNodes = upcomingEvents.splice(0, 2).map((event, index) => {
+const UpcomingEvents = ({ events }) => {
+  const filteredEvents = events.filter((event) => {
+    const currentDate = new Date();
+    const eventDate = new Date(event.event_date_time_start);
+    return eventDate > currentDate;
+    // return event;
+  });
+  const sortedEvents = filteredEvents.sort(function (a, b) {
+    return (
+      new Date(a.event_date_time_start) - new Date(b.event_date_time_start)
+    );
+  });
+  const eventNodes = sortedEvents.splice(0, 2).map((event, index) => {
     return (
       <li
         key={index}
@@ -17,6 +28,9 @@ const UpcomingEvents = ({ upcomingEvents }) => {
               {event.name}
             </h3>
             <p className="text-slate-600">{event.description}</p>
+            <p className="text-sm text-slate-500">
+              {new Date(event.event_date_time_start).toLocaleString()}
+            </p>
           </div>
         </Link>
       </li>
@@ -24,7 +38,7 @@ const UpcomingEvents = ({ upcomingEvents }) => {
   });
 
   return (
-    <div className="flex justify-center py-12 px-4">
+    <div className="flex justify-center py-8 px-4">
       <div className="max-w-7xl flex-1 space-y-6">
         <h2 className="text-2xl font-medium text-slate-900">Upcoming events</h2>
         <ul className="flex flex-1 flex-wrap justify-between gap-8">
