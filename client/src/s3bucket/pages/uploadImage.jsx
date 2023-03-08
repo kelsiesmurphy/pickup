@@ -14,7 +14,7 @@ const UploadImage = ({ onUpload }) => {
 
   return (
     <>
-      <div className="flex flex-wrap justify-between gap-8 py-4">
+      <div className="flex flex-wrap justify-between gap-x-8 py-4">
         <label htmlFor="email" className="text-sm font-medium text-slate-800">
           Profile image*
         </label>

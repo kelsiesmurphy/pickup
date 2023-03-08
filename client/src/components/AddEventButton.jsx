@@ -3,12 +3,18 @@ import { useState, useEffect } from "react";
 import Rodal from "rodal";
 // Include rodal styles
 import "rodal/lib/rodal.css";
+
+
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+
+
 import EventHandlers from "../handlers/EventHandlers";
 import UploadImage from "../s3bucket/pages/uploadImage";
 import handleFileUpload from "../s3bucket/pages/api/upload_url";
 
 const AddEventButton = ({ communityId }) => {
-  const [openModal, setOpenModal] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
@@ -28,10 +34,10 @@ const AddEventButton = ({ communityId }) => {
   }, [coverImage]);
 
   const handleNewEventModal = () => {
-    setOpenModal(true);
+    setOpen(true);
   };
   const handleClose = () => {
-    setOpenModal(false);
+    setOpen(false);
   };
 
   const handleTitle = (event) => {
@@ -79,17 +85,12 @@ const AddEventButton = ({ communityId }) => {
         <Plus color="#fff" size={20} />
         New event
       </button>
-      <Rodal
-        visible={openModal}
+      <Modal
+        open={open}
         onClose={handleClose}
-        customStyles={{
-          width: "auto",
-          height: "auto",
-          borderRadius: "12px",
-          display: "flex",
-          maxWidth: 688,
-          flex: 1,
-          margin: "16px",
+        center
+        classNames={{
+          modal: 'customModal',
         }}
       >
         <div className="flex flex-col">
@@ -103,7 +104,7 @@ const AddEventButton = ({ communityId }) => {
           </div>
           <form onSubmit={handleSubmit}>
             <div className="px-3">
-              <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
+              <div className="flex flex-wrap justify-between gap-x-8 border-b border-slate-300 py-4">
                 <label
                   htmlFor="title"
                   className="text-sm font-medium text-slate-800"
@@ -120,7 +121,7 @@ const AddEventButton = ({ communityId }) => {
                   placeholder="e.g. Monthly litter pick"
                 />
               </div>
-              <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
+              <div className="flex flex-wrap justify-between gap-x-8 border-b border-slate-300 py-4">
                 <label
                   htmlFor="location"
                   className="text-sm font-medium text-slate-800"
@@ -137,14 +138,14 @@ const AddEventButton = ({ communityId }) => {
                   placeholder="e.g. Community playing fields"
                 />
               </div>
-              <div className="flex flex-wrap justify-between gap-8 border-b border-slate-300 py-4">
+              <div className="flex flex-wrap justify-between gap-x-8 border-b border-slate-300 py-4">
                 <label
                   htmlFor="time"
                   className="text-sm font-medium text-slate-800"
                 >
                   Event start and finish*
                 </label>
-                <div className="flex max-w-[448px] flex-1 gap-4">
+                <div className="flex flex-wrap max-w-[448px] flex-1 gap-4">
                   <input
                     type="datetime-local"
                     name="date_time_start"
@@ -166,7 +167,7 @@ const AddEventButton = ({ communityId }) => {
                 </div>
               </div>
               <UploadImage onUpload={handleCoverImage} />
-              <div className="flex flex-wrap justify-between gap-8 py-4">
+              <div className="flex flex-wrap justify-between gap-x-8 py-4">
                 <label
                   htmlFor="description"
                   className="text-sm font-medium text-slate-800"
@@ -198,7 +199,7 @@ const AddEventButton = ({ communityId }) => {
             </div>
           </form>
         </div>
-      </Rodal>
+      </Modal>
     </>
   );
 };

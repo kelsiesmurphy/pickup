@@ -29,6 +29,7 @@
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
     "react-hot-toast": "^2.4.0",
+    "react-responsive-modal": "^6.4.1",
     "react-router-dom": "^6.8.2",
     "rodal": "^2.0.1",
     "source-map-support": "^0.5.21"
