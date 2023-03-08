@@ -81,7 +81,7 @@ const EventPage = ({ loggedInUserData }) => {
               Introduction
             </h1>
             <p className="text-lg text-slate-500 md:text-xl">
-              {event.text_body === undefined ? "" : event.text_body["1"]}
+              {event.text_body ? event.text_body["1"] : ""}
             </p>
             {event.img_before_link && (
               <img
@@ -91,7 +91,7 @@ const EventPage = ({ loggedInUserData }) => {
               />
             )}
             <p className="text-lg text-slate-500 md:text-xl">
-              {event.text_body === undefined ? "" : event.text_body["2"]}
+              {event.text_body ? event.text_body["2"] : ""}
             </p>
             {event.img_after_link && (
               <img
