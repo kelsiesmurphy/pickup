@@ -43,7 +43,7 @@ const CommunitiesList = () => {
       >
         <div
           onClick={() => setCommunityId(community.id)}
-          className="flex flex-wrap gap-4 p-6"
+          className="flex flex-wrap items-center gap-4 p-6"
         >
           <img
             src={community.img_logo_link}
