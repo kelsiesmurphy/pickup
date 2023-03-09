@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Copy, Twitter, Facebook, Linkedin } from "react-feather";
 import EventHandlers from "../handlers/EventHandlers";
 import Footer from "../components/Footer";
@@ -10,6 +11,8 @@ const EventPage = ({ loggedInUserData }) => {
   const [event, setEvent] = useState({});
   const [copyLinkText, setCopyLinkText] = useState("Copy Link");
   const [allComments, setAllComments] = useState([]);
+
+  const { isAuthenticated} = useAuth0();
 
   useEffect(() => {
     const eventHandler = new EventHandlers();
@@ -68,12 +71,12 @@ const EventPage = ({ loggedInUserData }) => {
                 {new Date(event.event_date_time_start).toLocaleString()}
               </p>
             </div>
-            <Link
+            { isAuthenticated && <Link
               to={`/add/${id}`}
               className="flex-0 rounded-lg border border-green-800 bg-green-800 py-2.5 px-4 text-white shadow-sm outline-slate-900 transition-colors hover:border-green-900 hover:bg-green-900"
             >
               Add Litter
-            </Link>
+            </Link> }
           </div>
           <div className="my-8 h-[1px] bg-slate-300" />
           <div className="flex flex-1 flex-col gap-16">
