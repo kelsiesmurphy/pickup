@@ -78,7 +78,7 @@ const Comments = ({ event, allComments, setAllComments, loggedInUserData }) => {
     <div className="space-y-4">
       <h3 className="text-2xl font-medium text-slate-900">Comments</h3>
       <div>
-        { isAuthenticated && <form
+        { isAuthenticated && loggedInUserData.community_id === event.community_id && <form
           onSubmit={handleCommentSubmit}
           className="items-between flex flex-col flex-wrap gap-2 py-4"
         >
