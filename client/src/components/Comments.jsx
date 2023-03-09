@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Send } from "react-feather";
+import { useAuth0 } from "@auth0/auth0-react";
 import EventHandlers from "../handlers/EventHandlers";
 
 const Comments = ({ event, allComments, setAllComments, loggedInUserData }) => {
@@ -9,6 +10,9 @@ const Comments = ({ event, allComments, setAllComments, loggedInUserData }) => {
     comment_date_time: "",
     text_body: "",
   });
+
+  const { isAuthenticated} = useAuth0();
+
 
   const handleCommentChange = (e) => {
     const currentDate = new Date();
@@ -74,7 +78,7 @@ const Comments = ({ event, allComments, setAllComments, loggedInUserData }) => {
     <div className="space-y-4">
       <h3 className="text-2xl font-medium text-slate-900">Comments</h3>
       <div>
-        <form
+        { isAuthenticated && <form
           onSubmit={handleCommentSubmit}
           className="items-between flex flex-col flex-wrap gap-2 py-4"
         >
@@ -93,7 +97,7 @@ const Comments = ({ event, allComments, setAllComments, loggedInUserData }) => {
             <Send color="#fff" size={20} />
             Send
           </button>
-        </form>
+        </form> }
       </div>
       <ul className="flex flex-col gap-4">{commentNodes}</ul>
     </div>
