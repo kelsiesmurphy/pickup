@@ -11,10 +11,12 @@ import Error from "./Error";
 import Admin from "./Admin";
 import Mobile from "./Mobile";
 import { useEffect } from "react";
+import FormHeader from "../components/FormHeader";
 
 const MainContainer = () => {
   const { isAuthenticated, user, isLoading } = useAuth0();
   const [loggedInUserData, setLoggedInUserData] = useState({});
+  const [showBanner, setShowBanner] = useState(true);
 
   const navigate = useNavigate();
 
@@ -35,6 +37,10 @@ const MainContainer = () => {
     }
   }, [isAuthenticated]);
 
+  const handleBanner =() => {
+    setShowBanner(false)
+  }
+
   function kFormatter(num) {
     return Math.abs(num) > 999
       ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
@@ -43,6 +49,7 @@ const MainContainer = () => {
 
   return (
     <div className="flex min-h-screen basis-full flex-col bg-slate-50">
+      {showBanner === true && <FormHeader handleBanner={handleBanner}/>}
       <Navbar loggedInUserData={loggedInUserData} />
       <Routes>
         <Route path="/" element={<LandingPage kFormatter={kFormatter} />} />
