@@ -30,6 +30,8 @@
 
 Pickup is a web application built with React and Java (Spring) for the capstone project of the CodeClan software professional development 16 week course. It allows communities to organise litter picking events and allow the users to track the litter collected in a leaderboard format. It was created in February/March 2023 by Kelsie Murphy, Kyle Fenlon and Josh Montgomery.
 
+You can view a live version of Pickup at https://www.joinpickup.co/
+
 <!-- BRIEF -->
 ### MVP
 
@@ -84,9 +86,12 @@ Note: To stop the server enter ctrl + c in your Terminal
 
 #### Server
 
-* TODO: Add server setup
+* Create a database called 'pickup' in your Terminal
+```sh
+  createdb pickup
+  ```
 
-
+* We recommend opening the server directory in IntelliJ IDEA, and run the ServerApplication.java file. Ensure that the resources/application.properties file is set up with the spring profile set to "dev-data-load", and the ddl-auto file is set to "create". After initially setting up the database, these values can be returned to the defaults to save reloading the data everytime you restart the server.
 
 
 <!-- CONTACT -->
