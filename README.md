@@ -87,7 +87,7 @@ Note: To stop the server enter ctrl + c in your Terminal
 #### Server
 
 * Create a database called 'pickup' in your Terminal
-```sh
+  ```sh
   createdb pickup
   ```
 
