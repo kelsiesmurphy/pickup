@@ -23,7 +23,7 @@
   </ol>
 </details>
 
-<img align="center" src="[https://github.com/kelsiesmurphy/kelsiesmurphy/assets/77012426/eff5aae0-cb6d-45cb-8eac-d7915d579f05](https://github.com/kelsiesmurphy/kelsiesmurphy/assets/77012426/e631b96d-3e77-4437-896a-ddb489f66e69)" alt="Pickup landing page home">
+<img align="center" src="https://user-images.githubusercontent.com/77012426/238215220-e631b96d-3e77-4437-896a-ddb489f66e69.jpg" alt="Pickup landing page home">
 
 <!-- ABOUT -->
 ### Pickup
